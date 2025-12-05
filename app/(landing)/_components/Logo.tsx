@@ -1,30 +1,20 @@
-import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+import { DM_Serif_Display } from "next/font/google";
 
-const font = Poppins({
+const font = DM_Serif_Display({
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: ["400"],
 });
 
 export const Logo = () => {
   return (
-    <div className="items-center gap-x-2 md:flex">
-      <Image
-        src="/logo.svg"
-        height="40"
-        width="40"
-        alt="logo"
-        className="dark:hidden"
-      />
-      <Image
-        src="/logo-dark.svg"
-        height="40"
-        width="40"
-        alt="logo"
-        className="hidden dark:block"
-      />
-      <p className={cn("font-semibold", font.className)}>Noted</p>
-    </div>
+    <span
+      className={cn(
+        "text-2xl font-semibold tracking-tight text-foreground",
+        font.className,
+      )}
+    >
+      Noted
+    </span>
   );
 };

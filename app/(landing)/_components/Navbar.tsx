@@ -17,37 +17,52 @@ export const Navbar = () => {
   return (
     <nav
       className={cn(
-        "sticky inset-x-0 top-0 z-50 mx-auto flex w-full items-center bg-background p-6 dark:bg-[#1F1F1F]",
-        scrolled && "border-b shadow-sm",
+        "fixed inset-x-0 top-0 z-50 flex w-full items-center justify-between bg-white/80 px-4 py-3 backdrop-blur-md transition-all duration-200 sm:px-6 dark:bg-neutral-900/80",
+        scrolled && "border-b border-neutral-200 dark:border-neutral-800",
       )}
     >
       <Logo />
-      <div className="flex w-full items-center justify-end md:ml-auto">
-        <div className="flex items-center gap-x-2">
-          {isLoading && <Spinner />}
-          {!isLoading && !isAuthenticated && (
-            <>
-              <SignInButton mode="modal">
-                <Button variant="ghost" size="sm">
-                  Log In
-                </Button>
-              </SignInButton>
-              <SignInButton mode="modal">
-                <Button size="sm">Get Noted Free</Button>
-              </SignInButton>
-            </>
-          )}
 
-          {isAuthenticated && !isLoading && (
-            <>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/documents"> Enter Noted </Link>
+      <div className="flex items-center gap-4">
+        {isLoading && <Spinner size="sm" />}
+
+        {!isLoading && !isAuthenticated && (
+          <>
+            <SignInButton mode="modal">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+              >
+                Log in
               </Button>
-              <UserButton afterSignOutUrl="/" />
-            </>
-          )}
-          <ModeToggle />
-        </div>
+            </SignInButton>
+            <SignInButton mode="modal">
+              <Button
+                size="sm"
+                className="rounded-lg bg-blue-600 font-medium text-white hover:bg-blue-700"
+              >
+                Get Noted free
+              </Button>
+            </SignInButton>
+          </>
+        )}
+
+        {isAuthenticated && !isLoading && (
+          <>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+              asChild
+            >
+              <Link href="/documents">Enter Noted</Link>
+            </Button>
+            <UserButton afterSignOutUrl="/" />
+          </>
+        )}
+
+        <ModeToggle />
       </div>
     </nav>
   );
