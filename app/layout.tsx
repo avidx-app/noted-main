@@ -11,7 +11,7 @@ import { EdgeStoreProvider } from "@/lib/edgestore";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Zotion",
+  title: "Noted",
   description:
     "The seamless platform where creative and productive work happens.",
   icons: {
@@ -45,7 +45,7 @@ export default function RootLayout({
               defaultTheme="system"
               enableSystem
               disableTransitionOnChange
-              storageKey="zotion-theme-2"
+              storageKey="noted-theme-2"
             >
               <Toaster position="bottom-center" />
               <ModalProvider />
