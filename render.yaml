@@ -1,10 +1,3 @@
-# Preview Environments Configuration
-# Set to "automatic" to create preview environments for every PR (like Vercel)
-# Each PR gets its own preview URL - these act as staging environments
-# Set to "manual" to create previews only when PR title includes [render preview]
-previews:
-  generation: automatic  # Options: automatic, manual
-
 services:
   # Production Web Service - Deploys from main branch
   - type: web
@@ -20,7 +13,7 @@ services:
       - key: NEXT_PUBLIC_CONVEX_URL
         sync: false  # Set this in Render dashboard (production Convex deployment)
       - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
-        sync: false  # Set this in Render dashboard
+        sync: false  # Set this in Render dashboard (Clerk Production instance)
       - key: EDGE_STORE_ACCESS_KEY
         sync: false  # Set this in Render dashboard
       - key: EDGE_STORE_SECRET_KEY
@@ -28,7 +21,26 @@ services:
     healthCheckPath: /
     autoDeploy: true  # Auto-deploys whenever main branch is updated
 
-# Note: Preview Environments automatically inherit environment variables from this Blueprint
-# Each PR preview will use the same staging third-party services (Convex staging, Clerk, EdgeStore)
-# Configure these in the Render dashboard - they'll be used by all preview environments
+  # Staging Web Service - Deploys from staging branch
+  # This gives you a dedicated staging environment for testing before production
+  - type: web
+    name: noted-staging
+    runtime: node
+    plan: starter
+    branch: staging  # Deploys from staging branch
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: staging
+      - key: NEXT_PUBLIC_CONVEX_URL
+        sync: false  # Set this in Render dashboard (Development Convex deployment)
+      - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+        sync: false  # Set this in Render dashboard (Clerk Development instance)
+      - key: EDGE_STORE_ACCESS_KEY
+        sync: false  # Set this in Render dashboard
+      - key: EDGE_STORE_SECRET_KEY
+        sync: false  # Set this in Render dashboard
+    healthCheckPath: /
+    autoDeploy: true  # Auto-deploys whenever staging branch is updated
 

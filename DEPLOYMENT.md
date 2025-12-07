@@ -1,17 +1,17 @@
-# Deployment Guide: Render (Preview Environments & Production)
+# Deployment Guide: Render (Staging & Production)
 
-This guide will walk you through deploying your Noted application to Render with **Preview Environments** (like Vercel) and **Production**.
+This guide will walk you through deploying your Noted application to Render with **Staging** and **Production** environments. 
 
 ## 🎯 Deployment Strategy
 
 **Your deployment setup:**
 - ✅ **Production**: Auto-deploys from `main` branch
-- ✅ **Preview Environments**: Each Pull Request automatically gets its own preview URL (acts as staging)
+- ✅ **Staging**: Separate staging service that auto-deploys from `staging` branch
 
 **How it works:**
-- Merge to `main` → Automatically deploys to **Production** (when a pull request is merged or code is merged to main)
-- Open a Pull Request → Automatically creates a **Preview Environment** (like Vercel) - each PR gets its own dedicated URL
-- **No separate staging service needed** - Preview Environments act as staging, all connecting to the same staging third-party services (Convex staging, Clerk, EdgeStore)
+- Merge to `main` → Automatically deploys to **Production**
+- Push to `staging` → Automatically deploys to **Staging**
+- Both services connect to different third-party services (Production uses Production Convex/Clerk, Staging uses Development Convex/Clerk)
 
 ---
 
@@ -23,10 +23,10 @@ Before you begin, make sure you have:
 2. ✅ A Render account ([sign up here](https://render.com))
 3. ✅ Convex project with separate deployments for staging and production
    - **Production Deployment**: Used by production service
-   - **Development/Staging Deployment**: Used by all preview environments (each PR preview connects to this)
+   - **Development Deployment**: Used by staging service
    - Both deployments can be in the same Convex project (recommended, similar to Clerk setup)
 4. ✅ Clerk application set up with Development and Production instances (recommended)
-5. ✅ EdgeStore account with access keys (can use same for both production and previews)
+5. ✅ EdgeStore account with access keys (can use same for both production and staging)
 
 ---
 
@@ -37,7 +37,7 @@ Before you begin, make sure you have:
 Just like Clerk, Convex allows you to have multiple deployments within the same project. This is the best approach:
 
 - ✅ **Production Deployment**: Use for production (e.g., "robust-wolf-630")
-- ✅ **Development Deployment**: Use for staging/preview environments (e.g., "rugged-hawk-26")
+- ✅ **Development Deployment**: Use for staging environment (e.g., "rugged-hawk-26")
 - ✅ Same project, easier to manage
 - ✅ Better isolation than using the same deployment
 - ✅ Simpler than creating separate Convex projects
@@ -55,12 +55,12 @@ Just like Clerk, Convex allows you to have multiple deployments within the same 
    - Note the deployment name (e.g., "robust-wolf-630")
 
 3. **Create or Select Development Deployment**:
-   - Switch to or create your **Development** deployment (for staging/previews)
+   - Switch to or create your **Development** deployment (for staging)
    - Copy the **Deployment URL** for this deployment
-   - Save this URL - you'll need it for staging/preview environment variables
+   - Save this URL - you'll need it for staging environment variables
    - Note the deployment name (e.g., "rugged-hawk-26")
 
-> 💡 **Tip**: Both deployments are in the same Convex project, making it easier to manage. Each deployment has its own database, so data is isolated between production and staging/previews.
+> 💡 **Tip**: Both deployments are in the same Convex project, making it easier to manage. Each deployment has its own database, so data is isolated between production and staging.
 
 ---
 
@@ -70,7 +70,7 @@ Just like Clerk, Convex allows you to have multiple deployments within the same 
 
 Clerk allows you to have both **Development** and **Production** instances within the same project. This is the best approach:
 
-- ✅ **Development Instance**: Use for staging/preview environments (uses `pk_test_...` keys)
+- ✅ **Development Instance**: Use for staging environment (uses `pk_test_...` keys)
 - ✅ **Production Instance**: Use for production (uses `pk_live_...` keys)
 - ✅ Same project, easier to manage
 - ✅ Better isolation than using the same instance
@@ -87,7 +87,7 @@ Clerk allows you to have both **Development** and **Production** instances withi
    - Click **"Create production instance"**
    - This creates a separate Production instance in the same project
 
-3. **Configure Development Instance** (for staging/previews):
+3. **Configure Development Instance** (for staging):
    - Make sure you're on the **Development** instance
    - Go to **API Keys**
    - Copy the **Publishable Key** (starts with `pk_test_...`)
@@ -148,67 +148,98 @@ Render can automatically detect and use the `render.yaml` file in your repositor
      EDGE_STORE_SECRET_KEY=<your-edgestore-secret-key>
      ```
    
-   **For Preview Environments** (all PR previews):
-   - Preview environments automatically inherit environment variables from your Blueprint
-   - Go to your Blueprint → **Environment Groups** (or configure at the service level)
-   - Add these environment variables (these will be used by ALL preview environments):
+   **For Staging Service** (`noted-staging`) - **Free Tier Alternative**:
+   - Click on the staging service
+   - Go to **Environment** tab
+   - Add these environment variables:
      ```
-     NEXT_PUBLIC_CONVEX_URL=<your-development-convex-url>  # Use Development deployment for all previews
+     NEXT_PUBLIC_CONVEX_URL=<your-development-convex-url>  # Use Development deployment
      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-clerk-development-publishable-key>  # pk_test_... from Development instance
      EDGE_STORE_ACCESS_KEY=<your-edgestore-access-key>  # Can use same as production
      EDGE_STORE_SECRET_KEY=<your-edgestore-secret-key>  # Can use same as production
      ```
-   - **Important**: All preview environments will connect to the same staging third-party services
-   - This means all PR previews share the same Development Convex deployment, Clerk Development instance, and EdgeStore
-
+   
 5. **Deploy**:
-   - Production will automatically deploy when code is merged to `main` branch
-   - Preview environments will automatically be created for each Pull Request
+   - **Production**: Will automatically deploy when code is merged to `main` branch
+   - **Staging**: Will automatically deploy when code is pushed to `staging` branch
    - Wait for the build to complete (usually 3-5 minutes)
    - Your apps will be live at the URLs provided by Render
 
 ---
 
-## Step 5: Configure Preview Environments (Like Vercel!)
+## Step 5: Set Up Staging Service
 
-## Step 5: Configure Preview Environments (Like Vercel!)
+### How Staging Service Works:
 
-Render supports **Preview Environments** that work just like Vercel! Each pull request automatically gets its own dedicated preview URL. **These preview environments act as your staging** - no separate staging service needed!
+- **Separate Service**: A dedicated `noted-staging` service runs alongside production
+- **Branch-Based**: Deploys automatically from `staging` branch
+- **Isolated Environment**: Uses Development Convex deployment and Clerk Development instance
+- **Always Available**: Staging is always running at a fixed URL for testing
 
-### How Preview Environments Work:
+### Setup Steps:
 
-- **Automatic Creation**: When you open a Pull Request, Render automatically creates a preview environment
-- **Dedicated URL**: Each PR gets its own unique URL (like `noted-production-pr-123.onrender.com`)
-- **Shared Staging Services**: All preview environments connect to the same staging third-party services:
-  - Same Development Convex deployment (all previews share the same data)
-  - Same Clerk Development instance (`pk_test_...`)
-  - Same EdgeStore storage
-- **Isolated Code**: Each preview runs its own code from the PR branch
-- **Auto-Cleanup**: Preview environments are automatically destroyed when the PR is merged or closed
+1. **Create a Staging Branch** (if you don't have one):
+   ```bash
+   git checkout -b staging
+   git push -u origin staging
+   ```
 
-### Configuration:
+2. **The `render.yaml` file already includes the staging service**:
+   ```yaml
+   - type: web
+     name: noted-staging
+     branch: staging
+   ```
 
-The `render.yaml` file is already configured with:
-```yaml
-previews:
-  generation: automatic  # Creates preview for every PR
-```
+3. **Configure Environment Variables** (already covered in Step 4):
+   - Staging service uses Development Convex deployment
+   - Staging service uses Clerk Development instance (`pk_test_...`)
 
-**Preview Modes:**
-- `automatic`: Creates preview for every PR (recommended)
-- `manual`: Only creates preview if PR title includes `[render preview]`
+4. **Workflow**:
 
-**To skip a preview** for a specific PR, add `[skip preview]` or `[render skip]` to the PR title.
+   **Option A: Direct Push (Quick Testing)**
+   ```bash
+   # Work on your feature branch
+   git checkout -b feature/my-feature
+   # ... make your changes ...
+   
+   # Push directly to staging to test
+   git checkout staging
+   git merge feature/my-feature  # or cherry-pick specific commits
+   git push origin staging
+   # → Staging automatically deploys! Test at staging URL
+   ```
 
-### Accessing Preview URLs:
+   **Option B: PR Workflow (Recommended for Code Review)**
+   ```bash
+   # Work on your feature branch
+   git checkout -b feature/my-feature
+   # ... make your changes ...
+   git push origin feature/my-feature
+   
+   # Create PR: feature/my-feature → staging
+   # Review code, then merge PR
+   # → Staging automatically deploys! Test at staging URL
+   ```
 
-1. Open a Pull Request on GitHub
-2. Render automatically creates the preview environment (usually takes 3-5 minutes)
-3. Go to Render Dashboard → Your Blueprint → Find the preview deployment
-4. Click **"View deployment"** to get the preview URL
-5. Share the URL with your team for testing!
+   **Then, when ready for production:**
+   ```bash
+   # Merge staging to main
+   git checkout main
+   git merge staging
+   git push origin main
+   # → Production automatically deploys!
+   ```
 
-**Important**: All preview environments share the same Development Convex deployment, so data created in one preview will be visible in other previews. This is intentional - they all act as staging environments.
+   **Summary:**
+   - Push to `staging` branch → Staging automatically deploys (no PR needed!)
+   - Merge `staging` to `main` → Production automatically deploys
+   - Test features in staging before merging to production!
+
+### Benefits:
+- ✅ **Always Available**: Fixed staging URL for testing
+- ✅ **Isolated**: Separate from production, uses staging services
+- ✅ **Simple**: Just push to staging branch to deploy
 
 ---
 
@@ -221,11 +252,11 @@ After deployment, you need to update your Convex auth configuration to allow req
    - Update `convex/auth.config.js` to include your Clerk Production instance domain
    - Make sure the Clerk domain matches your Clerk Production instance
 
-2. **For Development/Staging (used by all Preview Environments)**:
+2. **For Staging (Development Convex Deployment)**:
    - Go to your Development Convex deployment dashboard (switch to Development deployment in Convex Dashboard)
    - Update `convex/auth.config.js` to include your Clerk Development instance domain
    - Make sure the Clerk domain matches your Clerk Development instance
-   - **Note**: All preview environments will use this Development Convex deployment
+   - **Note**: Staging service uses this Development Convex deployment
 
 The `auth.config.js` should look like:
 ```javascript
@@ -250,11 +281,10 @@ export default {
 3. Add your custom domain (e.g., `app.yourdomain.com`)
 4. Follow Render's instructions to configure DNS
 
-### Preview Environment Domains:
+### Staging Domain:
 
-- Preview environments automatically get their own URLs (like `noted-production-pr-123.onrender.com`)
-- Custom domains are not typically needed for preview environments
-- Each preview URL is unique and automatically generated
+- Staging service gets its own URL (like `noted-staging.onrender.com`)
+- You can optionally add a custom domain for staging if needed
 
 ---
 
@@ -269,14 +299,13 @@ After deployment completes:
    - Upload an image
    - Verify everything works
 
-2. **Check Preview Environments**:
-   - Open a Pull Request on GitHub
-   - Wait for Render to create the preview environment (usually 3-5 minutes)
-   - Go to Render Dashboard → Your Blueprint → Find the preview deployment
-   - Click **"View deployment"** to get the preview URL
-   - Test the preview URL - it should work exactly like production!
-   - Each PR gets its own unique preview URL
-   - **Note**: All previews share the same Development Convex deployment and Clerk Development instance, so data is shared across previews
+2. **Check Staging**:
+   - Visit your staging URL (from Render dashboard)
+   - Test sign up / sign in (uses Clerk Development instance)
+   - Create a document (uses Development Convex deployment)
+   - Upload an image
+   - Verify everything works
+   - **Note**: Staging uses Development Convex deployment and Clerk Development instance, so data is separate from production
 
 ---
 
@@ -290,25 +319,25 @@ Here's a checklist of all environment variables you need:
 - [ ] `EDGE_STORE_ACCESS_KEY` - EdgeStore access key
 - [ ] `EDGE_STORE_SECRET_KEY` - EdgeStore secret key
 
-### Preview Environments (All PR Previews - Render):
-- [ ] `NEXT_PUBLIC_CONVEX_URL` - **Development Convex deployment URL** (all previews share this - same project, different deployment)
+### Staging Service (Free Tier Alternative - Render):
+- [ ] `NEXT_PUBLIC_CONVEX_URL` - **Development Convex deployment URL** (same project, different deployment)
 - [ ] `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Clerk Development instance publishable key (`pk_test_...`)
 - [ ] `EDGE_STORE_ACCESS_KEY` - EdgeStore access key (can be same as production)
 - [ ] `EDGE_STORE_SECRET_KEY` - EdgeStore secret key (can be same as production)
 
-**Important**: Configure these at the Blueprint level (Environment Groups) so all preview environments inherit them. All preview environments will connect to the same Development Convex deployment (same project, different deployment from production).
+**Important**: Configure these at the service level in Render dashboard for the staging service.
 
 ### Local Development (.env.local):
 
 **Recommended: Use staging services for local development**
 
-Your `.env.local` should use **staging services** to match your preview environments:
+Your `.env.local` should use **staging services** to match your staging environment:
 
 ```env
-# Use Development Convex deployment URL (matches preview environments - same project, different deployment)
+# Use Development Convex deployment URL (matches staging - same project, different deployment)
 NEXT_PUBLIC_CONVEX_URL=https://your-development-deployment.convex.cloud
 
-# Use Clerk Development instance (matches preview environments)
+# Use Clerk Development instance (matches staging)
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...  # From Development instance
 CLERK_SECRET_KEY=sk_test_...  # From Development instance
 EDGE_STORE_ACCESS_KEY=...
@@ -316,10 +345,10 @@ EDGE_STORE_SECRET_KEY=...
 ```
 
 **Why use staging for local development?**
-- ✅ Matches your preview environments (easier to test)
+- ✅ Matches your staging environment (easier to test)
 - ✅ Safer - won't accidentally affect production data
 - ✅ Can test with real staging data
-- ✅ Same environment as your PR previews
+- ✅ Same environment as your staging service
 
 **You don't need separate sections** - just use staging values in your `.env.local`. Production values are only set in Render dashboard, not in your local file.
 
@@ -390,22 +419,23 @@ If you need to test against production services from your local machine:
 
 ## Best Practices
 
-1. **Separate Environments**: Keep preview/staging and production completely separate
+1. **Separate Environments**: Keep staging and production completely separate
    - **Production Convex Deployment**: Used only by production service (same project, different deployment)
-   - **Development/Staging Convex Deployment**: Used by all preview environments (same project, different deployment - all PR previews share this)
-   - **Clerk**: Use Development instance (`pk_test_...`) for previews, Production instance (`pk_live_...`) for production (same project, different instances)
+   - **Development Convex Deployment**: Used by staging service (same project, different deployment)
+   - **Clerk**: Use Development instance (`pk_test_...`) for staging, Production instance (`pk_live_...`) for production (same project, different instances)
    - **EdgeStore**: Can use same store for both, or separate (optional)
 
 2. **Branch Strategy**:
    - `main` branch → Production (auto-deploy enabled - deploys when code is merged to main)
-   - Any Pull Request → Preview Environment (automatically created, acts as staging)
-   - **No separate staging service needed** - Preview Environments serve as staging
+   - `staging` branch → Staging (auto-deploy enabled - deploys when code is pushed to staging)
+   - **Staging service provides a dedicated staging environment for testing**
 
 3. **Environment Variables**:
    - Never commit `.env.local` to Git
    - Always set variables in Render dashboard
    - Use Production Convex deployment for production service (same project, different deployment)
-   - Use Development Convex deployment for all preview environments (same project, different deployment - configure at Blueprint level)
+   - Use Development Convex deployment for staging service (same project, different deployment)
+   - Configure variables at the service level in Render dashboard
 
 4. **Monitoring**:
    - Set up Render's built-in monitoring
@@ -418,10 +448,10 @@ If you need to test against production services from your local machine:
 
 After successful deployment:
 
-1. ✅ Test preview environments by opening a Pull Request
-2. ✅ Verify all preview environments connect to Development Convex deployment
+1. ✅ Test staging by pushing to staging branch
+2. ✅ Verify staging connects to Development Convex deployment
 3. ✅ Set up monitoring and alerts
-4. ✅ Configure custom domain for production
+4. ✅ Configure custom domain for production (and staging if needed)
 5. ✅ Document your deployment process for your team
 
 ---
