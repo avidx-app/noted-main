@@ -1,6 +1,8 @@
 # Deployment Guide: Render (Staging & Production)
 
-This guide will walk you through deploying your Noted application to Render with **Staging** and **Production** environments. 
+This guide will walk you through deploying your Noted application to Render with **Staging** and **Production** environments.
+
+> 💡 **Note**: By default, this guide uses Render's **Free tier** plan. Free tier services spin down after 15 minutes of inactivity and may take up to 1 minute to spin back up. For production apps, consider upgrading to the Starter plan ($7/month) for always-on availability. 
 
 ## 🎯 Deployment Strategy
 
@@ -91,6 +93,7 @@ Clerk allows you to have both **Development** and **Production** instances withi
    - Make sure you're on the **Development** instance
    - Go to **API Keys**
    - Copy the **Publishable Key** (starts with `pk_test_...`)
+   - Copy the **Secret Key** (starts with `sk_test_...`)
    - **Important**: Make sure you have a JWT Template named exactly `convex` (lowercase) configured
      - Go to **JWT Templates** → Create new template (if it doesn't exist)
      - Name: `convex` (must be exactly "convex" in lowercase!)
@@ -101,6 +104,7 @@ Clerk allows you to have both **Development** and **Production** instances withi
    - Switch to the **Production** instance (use the dropdown in top navigation)
    - Go to **API Keys**
    - Copy the **Publishable Key** (starts with `pk_live_...`)
+   - Copy the **Secret Key** (starts with `sk_live_...`)
    - **Important**: Make sure you have a JWT Template named exactly `convex` (lowercase) configured
      - Go to **JWT Templates** → Create new template (if it doesn't exist)
      - Name: `convex` (must be exactly "convex" in lowercase!)
@@ -144,6 +148,7 @@ Render can automatically detect and use the `render.yaml` file in your repositor
      ```
      NEXT_PUBLIC_CONVEX_URL=<your-production-convex-url>
      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-clerk-production-publishable-key>  # pk_live_... from Production instance
+     CLERK_SECRET_KEY=<your-clerk-production-secret-key>  # sk_live_... from Production instance
      EDGE_STORE_ACCESS_KEY=<your-edgestore-access-key>
      EDGE_STORE_SECRET_KEY=<your-edgestore-secret-key>
      ```
@@ -155,6 +160,7 @@ Render can automatically detect and use the `render.yaml` file in your repositor
      ```
      NEXT_PUBLIC_CONVEX_URL=<your-development-convex-url>  # Use Development deployment
      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-clerk-development-publishable-key>  # pk_test_... from Development instance
+     CLERK_SECRET_KEY=<your-clerk-development-secret-key>  # sk_test_... from Development instance
      EDGE_STORE_ACCESS_KEY=<your-edgestore-access-key>  # Can use same as production
      EDGE_STORE_SECRET_KEY=<your-edgestore-secret-key>  # Can use same as production
      ```
@@ -316,12 +322,14 @@ Here's a checklist of all environment variables you need:
 ### Production Service (Render):
 - [ ] `NEXT_PUBLIC_CONVEX_URL` - Production Convex deployment URL
 - [ ] `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Clerk Production instance publishable key (`pk_live_...`)
+- [ ] `CLERK_SECRET_KEY` - Clerk Production instance secret key (`sk_live_...`)
 - [ ] `EDGE_STORE_ACCESS_KEY` - EdgeStore access key
 - [ ] `EDGE_STORE_SECRET_KEY` - EdgeStore secret key
 
 ### Staging Service (Free Tier Alternative - Render):
 - [ ] `NEXT_PUBLIC_CONVEX_URL` - **Development Convex deployment URL** (same project, different deployment)
 - [ ] `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Clerk Development instance publishable key (`pk_test_...`)
+- [ ] `CLERK_SECRET_KEY` - Clerk Development instance secret key (`sk_test_...`)
 - [ ] `EDGE_STORE_ACCESS_KEY` - EdgeStore access key (can be same as production)
 - [ ] `EDGE_STORE_SECRET_KEY` - EdgeStore secret key (can be same as production)
 
