@@ -21,59 +21,91 @@ Before you begin, make sure you have:
 
 1. ✅ A GitHub account with your code pushed to a repository
 2. ✅ A Render account ([sign up here](https://render.com))
-3. ✅ Separate Convex deployments for staging and production
-   - **Production Convex**: Used by production service
-   - **Staging Convex**: Used by all preview environments (each PR preview connects to this)
-4. ✅ Clerk application set up (can use same for both production and previews)
+3. ✅ Convex project with separate deployments for staging and production
+   - **Production Deployment**: Used by production service
+   - **Development/Staging Deployment**: Used by all preview environments (each PR preview connects to this)
+   - Both deployments can be in the same Convex project (recommended, similar to Clerk setup)
+4. ✅ Clerk application set up with Development and Production instances (recommended)
 5. ✅ EdgeStore account with access keys (can use same for both production and previews)
 
 ---
 
 ## Step 1: Prepare Your Convex Deployments
 
-You'll need **separate Convex deployments** for staging and production.
+**Recommended: Use the Same Convex Project with Separate Deployments**
 
-### For Production:
+Just like Clerk, Convex allows you to have multiple deployments within the same project. This is the best approach:
 
-1. Go to [Convex Dashboard](https://dashboard.convex.dev)
-2. Create a new deployment or use your existing production deployment
-3. Copy the **Deployment URL** (looks like `https://your-project.convex.cloud`)
-4. Save this URL - you'll need it for production environment variables
+- ✅ **Production Deployment**: Use for production (e.g., "robust-wolf-630")
+- ✅ **Development Deployment**: Use for staging/preview environments (e.g., "rugged-hawk-26")
+- ✅ Same project, easier to manage
+- ✅ Better isolation than using the same deployment
+- ✅ Simpler than creating separate Convex projects
 
-### For Staging:
+### Setup Steps:
 
-1. In Convex Dashboard, create a **separate deployment** for staging
-2. Copy the **Deployment URL** for staging
-3. Save this URL - you'll need it for staging environment variables
+1. **Go to [Convex Dashboard](https://dashboard.convex.dev)**
+   - Select your project (e.g., "noted-main")
+   - You'll see a dropdown in the top navigation to switch between deployments
 
-> 💡 **Tip**: You can create multiple deployments in the same Convex project, or create separate projects entirely. The choice depends on whether you want to share data between environments.
+2. **Create or Select Production Deployment**:
+   - Switch to or create your **Production** deployment
+   - Copy the **Deployment URL** (looks like `https://your-project.convex.cloud`)
+   - Save this URL - you'll need it for production environment variables
+   - Note the deployment name (e.g., "robust-wolf-630")
+
+3. **Create or Select Development Deployment**:
+   - Switch to or create your **Development** deployment (for staging/previews)
+   - Copy the **Deployment URL** for this deployment
+   - Save this URL - you'll need it for staging/preview environment variables
+   - Note the deployment name (e.g., "rugged-hawk-26")
+
+> 💡 **Tip**: Both deployments are in the same Convex project, making it easier to manage. Each deployment has its own database, so data is isolated between production and staging/previews.
 
 ---
 
 ## Step 2: Set Up Clerk (Authentication)
 
-You have two options:
+**Recommended: Use Clerk's Production Instance Feature**
 
-### Option A: Use the Same Clerk Application (Simpler)
-- Use the same Clerk app for both staging and production
-- Simpler setup, but users will be shared between environments
+Clerk allows you to have both **Development** and **Production** instances within the same project. This is the best approach:
 
-### Option B: Create Separate Clerk Applications (Recommended)
-- Create separate Clerk apps for staging and production
-- Better isolation between environments
-- Users won't mix between staging and production
+- ✅ **Development Instance**: Use for staging/preview environments (uses `pk_test_...` keys)
+- ✅ **Production Instance**: Use for production (uses `pk_live_...` keys)
+- ✅ Same project, easier to manage
+- ✅ Better isolation than using the same instance
+- ✅ Simpler than creating separate Clerk applications
 
-**For each Clerk application:**
+### Setup Steps:
 
-1. Go to [Clerk Dashboard](https://dashboard.clerk.com)
-2. Create/select your application
-3. Go to **API Keys**
-4. Copy the **Publishable Key** (starts with `pk_test_...` or `pk_live_...`)
-5. **Important**: Make sure you have a JWT Template named exactly `convex` (lowercase) configured
-   - Go to **JWT Templates** → Create new template
-   - Name: `convex` (must be lowercase!)
-   - Signing Algorithm: RS256
-   - Save the template
+1. **Go to [Clerk Dashboard](https://dashboard.clerk.com)**
+   - Select your project
+   - You'll see "Development" instance by default
+
+2. **Create Production Instance**:
+   - In the top navigation, click the dropdown next to "Development"
+   - Click **"Create production instance"**
+   - This creates a separate Production instance in the same project
+
+3. **Configure Development Instance** (for staging/previews):
+   - Make sure you're on the **Development** instance
+   - Go to **API Keys**
+   - Copy the **Publishable Key** (starts with `pk_test_...`)
+   - **Important**: Make sure you have a JWT Template named exactly `convex` (lowercase) configured
+     - Go to **JWT Templates** → Create new template (if it doesn't exist)
+     - Name: `convex` (must be exactly "convex" in lowercase!)
+     - Signing Algorithm: RS256
+     - Save the template
+
+4. **Configure Production Instance** (for production):
+   - Switch to the **Production** instance (use the dropdown in top navigation)
+   - Go to **API Keys**
+   - Copy the **Publishable Key** (starts with `pk_live_...`)
+   - **Important**: Make sure you have a JWT Template named exactly `convex` (lowercase) configured
+     - Go to **JWT Templates** → Create new template (if it doesn't exist)
+     - Name: `convex` (must be exactly "convex" in lowercase!)
+     - Signing Algorithm: RS256
+     - Save the template
 
 ---
 
@@ -111,7 +143,7 @@ Render can automatically detect and use the `render.yaml` file in your repositor
    - Add these environment variables:
      ```
      NEXT_PUBLIC_CONVEX_URL=<your-production-convex-url>
-     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-clerk-publishable-key>
+     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-clerk-production-publishable-key>  # pk_live_... from Production instance
      EDGE_STORE_ACCESS_KEY=<your-edgestore-access-key>
      EDGE_STORE_SECRET_KEY=<your-edgestore-secret-key>
      ```
@@ -121,13 +153,13 @@ Render can automatically detect and use the `render.yaml` file in your repositor
    - Go to your Blueprint → **Environment Groups** (or configure at the service level)
    - Add these environment variables (these will be used by ALL preview environments):
      ```
-     NEXT_PUBLIC_CONVEX_URL=<your-staging-convex-url>  # Use staging Convex for all previews
-     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-clerk-publishable-key>  # Can use same as production
+     NEXT_PUBLIC_CONVEX_URL=<your-development-convex-url>  # Use Development deployment for all previews
+     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-clerk-development-publishable-key>  # pk_test_... from Development instance
      EDGE_STORE_ACCESS_KEY=<your-edgestore-access-key>  # Can use same as production
      EDGE_STORE_SECRET_KEY=<your-edgestore-secret-key>  # Can use same as production
      ```
    - **Important**: All preview environments will connect to the same staging third-party services
-   - This means all PR previews share the same staging Convex database, Clerk app, and EdgeStore
+   - This means all PR previews share the same Development Convex deployment, Clerk Development instance, and EdgeStore
 
 5. **Deploy**:
    - Production will automatically deploy when code is merged to `main` branch
@@ -148,8 +180,8 @@ Render supports **Preview Environments** that work just like Vercel! Each pull r
 - **Automatic Creation**: When you open a Pull Request, Render automatically creates a preview environment
 - **Dedicated URL**: Each PR gets its own unique URL (like `noted-production-pr-123.onrender.com`)
 - **Shared Staging Services**: All preview environments connect to the same staging third-party services:
-  - Same staging Convex database (all previews share the same data)
-  - Same Clerk application
+  - Same Development Convex deployment (all previews share the same data)
+  - Same Clerk Development instance (`pk_test_...`)
   - Same EdgeStore storage
 - **Isolated Code**: Each preview runs its own code from the PR branch
 - **Auto-Cleanup**: Preview environments are automatically destroyed when the PR is merged or closed
@@ -176,7 +208,7 @@ previews:
 4. Click **"View deployment"** to get the preview URL
 5. Share the URL with your team for testing!
 
-**Important**: All preview environments share the same staging Convex database, so data created in one preview will be visible in other previews. This is intentional - they all act as staging environments.
+**Important**: All preview environments share the same Development Convex deployment, so data created in one preview will be visible in other previews. This is intentional - they all act as staging environments.
 
 ---
 
@@ -186,14 +218,14 @@ After deployment, you need to update your Convex auth configuration to allow req
 
 1. **For Production**:
    - Go to your production Convex deployment dashboard
-   - Update `convex/auth.config.js` to include your Clerk domain
-   - Make sure the Clerk domain matches your Clerk application
+   - Update `convex/auth.config.js` to include your Clerk Production instance domain
+   - Make sure the Clerk domain matches your Clerk Production instance
 
-2. **For Staging (used by all Preview Environments)**:
-   - Go to your staging Convex deployment dashboard
-   - Update `convex/auth.config.js` to include your Clerk domain
-   - Make sure the Clerk domain matches your Clerk application
-   - **Note**: All preview environments will use this staging Convex deployment
+2. **For Development/Staging (used by all Preview Environments)**:
+   - Go to your Development Convex deployment dashboard (switch to Development deployment in Convex Dashboard)
+   - Update `convex/auth.config.js` to include your Clerk Development instance domain
+   - Make sure the Clerk domain matches your Clerk Development instance
+   - **Note**: All preview environments will use this Development Convex deployment
 
 The `auth.config.js` should look like:
 ```javascript
@@ -244,7 +276,7 @@ After deployment completes:
    - Click **"View deployment"** to get the preview URL
    - Test the preview URL - it should work exactly like production!
    - Each PR gets its own unique preview URL
-   - **Note**: All previews share the same staging Convex database, so data is shared across previews
+   - **Note**: All previews share the same Development Convex deployment and Clerk Development instance, so data is shared across previews
 
 ---
 
@@ -254,17 +286,17 @@ Here's a checklist of all environment variables you need:
 
 ### Production Service (Render):
 - [ ] `NEXT_PUBLIC_CONVEX_URL` - Production Convex deployment URL
-- [ ] `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Clerk publishable key
+- [ ] `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Clerk Production instance publishable key (`pk_live_...`)
 - [ ] `EDGE_STORE_ACCESS_KEY` - EdgeStore access key
 - [ ] `EDGE_STORE_SECRET_KEY` - EdgeStore secret key
 
 ### Preview Environments (All PR Previews - Render):
-- [ ] `NEXT_PUBLIC_CONVEX_URL` - **Staging Convex deployment URL** (all previews share this)
-- [ ] `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Clerk publishable key (can be same as production)
+- [ ] `NEXT_PUBLIC_CONVEX_URL` - **Development Convex deployment URL** (all previews share this - same project, different deployment)
+- [ ] `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Clerk Development instance publishable key (`pk_test_...`)
 - [ ] `EDGE_STORE_ACCESS_KEY` - EdgeStore access key (can be same as production)
 - [ ] `EDGE_STORE_SECRET_KEY` - EdgeStore secret key (can be same as production)
 
-**Important**: Configure these at the Blueprint level (Environment Groups) so all preview environments inherit them. All preview environments will connect to the same staging Convex database.
+**Important**: Configure these at the Blueprint level (Environment Groups) so all preview environments inherit them. All preview environments will connect to the same Development Convex deployment (same project, different deployment from production).
 
 ### Local Development (.env.local):
 
@@ -273,12 +305,12 @@ Here's a checklist of all environment variables you need:
 Your `.env.local` should use **staging services** to match your preview environments:
 
 ```env
-# Use STAGING Convex URL (matches preview environments)
-NEXT_PUBLIC_CONVEX_URL=https://your-staging-project.convex.cloud
+# Use Development Convex deployment URL (matches preview environments - same project, different deployment)
+NEXT_PUBLIC_CONVEX_URL=https://your-development-deployment.convex.cloud
 
-# Can use same Clerk and EdgeStore as staging/production
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-CLERK_SECRET_KEY=sk_test_...
+# Use Clerk Development instance (matches preview environments)
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...  # From Development instance
+CLERK_SECRET_KEY=sk_test_...  # From Development instance
 EDGE_STORE_ACCESS_KEY=...
 EDGE_STORE_SECRET_KEY=...
 ```
@@ -298,8 +330,8 @@ If you need to test against production services from your local machine:
 1. **Create `.env.production.local`** file with production values:
    ```env
    NEXT_PUBLIC_CONVEX_URL=https://your-production-project.convex.cloud
-   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_...
-   CLERK_SECRET_KEY=sk_live_...
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_...  # From Production instance
+   CLERK_SECRET_KEY=sk_live_...  # From Production instance
    EDGE_STORE_ACCESS_KEY=...
    EDGE_STORE_SECRET_KEY=...
    ```
@@ -359,9 +391,9 @@ If you need to test against production services from your local machine:
 ## Best Practices
 
 1. **Separate Environments**: Keep preview/staging and production completely separate
-   - **Production Convex**: Used only by production service
-   - **Staging Convex**: Used by all preview environments (all PR previews share this)
-   - **Clerk**: Can use same application for both, or separate (optional)
+   - **Production Convex Deployment**: Used only by production service (same project, different deployment)
+   - **Development/Staging Convex Deployment**: Used by all preview environments (same project, different deployment - all PR previews share this)
+   - **Clerk**: Use Development instance (`pk_test_...`) for previews, Production instance (`pk_live_...`) for production (same project, different instances)
    - **EdgeStore**: Can use same store for both, or separate (optional)
 
 2. **Branch Strategy**:
@@ -372,8 +404,8 @@ If you need to test against production services from your local machine:
 3. **Environment Variables**:
    - Never commit `.env.local` to Git
    - Always set variables in Render dashboard
-   - Use production Convex for production service
-   - Use staging Convex for all preview environments (configure at Blueprint level)
+   - Use Production Convex deployment for production service (same project, different deployment)
+   - Use Development Convex deployment for all preview environments (same project, different deployment - configure at Blueprint level)
 
 4. **Monitoring**:
    - Set up Render's built-in monitoring
@@ -387,7 +419,7 @@ If you need to test against production services from your local machine:
 After successful deployment:
 
 1. ✅ Test preview environments by opening a Pull Request
-2. ✅ Verify all preview environments connect to staging Convex
+2. ✅ Verify all preview environments connect to Development Convex deployment
 3. ✅ Set up monitoring and alerts
 4. ✅ Configure custom domain for production
 5. ✅ Document your deployment process for your team
