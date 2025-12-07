@@ -9,7 +9,7 @@ services:
   # Production Web Service - Deploys from main branch
   - type: web
     name: noted-production
-    env: production
+    runtime: node
     plan: starter
     branch: main  # Only deploys from main branch
     buildCommand: npm install && npm run build
