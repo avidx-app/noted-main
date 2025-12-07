@@ -3,7 +3,7 @@ services:
   - type: web
     name: noted-production
     runtime: node
-    plan: starter
+    plan: starter  # Starter plan ($7/month): Always on, no cold starts
     branch: main  # Only deploys from main branch
     buildCommand: npm install && npm run build
     startCommand: npm start
@@ -13,6 +13,8 @@ services:
       - key: NEXT_PUBLIC_CONVEX_URL
         sync: false  # Set this in Render dashboard (production Convex deployment)
       - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+        sync: false  # Set this in Render dashboard (Clerk Production instance)
+      - key: CLERK_SECRET_KEY
         sync: false  # Set this in Render dashboard (Clerk Production instance)
       - key: EDGE_STORE_ACCESS_KEY
         sync: false  # Set this in Render dashboard
@@ -26,7 +28,7 @@ services:
   - type: web
     name: noted-staging
     runtime: node
-    plan: starter
+    plan: free  # Free tier: spins down after 15min inactivity, ~1min cold start
     branch: staging  # Deploys from staging branch
     buildCommand: npm install && npm run build
     startCommand: npm start
@@ -36,6 +38,8 @@ services:
       - key: NEXT_PUBLIC_CONVEX_URL
         sync: false  # Set this in Render dashboard (Development Convex deployment)
       - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+        sync: false  # Set this in Render dashboard (Clerk Development instance)
+      - key: CLERK_SECRET_KEY
         sync: false  # Set this in Render dashboard (Clerk Development instance)
       - key: EDGE_STORE_ACCESS_KEY
         sync: false  # Set this in Render dashboard
