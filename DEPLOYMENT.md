@@ -251,30 +251,72 @@ Render can automatically detect and use the `render.yaml` file in your repositor
 
 ## Step 6: Update Convex Auth Configuration
 
-After deployment, you need to update your Convex auth configuration to allow requests from your Render URLs.
+> ⚠️ **CRITICAL STEP**: After deployment, you **MUST** update your Convex auth configuration for each deployment. This is required for authentication to work properly. If you skip this step, you'll get authentication errors like "No auth provider found matching the given token".
 
-1. **For Production**:
-   - Go to your production Convex deployment dashboard
-   - Update `convex/auth.config.js` to include your Clerk Production instance domain
-   - Make sure the Clerk domain matches your Clerk Production instance
+After deployment, you need to update your Convex auth configuration to match the Clerk instance used by each deployment. **Each Convex deployment has its own `auth.config.js` file**, so you need to update them separately.
 
-2. **For Staging (Development Convex Deployment)**:
-   - Go to your Development Convex deployment dashboard (switch to Development deployment in Convex Dashboard)
-   - Update `convex/auth.config.js` to include your Clerk Development instance domain
-   - Make sure the Clerk domain matches your Clerk Development instance
-   - **Note**: Staging service uses this Development Convex deployment
+### For Production Convex Deployment:
 
-The `auth.config.js` should look like:
+1. **Go to [Convex Dashboard](https://dashboard.convex.dev)**
+   - Select your project
+   - **Switch to your Production deployment** (use the dropdown in top navigation)
+   - This is the deployment used by your production service (e.g., `prod:robust-wolf-630`)
+
+2. **Update `auth.config.js` for Production**:
+   - Go to **Files** tab in the Convex dashboard
+   - Find and open `convex/auth.config.js`
+   - Update the `domain` field to match your **Clerk Production instance** Frontend API URL
+   - To find your Production Clerk domain:
+     - Go to [Clerk Dashboard](https://dashboard.clerk.com)
+     - Switch to **Production instance** (top navigation dropdown)
+     - Go to **API Keys**
+     - Copy the **Frontend API URL** (this is your Clerk domain - could be `https://xxx.clerk.accounts.dev` or a custom domain like `https://clerk.yourdomain.com`)
+   - Save the file
+
+3. **Deploy the changes**:
+   - After updating in the dashboard, the changes are automatically saved
+   - Or, if you prefer to update locally:
+     - Update `convex/auth.config.js` in your repo with the Production Clerk domain
+     - Run: `npx convex deploy --prod` (or `CONVEX_DEPLOYMENT=prod:your-deployment-name npx convex deploy`)
+
+### For Staging (Development Convex Deployment):
+
+1. **Go to [Convex Dashboard](https://dashboard.convex.dev)**
+   - Select your project
+   - **Switch to your Development deployment** (use the dropdown in top navigation)
+   - This is the deployment used by your staging service
+
+2. **Update `auth.config.js` for Development**:
+   - Go to **Files** tab in the Convex dashboard
+   - Find and open `convex/auth.config.js`
+   - Update the `domain` field to match your **Clerk Development instance** Frontend API URL
+   - To find your Development Clerk domain:
+     - Go to [Clerk Dashboard](https://dashboard.clerk.com)
+     - Make sure you're on **Development instance** (top navigation dropdown)
+     - Go to **API Keys**
+     - Copy the **Frontend API URL** (this is your Clerk domain - usually `https://xxx.clerk.accounts.dev`)
+   - Save the file
+
+### Example `auth.config.js` format:
+
 ```javascript
 export default {
   providers: [
     {
-      domain: "https://your-clerk-domain.clerk.accounts.dev",
-      applicationID: "convex",
+      domain: "https://your-clerk-domain.clerk.accounts.dev",  // Or custom domain like https://clerk.yourdomain.com
+      applicationID: "convex",  // Must be exactly "convex" (lowercase)
     },
   ],
 };
 ```
+
+### Important Notes:
+
+- ✅ **Production Convex deployment** → Must use **Production Clerk domain**
+- ✅ **Development Convex deployment** → Must use **Development Clerk domain**
+- ✅ Each deployment has its own `auth.config.js` file - update them separately
+- ✅ The `applicationID` must always be `"convex"` (lowercase) - this matches your Clerk JWT Template name
+- ⚠️ **If you get authentication errors**, check that the Clerk domain in `auth.config.js` matches the Clerk instance you're using
 
 ---
 
@@ -405,11 +447,14 @@ If you need to test against production services from your local machine:
   - Check that Convex deployment is active
   - Verify `convex/auth.config.js` has correct Clerk domain
 
-**Error**: "Clerk authentication failed"
+**Error**: "Clerk authentication failed" or "No auth provider found matching the given token"
 - **Solution**:
+  - ⚠️ **Most Common Issue**: The `convex/auth.config.js` in your Convex deployment doesn't match your Clerk instance
+  - **For Production**: Make sure your Production Convex deployment's `auth.config.js` uses your **Production Clerk domain**
+  - **For Staging**: Make sure your Development Convex deployment's `auth.config.js` uses your **Development Clerk domain**
   - Verify `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` is correct
-  - Check that JWT Template named `convex` exists in Clerk
-  - Verify Clerk domain in `convex/auth.config.js` matches your Clerk app
+  - Check that JWT Template named `convex` exists in Clerk (both Development and Production instances)
+  - To update: Go to Convex Dashboard → Switch to correct deployment → Files → `auth.config.js` → Update domain → Save
 
 **Error**: "EdgeStore upload failed"
 - **Solution**:
@@ -456,11 +501,13 @@ If you need to test against production services from your local machine:
 
 After successful deployment:
 
-1. ✅ Test staging by pushing to staging branch
-2. ✅ Verify staging connects to Development Convex deployment
-3. ✅ Set up monitoring and alerts
-4. ✅ Configure custom domain for production (and staging if needed)
-5. ✅ Document your deployment process for your team
+1. ✅ **Update Convex auth configuration** (Step 6) - **CRITICAL**: Make sure Production Convex deployment uses Production Clerk domain
+2. ✅ Test staging by pushing to staging branch
+3. ✅ Verify staging connects to Development Convex deployment
+4. ✅ Test production authentication - verify sign in/sign up works
+5. ✅ Set up monitoring and alerts
+6. ✅ Configure custom domain for production (and staging if needed)
+7. ✅ Document your deployment process for your team
 
 ---
 
