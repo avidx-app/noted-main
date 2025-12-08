@@ -84,44 +84,6 @@ EDGE_STORE_SECRET_KEY=
 - ✅ Can test with real staging data
 - ✅ Same environment as your PR previews
 
-**Testing Production Locally:**
-
-If you need to test against production services from your local machine:
-
-1. **Create `.env.production.local`** file with production values:
-   ```env
-   # Production Convex URL
-   NEXT_PUBLIC_CONVEX_URL=https://your-production-project.convex.cloud
-   
-   # Production Clerk and EdgeStore (same as staging, or separate if you have them)
-   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_...  # or pk_test_... if same
-   CLERK_SECRET_KEY=sk_live_...  # or sk_test_... if same
-   EDGE_STORE_ACCESS_KEY=...
-   EDGE_STORE_SECRET_KEY=...
-   ```
-
-2. **Install dotenv-cli** (if not already installed):
-   ```bash
-   npm install --save-dev dotenv-cli
-   ```
-
-3. **Run with production env vars**:
-   ```bash
-   npm run dev:prod
-   ```
-
-   This will load `.env.production.local` and run the dev server connected to production services.
-
-   ⚠️ **Warning**: Be careful when testing against production! You'll be using real production data.
-
-**Alternative: Quick Switch Method**
-
-If you don't want to install dotenv-cli, you can temporarily:
-1. Rename `.env.local` to `.env.local.backup`
-2. Copy `.env.production.local` to `.env.local`
-3. Run `npm run dev`
-4. When done, restore `.env.local` from backup
-
 ### 4. Get API keys
 
 #### Convex (Backend Database)
@@ -202,3 +164,41 @@ The application will be available at [http://localhost:3000](http://localhost:30
 - **Convex not connecting**: Ensure `npx convex dev` is running and shows "Convex functions ready!"
 - **Environment variables not loading**: Restart your Next.js dev server after adding/changing `.env.local`
 - **Clerk authentication errors**: Verify your Clerk domain in `convex/auth.config.js` matches your Clerk Dashboard Frontend API URL
+
+**Testing Production Locally:**
+
+If you need to test against production services from your local machine:
+
+1. **Create `.env.production.local`** file with production values:
+   ```env
+   # Production Convex URL
+   NEXT_PUBLIC_CONVEX_URL=https://your-production-project.convex.cloud
+   
+   # Production Clerk and EdgeStore (same as staging, or separate if you have them)
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_...  # or pk_test_... if same
+   CLERK_SECRET_KEY=sk_live_...  # or sk_test_... if same
+   EDGE_STORE_ACCESS_KEY=...
+   EDGE_STORE_SECRET_KEY=...
+   ```
+
+2. **Install dotenv-cli** (if not already installed):
+   ```bash
+   npm install --save-dev dotenv-cli
+   ```
+
+3. **Run with production env vars**:
+   ```bash
+   npm run dev:prod
+   ```
+
+   This will load `.env.production.local` and run the dev server connected to production services.
+
+   ⚠️ **Warning**: Be careful when testing against production! You'll be using real production data.
+
+**Alternative: Quick Switch Method**
+
+If you don't want to install dotenv-cli, you can temporarily:
+1. Rename `.env.local` to `.env.local.backup`
+2. Copy `.env.production.local` to `.env.local`
+3. Run `npm run dev`
+4. When done, restore `.env.local` from backup
