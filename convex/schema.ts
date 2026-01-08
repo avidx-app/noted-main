@@ -46,4 +46,15 @@ export default defineSchema({
     .index("by_user", ["userId"])
     .index("by_user_document", ["userId", "documentId"])
     .index("by_checksum", ["userId", "checksum"]), // [NEW] Fast lookup for dupes
+  pageShares: defineTable({
+    documentId: v.id("documents"),
+    userId: v.string(), // Clerk user ID or Email for pending invites
+    email: v.optional(v.string()), // For display purposes
+    role: v.string(), // "full_access" | "can_edit" | "can_view"
+    grantedBy: v.string(),
+    grantedAt: v.number(),
+  })
+    .index("by_document", ["documentId"])
+    .index("by_user", ["userId"])
+    .index("by_document_user", ["documentId", "userId"]),
 });

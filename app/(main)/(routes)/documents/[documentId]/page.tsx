@@ -2,6 +2,9 @@
 
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 import { Cover } from "@/components/cover";
 import { Toolbar } from "@/components/toolbar";
@@ -9,7 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { useMutation, useQuery } from "convex/react";
+import { useQuery } from "convex/react";
 
 interface DocumentIdPageProps {
   params: {
@@ -26,15 +29,6 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
   const document = useQuery(api.documents.getById, {
     documentId: params.documentId,
   });
-
-  const update = useMutation(api.documents.update);
-
-  const onChange = (content: string) => {
-    update({
-      id: params.documentId,
-      content,
-    });
-  };
 
   if (document === undefined) {
     return (
@@ -53,18 +47,44 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
   }
 
   if (document === null) {
-    return <div>Not found</div>;
+    return (
+      <div className="flex h-full flex-col items-center justify-center space-y-4 dark:bg-[#1F1F1F]">
+        <Image
+          src="/empty-pages-v3.svg"
+          height="300"
+          width="300"
+          alt="Not found"
+          className="dark:hidden"
+        />
+        <Image
+          src="/empty-pages-v3-dark.svg"
+          height="300"
+          width="300"
+          alt="Not found"
+          className="hidden dark:block"
+        />
+        <h2 className="text-xl font-medium">Page not found</h2>
+        <div className="text-muted-foreground text-sm text-center max-w-xs">
+          This page may have been deleted or your access was removed.
+        </div>
+        <Button asChild>
+          <Link href="/documents">Go back</Link>
+        </Button>
+      </div>
+    );
   }
+
+  const isReadOnly = (document as any).currentUserRole === "can_view";
 
   return (
     <div className="pb-40">
       <Cover url={document.coverImage} />
       <div className="mx-auto md:max-w-3xl lg:max-w-4xl">
-        <Toolbar initialData={document} />
+        <Toolbar initialData={document} preview={isReadOnly} />
         <Editor
-          onChange={onChange}
-          initialContent={document.content}
           documentId={params.documentId}
+          editable={!isReadOnly}
+          initialLegacyContent={document.content}
         />
       </div>
     </div>

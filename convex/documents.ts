@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { Doc, Id } from "./_generated/dataModel";
+import { checkPageAccess } from "./pageShares";
 
 export const archive = mutation({
   args: { id: v.id("documents") },
@@ -20,7 +21,10 @@ export const archive = mutation({
     }
 
     if (exisingDocument.userId !== userId) {
-      throw new Error("Not authorized");
+      const access = await checkPageAccess(ctx, args.id, userId);
+      if (!access.hasAccess || access.role !== "full_access") {
+        throw new Error("Not authorized");
+      }
     }
 
     const recursiveArchive = async (documentId: Id<"documents">) => {
@@ -63,16 +67,61 @@ export const getSidebar = query({
 
     const userId = identity.subject;
 
+    let queryUserId = userId;
+    let currentUserRole = "owner";
+
+    if (args.parentDocument) {
+      const parent = await ctx.db.get(args.parentDocument);
+      if (parent) {
+        queryUserId = parent.userId;
+
+        if (queryUserId !== userId) {
+          // Check access and determine role
+          let hasAccess = false;
+          let role = "can_view"; // Default safe fallback
+
+          let curr: typeof parent | null = parent;
+          while (curr) {
+            const share = await ctx.db
+              .query("pageShares")
+              .withIndex("by_document_user", (q) =>
+                q.eq("documentId", curr!._id).eq("userId", userId)
+              )
+              .first();
+
+            if (share) {
+              hasAccess = true;
+              role = share.role;
+              break;
+            }
+
+            if (!curr.parentDocument) break;
+            const next: typeof parent | null = await ctx.db.get(curr.parentDocument);
+            curr = next;
+          }
+
+          if (!hasAccess) {
+            return [];
+          }
+          currentUserRole = role;
+        }
+      }
+    }
+
     const documents = await ctx.db
       .query("documents")
       .withIndex("by_user_parent", (q) =>
-        q.eq("userId", userId).eq("parentDocument", args.parentDocument),
+        q.eq("userId", queryUserId).eq("parentDocument", args.parentDocument),
       )
       .filter((q) => q.eq(q.field("isArchived"), false))
       .order("desc")
       .collect();
 
-    return documents;
+    // Map role to docs if not owner users
+    return documents.map(doc => ({
+      ...doc,
+      currentUserRole: queryUserId === userId ? "owner" : currentUserRole
+    }));
   },
 });
 
@@ -141,7 +190,10 @@ export const restore = mutation({
     }
 
     if (exisingDocument.userId !== userId) {
-      throw new Error("Not authorized");
+      const access = await checkPageAccess(ctx, args.id, userId);
+      if (!access.hasAccess || access.role !== "full_access") {
+        throw new Error("Not authorized");
+      }
     }
 
     const recursiveRestore = async (documentId: Id<"documents">) => {
@@ -199,7 +251,10 @@ export const remove = mutation({
     }
 
     if (exisingDocument.userId !== userId) {
-      throw new Error("Not authorized");
+      const access = await checkPageAccess(ctx, args.id, userId);
+      if (!access.hasAccess || access.role !== "full_access") {
+        throw new Error("Not authorized");
+      }
     }
 
     const document = await ctx.db.delete(args.id);
@@ -250,11 +305,51 @@ export const getById = query({
 
     const userId = identity.subject;
 
-    if (document.userId !== userId) {
-      throw new Error("Not authorized");
+    if (document.userId === userId) {
+      return { ...document, currentUserRole: "owner" };
     }
 
-    return document;
+    // Check for direct shared access
+    const directShare = await ctx.db
+      .query("pageShares")
+      .withIndex("by_document_user", (q) =>
+        q.eq("documentId", args.documentId).eq("userId", userId)
+      )
+      .first();
+
+    if (directShare) {
+      return { ...document, currentUserRole: directShare.role };
+    }
+
+    // Check strictly parent inheritance
+    const checkParentAccess = async (documentId: Id<"documents">): Promise<{ hasAccess: boolean; role?: string }> => {
+      const doc = await ctx.db.get(documentId);
+      if (!doc) return { hasAccess: false };
+
+      const share = await ctx.db
+        .query("pageShares")
+        .withIndex("by_document_user", (q) =>
+          q.eq("documentId", documentId).eq("userId", userId)
+        )
+        .first();
+
+      if (share) return { hasAccess: true, role: share.role };
+
+      if (doc.parentDocument) {
+        return checkParentAccess(doc.parentDocument);
+      }
+
+      return { hasAccess: false };
+    };
+
+    if (document.parentDocument) {
+      const parentAccess = await checkParentAccess(document.parentDocument);
+      if (parentAccess.hasAccess) {
+        return { ...document, currentUserRole: parentAccess.role };
+      }
+    }
+
+    return null;
   },
 });
 
@@ -285,7 +380,10 @@ export const update = mutation({
     }
 
     if (existingDocument.userId !== userId) {
-      throw new Error("Unauthorized");
+      const access = await checkPageAccess(ctx, args.id, userId);
+      if (!access.hasAccess || (access.role !== "full_access" && access.role !== "can_edit")) {
+        throw new Error("Unauthorized");
+      }
     }
 
     const document = await ctx.db.patch(args.id, {
@@ -314,7 +412,10 @@ export const removeIcon = mutation({
     }
 
     if (existingDocument.userId !== userId) {
-      throw new Error("Unauthorized");
+      const access = await checkPageAccess(ctx, args.id, userId);
+      if (!access.hasAccess || (access.role !== "full_access" && access.role !== "can_edit")) {
+        throw new Error("Unauthorized");
+      }
     }
 
     const document = await ctx.db.patch(args.id, {
@@ -343,7 +444,10 @@ export const removeCoverImage = mutation({
     }
 
     if (existingDocument.userId !== userId) {
-      throw new Error("Unauthorized");
+      const access = await checkPageAccess(ctx, args.id, userId);
+      if (!access.hasAccess || (access.role !== "full_access" && access.role !== "can_edit")) {
+        throw new Error("Unauthorized");
+      }
     }
 
     const document = await ctx.db.patch(args.id, {

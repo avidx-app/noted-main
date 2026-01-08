@@ -8,6 +8,7 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { api } from "@/convex/_generated/api";
 import { DocumentList } from "./DocumentList";
+import { SharedDocumentList } from "./SharedDocumentList";
 import { Item } from "./Item";
 import { UserItem } from "./UserItem";
 
@@ -169,6 +170,7 @@ const Navigation = () => {
         <div className="mt-4">
           <DocumentList />
           <Item onClick={handleCreate} icon={Plus} label="Add a page" />
+          <SharedDocumentList />
 
           <Popover>
             <PopoverTrigger className="mt-4 w-full">

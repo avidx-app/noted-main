@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
 import { useUser } from "@clerk/clerk-react";
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import {
@@ -25,6 +25,7 @@ export const Menu = ({ documentId }: MenuProps) => {
   const router = useRouter();
   const { user } = useUser();
 
+  const document = useQuery(api.documents.getById, { documentId });
   const archive = useMutation(api.documents.archive);
 
   const onArchive = () => {
@@ -39,6 +40,10 @@ export const Menu = ({ documentId }: MenuProps) => {
     router.push("/documents");
   };
 
+  if (document && ((document as any).currentUserRole === "can_view" || (document as any).currentUserRole === "can_edit")) {
+    return null;
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -52,10 +57,13 @@ export const Menu = ({ documentId }: MenuProps) => {
         alignOffset={8}
         forceMount
       >
-        <DropdownMenuItem onClick={onArchive}>
-          <Trash className="mr-2 h-4 w-4" />
-          Delete
-        </DropdownMenuItem>
+        {/* Check role. If document not loaded yet, don't show specific actions, or assume no access till loaded */}
+        {document && (document as any).currentUserRole !== "can_view" && (document as any).currentUserRole !== "can_edit" && (
+          <DropdownMenuItem onClick={onArchive}>
+            <Trash className="mr-2 h-4 w-4" />
+            Delete
+          </DropdownMenuItem>
+        )}
         <DropdownMenuSeparator />
         <div className="p-2 text-xs text-muted-foreground">
           Last edited by {user?.fullName}

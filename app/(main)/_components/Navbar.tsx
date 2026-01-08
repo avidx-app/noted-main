@@ -8,7 +8,7 @@ import { useParams } from "next/navigation";
 import { Title } from "./Title";
 import { Banner } from "./Banner";
 import { Menu } from "./Menu";
-import { Publish } from "./Publish";
+import { ShareButton } from "./ShareButton";
 
 interface NavbarProps {
   isCollapsed: boolean;
@@ -50,7 +50,9 @@ export const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
         <div className="flex w-full items-center justify-between">
           <Title initialData={document} />
           <div className="flex items-center gap-x-2">
-            <Publish initialData={document} />
+            {!document.isArchived && ((document as any).currentUserRole === "owner" || (document as any).currentUserRole === "full_access") && (
+              <ShareButton documentId={document._id} isPublished={document.isPublished} />
+            )}
             <Menu documentId={document._id} />
           </div>
         </div>

@@ -35,6 +35,7 @@ interface ItemProps {
   label: string;
   onClick?: () => void;
   icon: LucideIcon;
+  role?: string;
 }
 
 export const Item = ({
@@ -48,6 +49,7 @@ export const Item = ({
   level = 0,
   onExpand,
   expanded,
+  role,
 }: ItemProps) => {
   const { user } = useUser();
   const router = useRouter();
@@ -128,38 +130,49 @@ export const Item = ({
       )}
       {!!id && (
         <div className="ml-auto flex items-center gap-x-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger onClick={(e) => e.stopPropagation()} asChild>
+
+          <>
+            {(!role || role === "owner" || role === "full_access") && (
+              <DropdownMenu>
+                <DropdownMenuTrigger
+                  onClick={(e) => e.stopPropagation()}
+                  asChild
+                >
+                  <div
+                    role="button"
+                    className="ml-auto h-full rounded-sm opacity-0 hover:bg-neutral-300 group-hover:opacity-100 dark:hover:bg-neutral-600"
+                  >
+                    <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  className="w-60"
+                  align="start"
+                  side="right"
+                  forceMount
+                >
+                  <DropdownMenuItem onClick={onArchive}>
+                    <Trash className="mr-2 h-4 w-4" />
+                    Delete
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <div className="p-2 text-xs text-muted-foreground">
+                    Last edited by: {user?.fullName}
+                  </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+
+            {role !== "can_view" && (
               <div
                 role="button"
+                onClick={onCreate}
                 className="ml-auto h-full rounded-sm opacity-0 hover:bg-neutral-300 group-hover:opacity-100 dark:hover:bg-neutral-600"
               >
-                <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
+                <Plus className="h-4 w-4 text-muted-foreground" />
               </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              className="w-60"
-              align="start"
-              side="right"
-              forceMount
-            >
-              <DropdownMenuItem onClick={onArchive}>
-                <Trash className="mr-2 h-4 w-4" />
-                Delete
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <div className="p-2 text-xs text-muted-foreground">
-                Last edited by: {user?.fullName}
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <div
-            role="button"
-            onClick={onCreate}
-            className="ml-auto h-full rounded-sm opacity-0 hover:bg-neutral-300 group-hover:opacity-100 dark:hover:bg-neutral-600"
-          >
-            <Plus className="h-4 w-4 text-muted-foreground" />
-          </div>
+            )}
+          </>
         </div>
       )}
     </div>
