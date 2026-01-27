@@ -65,6 +65,15 @@ export default defineSchema({
     // Linked instructions document
     instructionsDocId: v.optional(v.id("documents")),
 
+    // Adology MCP integration
+    adologyEnabled: v.optional(v.boolean()),
+    adologyTokens: v.optional(v.object({
+      accessToken: v.string(),
+      refreshToken: v.optional(v.string()),
+      expiresAt: v.optional(v.number()),
+    })),
+    adologyCodeVerifier: v.optional(v.string()), // PKCE verifier
+
     createdAt: v.number(),
     updatedAt: v.number(),
   }).index("by_user", ["userId"]),

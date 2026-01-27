@@ -27,6 +27,49 @@ interface Block {
 }
 
 /**
+ * Sanitize tool definitions for Google Gemini
+ * Gemini has strict requirements on JSON schemas, specifically checking for boolean enums
+ */
+function sanitizeSchema(schema: any): any {
+    if (!schema) return schema;
+    if (typeof schema === 'function') return schema; // Skip functions
+    if (typeof schema !== 'object') return schema; // Skip primitives
+
+    // Deep clone if it's an array
+    if (Array.isArray(schema)) {
+        return schema.map(item => sanitizeSchema(item));
+    }
+
+    // Deep clone object
+    const newSchema = { ...schema };
+
+    // Fix enum values if they are not strings
+    // Fix enum values if they are not strings
+    if (newSchema.enum && Array.isArray(newSchema.enum)) {
+        // If enum contains booleans, convert to string
+        if (newSchema.enum.some((v: any) => typeof v === 'boolean')) {
+            newSchema.enum = newSchema.enum.map((v: any) => String(v));
+            newSchema.type = 'string'; // Force type to string if enum used
+        }
+    }
+
+    // Fix const values if they are booleans (Gemini treats const as enum)
+    if (newSchema.const !== undefined && typeof newSchema.const === 'boolean') {
+        newSchema.const = String(newSchema.const);
+        newSchema.type = 'string';
+    }
+
+    // Recursively handle ALL properties in the object
+    for (const key in newSchema) {
+        if (key !== 'enum' && key !== 'const') {
+            newSchema[key] = sanitizeSchema(newSchema[key]);
+        }
+    }
+
+    return newSchema;
+}
+
+/**
  * Create the appropriate AI model based on provider
  * For Google Gemini 2.5+ models, this includes thinkingConfig with includeThoughts
  */
@@ -212,6 +255,64 @@ export async function POST(req: NextRequest) {
 
         // Create workspace tools with execute functions
         const tools = createWorkspaceTools(convex, config?.instructionsDocId);
+
+        // Inject Adology MCP tools if enabled
+        if (config?.adologyEnabled && config?.adologyTokens?.accessToken) {
+            try {
+                // Determine token expiration (optional safety check)
+                const now = Date.now();
+                // Check if expired or expiring in 5 minutes
+                const expiresAt = config.adologyTokens?.expiresAt || 0;
+
+                if (now > (expiresAt - 5 * 60 * 1000) && config.adologyTokens.refreshToken) {
+                    console.log("Adology token expiring, refreshing...");
+                    try {
+                        const { refreshAdologyTokens } = await import("@/lib/adology-mcp");
+                        const newTokens = await refreshAdologyTokens(config.adologyTokens.refreshToken);
+
+                        // Save new tokens to Convex
+                        if (newTokens.access_token) {
+                            await convex.mutation((api as any).coworkerAdology.saveAdologyTokens, {
+                                accessToken: newTokens.access_token,
+                                refreshToken: newTokens.refresh_token || config.adologyTokens.refreshToken, // Keep old refresh token if not rotated
+                                expiresIn: newTokens.expires_in
+                            });
+
+                            // Use the new token for this request
+                            config.adologyTokens.accessToken = newTokens.access_token;
+                            console.log("Adology token refreshed successfully");
+                        }
+                    } catch (e) {
+                        console.error("Failed to refresh Adology tokens:", e);
+                        // Fallback: Try with existing token or let it fail downstream
+                    }
+                }
+
+                // If token is expired and we had a refresh token, we would refresh here
+                // For now, we'll try to use it and if it fails, the agent will just strictly use workspace tools
+
+                const { getAdologyMcpClient } = await import("@/lib/adology-mcp");
+                const adologyClient = await getAdologyMcpClient(config.adologyTokens.accessToken);
+
+                const mcpTools = await adologyClient.tools();
+                const firstToolName = Object.keys(mcpTools)[0];
+                const firstTool = Object.values(mcpTools)[0] as any;
+                console.error("DEBUG: Raw MCP Tool (full):", JSON.stringify(firstTool, null, 2));
+
+
+                // Sanitize tools for Gemini (fix boolean enums, etc)
+                const sanitizedMcpTools: Record<string, any> = {};
+                for (const [name, tool] of Object.entries(mcpTools)) {
+                    sanitizedMcpTools[name] = sanitizeSchema(tool);
+                }
+
+                // Merge tools
+                Object.assign(tools, sanitizedMcpTools);
+            } catch (err) {
+                console.error("Failed to load Adology tools:", err);
+                // We continue without Adology tools rather than failing the request
+            }
+        }
 
         // Convert messages to the format expected by streamText (AI SDK Core)
         const formattedMessages = messages.map((msg: ChatMessage) => {
