@@ -307,23 +307,41 @@ function generateEvents(plan, fixture, eventCatalog, options) {
       activationStatus: activationStatus(documents.length, publishedDocuments.length, messageCount),
     };
 
-    push(
+    const featureIndex = intBetween(random, 0, 5);
+    const landingProps = {
+      feature_name: ["AI Writing", "Editor", "Files", "Publish", "Search", "Squad"][featureIndex],
+      page_path: [
+        "/features/ai-writing",
+        "/features/editor",
+        "/features/files",
+        "/features/publish",
+        "/features/search",
+        "/features/squad",
+      ][featureIndex],
+    };
+    const landingDay = shiftToWorkingDay(
+      Math.max(0, signupDay - 1), finalDay, windowStart, random,
+    );
+    const landingAt = sampleWorkingTime(windowStart, landingDay, random);
+    pushAt(
       "Landing Feature Page Visited",
-      Math.max(0, signupDay - 1),
+      landingAt,
       user,
       { ...baseContext, featureArea: "acquisition", funnelStage: "visitor" },
-      {
-        feature_name: pick(random, ["AI Writing", "Editor", "Files", "Publish", "Search", "Squad"]),
-        page_path: pick(random, [
-          "/features/ai-writing",
-          "/features/editor",
-          "/features/files",
-          "/features/publish",
-          "/features/search",
-          "/features/squad",
-        ]),
-      },
+      landingProps,
     );
+
+    // A page that is read and never acted on is not how landing pages behave.
+    // The gap between the visit and the click is the acquisition step itself.
+    if (random() < 0.44) {
+      pushAt(
+        "Landing Feature Clicked",
+        landingAt + intBetween(random, 6, 190) * 1000,
+        user,
+        { ...baseContext, featureArea: "acquisition", funnelStage: "visitor" },
+        landingProps,
+      );
+    }
 
     if (user.persona === "trial_users" || random() < 0.22) {
       push(
@@ -411,6 +429,35 @@ function generateEvents(plan, fixture, eventCatalog, options) {
         }
       }
 
+      // A withdrawn document looks identical to one never published in the
+      // tables, because isPublished is a flag with no history. The events keep
+      // the history the flag discards, which is the whole reason both views
+      // exist. Only non-archived drafts qualify: an archived one was abandoned,
+      // not retracted.
+      if (!document.isPublished && !document.isArchived && random() < 0.022) {
+        const shownDay = shiftToWorkingDay(
+          Math.min(finalDay, eventDay + 1), finalDay, windowStart, random,
+        );
+        const shownAt = sampleWorkingTime(windowStart, shownDay, random);
+        pushAt(
+          "Document Published",
+          shownAt,
+          user,
+          { ...baseContext, featureArea: "documents", funnelStage: "publish" },
+          documentProps,
+        );
+        const pulledDay = shiftToWorkingDay(
+          Math.min(finalDay, shownDay + intBetween(random, 1, 6)), finalDay, windowStart, random,
+        );
+        pushAt(
+          "Document Unpublished",
+          sampleWorkingTime(windowStart, pulledDay, random),
+          user,
+          { ...baseContext, featureArea: "documents", funnelStage: "retract" },
+          documentProps,
+        );
+      }
+
       if (document.isArchived) {
         push(
           "Document Archived",
@@ -463,6 +510,22 @@ function generateEvents(plan, fixture, eventCatalog, options) {
           },
         );
         moment += intBetween(random, 1, 9) * minuteMs;
+      }
+    }
+
+    // Nobody signing out across 30 days is not a quiet signal, it is a missing
+    // one. Shared machines and password managers both produce explicit logouts.
+    if (random() < 0.46) {
+      const logouts = intBetween(random, 1, 3);
+      for (let index = 0; index < logouts; index += 1) {
+        push(
+          "User Logged Out",
+          Math.min(finalDay, signupDay + 2 + intBetween(random, 0, 20)),
+          user,
+          { ...baseContext, featureArea: "auth", funnelStage: "signup" },
+          { auth_surface: "clerk" },
+          finalDay,
+        );
       }
     }
   }
