@@ -5,13 +5,15 @@ people say about using it.
 
 ## Doc index
 
-| Path                           | What it is                                                                                                                              |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| [interviews/](interviews/)     | Customer conversation transcripts. **All currently constructed** — read [interviews/CLAUDE.md](interviews/CLAUDE.md) before quoting one |
-| [market-pulse/](market-pulse/) | Weekly/monthly pulses on the note-taking + AI-native editor space                                                                       |
-| [competitors/](competitors/)   | One folder per competitor: product teardown, pricing, positioning                                                                       |
-| `deep-dives/`                  | Multi-day research threads on a specific question (e.g., "what's the TAM of AI-native notes in 2026?")                                  |
-| `signals/`                     | Raw signals worth tracking (funding announcements, launches, pricing changes) before they become pulses                                 |
+| Path                                   | What it is                                                                                                                              |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| [personas.md](personas.md)             | Five relationships people have with the product, synthesised from the interviews                                                        |
+| [pain-landscape.md](pain-landscape.md) | What hurts, ranked by independent mentions and what it gates                                                                            |
+| [interviews/](interviews/)             | Customer conversation transcripts. **All currently constructed** — read [interviews/CLAUDE.md](interviews/CLAUDE.md) before quoting one |
+| [market-pulse/](market-pulse/)         | Weekly/monthly pulses on the note-taking + AI-native editor space                                                                       |
+| [competitors/](competitors/)           | One folder per competitor: product teardown, pricing, positioning                                                                       |
+| `deep-dives/`                          | Multi-day research threads on a specific question (e.g., "what's the TAM of AI-native notes in 2026?")                                  |
+| `signals/`                             | Raw signals worth tracking (funding announcements, launches, pricing changes) before they become pulses                                 |
 
 ## Market pulse cadence
 
