@@ -80,6 +80,22 @@ publish-to-web:
   owners:
     engineering: avidx-app
 
+ai-first-onboarding:
+  # A bet in flight, not a feature. There is a Stage 2 PRD and a prototype route;
+  # there is no eligibility check, no flag, no generation, and no instrumentation.
+  # Read prototype-boundary.md before citing the prototype as evidence of anything.
+  dossier: null                    # not yet written (nothing shipped)
+  status: in-design
+  prd: team-os/product/prds/growth/ai-first-onboarding-prd.md
+  prototype_boundary: team-os/product/prds/growth/prototype-boundary.md
+  metrics: team-os/analytics/metrics/growth/ai-first-onboarding-metrics.md
+  code:
+    ui:
+      - app/(main)/(routes)/documents/start/page.tsx   # prototype only, not linked from anywhere
+  owners:
+    product: raziiabraham
+    engineering: avidx-app
+
 team-collaboration:
   dossier: null                    # not yet written (nothing built)
   status: planned

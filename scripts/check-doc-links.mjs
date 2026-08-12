@@ -102,6 +102,13 @@ function pathsOn(line, mapDir) {
     if (value.includes("*") || value.includes("<") || value.includes("$")) return;
     if (/\s/.test(value)) return;
     value = value.split("#")[0].replace(/^\.\//, "");
+    // Route-group directories put parentheses in paths, and a markdown link has
+    // to percent-encode those or the renderer ends the link at the first `)`.
+    try {
+      value = decodeURIComponent(value);
+    } catch {
+      // Malformed escape — compare it raw rather than throwing.
+    }
     if (!value || GENERATED.test(value)) return;
 
     if (REPO_PREFIXES.some((prefix) => value.startsWith(prefix))) {
