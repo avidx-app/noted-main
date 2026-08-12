@@ -1,17 +1,17 @@
 # Research
 
-Market, competitor, and deep-dive research. This is where *outward-looking* knowledge lives — what the world outside Noted is doing.
-
-(Internal customer calls would live in `../product/customers/` if we had them. We currently don't run structured customer calls, so that folder doesn't exist yet. When we do, create it.)
+Market, competitor, and customer research — both what the world outside Noted is doing, and what
+people say about using it.
 
 ## Doc index
 
-| Path | What it is |
-|---|---|
-| [market-pulse/](market-pulse/) | Weekly/monthly pulses on the note-taking + AI-native editor space |
-| [competitors/](competitors/) | One folder per competitor: product teardown, pricing, positioning |
-| `deep-dives/` | Multi-day research threads on a specific question (e.g., "what's the TAM of AI-native notes in 2026?") |
-| `signals/` | Raw signals worth tracking (funding announcements, launches, pricing changes) before they become pulses |
+| Path                           | What it is                                                                                                                              |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| [interviews/](interviews/)     | Customer conversation transcripts. **All currently constructed** — read [interviews/CLAUDE.md](interviews/CLAUDE.md) before quoting one |
+| [market-pulse/](market-pulse/) | Weekly/monthly pulses on the note-taking + AI-native editor space                                                                       |
+| [competitors/](competitors/)   | One folder per competitor: product teardown, pricing, positioning                                                                       |
+| `deep-dives/`                  | Multi-day research threads on a specific question (e.g., "what's the TAM of AI-native notes in 2026?")                                  |
+| `signals/`                     | Raw signals worth tracking (funding announcements, launches, pricing changes) before they become pulses                                 |
 
 ## Market pulse cadence
 
@@ -34,4 +34,4 @@ Start simple — `tldr.md` is enough on day one. Expand when a competitor gets r
 
 ## Current priority competitors
 
-*(Populate as we decide who to track. Notion, Obsidian, Craft, Mem, and any AI-native editors are obvious candidates.)*
+_(Populate as we decide who to track. Notion, Obsidian, Craft, Mem, and any AI-native editors are obvious candidates.)_

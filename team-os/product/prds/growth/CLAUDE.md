@@ -1,7 +1,7 @@
 # PRDs — Growth
 
-| File | Stage | Summary |
-|---|---|---|
+| File                                                     | Stage               | Summary                                                                                                                                                       |
+| -------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [ai-first-onboarding-prd.md](ai-first-onboarding-prd.md) | 2 — Planning Review | Ask new users what they are working on before creating a blank document, then generate a structured starter doc. A prototype exists; the experiment does not. |
 
 ## Current state of onboarding in Noted

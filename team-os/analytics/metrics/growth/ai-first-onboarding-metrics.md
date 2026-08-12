@@ -52,12 +52,12 @@ created document.
 
 ## Guardrails
 
-| Guardrail | Source | Status |
-| --- | --- | --- |
-| First-document creation rate does not fall | `Document Created` | Measurable |
+| Guardrail                                         | Source                                       | Status                         |
+| ------------------------------------------------- | -------------------------------------------- | ------------------------------ |
+| First-document creation rate does not fall        | `Document Created`                           | Measurable                     |
 | Time to first editable document does not increase | first `Document Created` minus session start | `[NEED: acceptable threshold]` |
-| Skip rate does not indicate confusion | `Onboarding Intent Skipped` | `[NEEDS INSTRUMENTATION]` |
-| Support contacts tagged onboarding do not rise | support tagging | No support tagging exists |
+| Skip rate does not indicate confusion             | `Onboarding Intent Skipped`                  | `[NEEDS INSTRUMENTATION]`      |
+| Support contacts tagged onboarding do not rise    | support tagging                              | No support tagging exists      |
 
 ## Anti-metric
 
@@ -70,7 +70,7 @@ read as the prompt teaching compliance, not value.
 
 Second-order: **starter documents created going up while second-document rate stays flat** means the
 feature manufactures first documents rather than habits. The primary metric would not catch it,
-because the starter document *is* the first document.
+because the starter document _is_ the first document.
 
 ## Readiness verdict
 

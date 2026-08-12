@@ -40,7 +40,7 @@ become a problem when someone reads the route as a working feature.
 
 - **Scaffold selection is keyword matching, not comprehension.** `detectScaffold` runs five
   regexes over the lowercased text. "I'm preparing for an interview" matches `interview`. So does
-  "I need to hire someone", which gets an interview *prep* plan. No model is involved.
+  "I need to hire someone", which gets an interview _prep_ plan. No model is involved.
 - **Generation is a timer.** `setTimeout(() => setScreen("result"), 1800)`. The 1.8 seconds is a
   guess at what generation would feel like, and it is identical for every input. Whatever the
   generating screen teaches about patience is a property of that number, not of the product.
@@ -75,7 +75,7 @@ mobile.
 **Reading behaviour off this prototype is the specific trap.** A participant who completes the flow
 has completed a flow that always works, in 1.8 seconds, with an answer chosen from five. The real
 version would sometimes be slow, sometimes be wrong, and sometimes fail. Observed enthusiasm here is
-evidence about the *offer*, not about the *product*.
+evidence about the _offer_, not about the _product_.
 
 ## Before this becomes a feature
 
