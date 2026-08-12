@@ -1,6 +1,7 @@
 ---
 name: convex-schema
 description: Convex schema conventions for noted-main — `defineSchema`, `defineTable`, the `v.*` validator namespace, index design (`by_<col>`, `by_<col>_<col>`), nullable vs optional fields, and the additive-only migration rule. Use when user asks to "add a table", "add a column", "add an index", "should this be optional or required", or any time `convex/schema.ts` is being touched. Applies implicitly whenever introducing a new table, adding fields to an existing table, or designing query patterns that require a new index.
+summary: defineTable, indexes, additive migrations
 ---
 
 <!--

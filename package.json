@@ -24,8 +24,13 @@
     "seed:amplitude:plan": "node scripts/seed-amplitude.mjs",
     "seed:amplitude": "node scripts/seed-amplitude.mjs --apply",
     "sync-ai": "node scripts/sync-ai.mjs",
+    "install-hooks": "node scripts/install-git-hooks.mjs",
+    "check:index": "node scripts/check-ai-index.mjs",
+    "check:links": "node scripts/check-doc-links.mjs --check",
+    "check:drift": "node scripts/check-ai-index.mjs --check && node scripts/check-doc-links.mjs --check",
+    "ci:local": "npm run format:check && npm run test:eslint-rules && npm run lint:check && npm run type:check && npm run check:drift && npm run test",
     "design:lint": "npx --yes @google/design.md lint DESIGN.md",
-    "postinstall": "node scripts/sync-ai.mjs"
+    "postinstall": "node scripts/sync-ai.mjs && node scripts/install-git-hooks.mjs"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.23",

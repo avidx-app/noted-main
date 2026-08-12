@@ -71,7 +71,11 @@ Proposed instrumentation (Stage 6 follow-up):
 | Convex function error rate for `/api/ai/chat` and `/api/ai/coworker` | Guardrail | Convex Dashboard |
 | Messages-per-active-user trending **up** while completion rate trends **down** | Anti-metric | Same table |
 
-Instrumenting these is worth its own mini-PRD if anyone takes it on. Use [`/metrics-define`](../../../../.claude/commands/) while scoping.
+These are now defined properly in
+[`team-os/analytics/metrics/ai-features/ai-squad-metrics.md`](../../../analytics/metrics/ai-features/ai-squad-metrics.md),
+which records what is measurable from `lib/analytics.ts` today and what is still blocked on
+instrumentation. Use [`/metrics-define`](../../../../.ai/commands/metrics-define.md) when scoping
+metrics for a new feature.
 
 ## 8. Open questions
 

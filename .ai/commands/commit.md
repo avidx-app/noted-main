@@ -1,5 +1,6 @@
 ---
 description: Validate branch, run quality checks, review code, and commit changes. Optionally links to a Linear ticket (e.g. NOT-123).
+summary: Pre-commit quality gate
 ---
 
 <!--

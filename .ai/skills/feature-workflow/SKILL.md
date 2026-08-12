@@ -1,6 +1,7 @@
 ---
 name: feature-workflow
 description: End-to-end feature development workflow for noted-main — from ideation through merge and smoke test. Every feature MUST begin with user grounding against the noted Customer Understanding OS (personas, pain landscape, behavioural cohorts). Use when starting a new feature, planning implementation, or checking what step comes next in the dev process. Pairs with the `/feature-workflow` slash command, which walks an agent through the same phases interactively.
+summary: Interactive feature dev phases
 ---
 
 <!--

@@ -31,6 +31,20 @@ See [team-os/ROSTER.md](team-os/ROSTER.md).
 - **When switching tasks, `/clear` first.** Leftover context pollutes results.
 - **Never fabricate data, quotes, or metrics.** Flag gaps with `[NEED: data from X]`.
 
+## Connected tools (MCP)
+
+[`.mcp.json`](.mcp.json) declares two remote servers. Both are hosted, both authenticate per person
+over OAuth on first use, and neither stores a credential in this repo. Your client will ask you to
+approve them the first time you open the project.
+
+| Server   | Used by                                                                                                   | If you do not have it                                                                                                                                                                                                                                                                                                                                      |
+| -------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `linear` | `/feature-workflow` Phase 0, every `/speckit.*`, `/worktree`, `/commit`, `/noted-review` ticket alignment | Work ticketless. `/speckit.specify --explore` drafts against an `EXP-N` id with no ticket required, and branches become `explore/EXP-N-<slug>`. Every other command must **say in its output** that ticket alignment was skipped rather than silently passing that check.                                                                                  |
+| `notion` | `/feature-workflow` Phase 0 user grounding (the Customer Understanding OS)                                | Read [`team-os/research/`](team-os/research/) instead — personas, pain landscape and interview evidence live there for any feature that has been grounded. If the feature you are working on has no grounding there, Phase 0's stop rule applies: **no quote, no grounding, stop.** Do not substitute the model's general knowledge for customer evidence. |
+
+The fallbacks are not second-class paths — most contributors will run this way. What is not
+acceptable is a command that needs evidence, cannot reach it, and proceeds as though it could.
+
 ## AI playground (self-healing loop)
 
 This repo is set up so humans and agents can ship compliant PRs without engineer babysitting. The loop:

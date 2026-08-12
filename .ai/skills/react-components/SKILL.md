@@ -1,6 +1,7 @@
 ---
 name: react-components
 description: React component patterns for noted-main including forwardRef, typed props with JSDoc, the cn() helper, cva variants for shadcn primitives, and the "almost never useMemo/useCallback" performance rule. Use when user asks to "build a component", "add a button variant", "style with Tailwind", or "should I memoize this". Also use when defining component props, organizing component files, or extending shadcn primitives. Applies implicitly when building any UI as part of a feature.
+summary: forwardRef, cva, cn(), no premature memo
 ---
 
 <!--

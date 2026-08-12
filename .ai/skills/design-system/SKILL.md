@@ -1,6 +1,7 @@
 ---
 name: design-system
 description: Design system and styling rules for noted-main — shadcn primitives in `components/ui/` (do not modify), HSL CSS custom properties in `app/globals.css` mapped to Tailwind in `tailwind.config.ts`, the `brand-blue` / `brand-violet` AI/marketing accent layer, dark mode via `next-themes`, and the strict "everything new must round-trip through DESIGN.md" rule. Use when adding any UI component, picking a color, building a form, choosing icon/typography, or wrapping a primitive. Applies implicitly whenever building any frontend.
+summary: shadcn + Tailwind tokens
 ---
 
 <!--

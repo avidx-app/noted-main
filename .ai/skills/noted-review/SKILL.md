@@ -1,6 +1,7 @@
 ---
 name: noted-review
 description: Codex-compatible mirror of `/noted-review`. Use when the user asks for `/noted-review`, `$noted-review`, or wants the repo's PR review workflow against architecture docs, skills, and the engineering constitution. Read `.ai/commands/noted-review.md` and follow it as the source of truth.
+summary: PR review against skills + constitution
 ---
 
 # Noted Review

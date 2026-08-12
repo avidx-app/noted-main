@@ -1,6 +1,7 @@
 ---
 name: date-handling
 description: Date handling conventions for noted-main — store as `Date.now()` numbers in Convex, format with date-fns at the render site, never mutate native Date objects. Use when user asks to "format a date", "show 'X ago'", "compare two dates", "add days/months", or any time a Convex `createdAt`/`updatedAt` field needs to render. Applies implicitly whenever a feature stores, displays, or computes with dates.
+summary: Store numbers, format with date-fns
 ---
 
 <!--

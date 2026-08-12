@@ -1,6 +1,7 @@
 ---
 name: ship-log
 description: Log a shipped PR to the right feature's ship-log.md so non-engineers can see what's live
+summary: Append ship-log entry
 ---
 
 # Ship Log

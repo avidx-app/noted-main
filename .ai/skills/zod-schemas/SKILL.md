@@ -1,6 +1,7 @@
 ---
 name: zod-schemas
 description: Zod validation conventions for noted-main — Zod is the boundary guard for anything that crosses into TypeScript from outside (API request bodies, AI tool inputs, env vars, URL params, third-party webhooks). Convex's `v.*` validators (NOT Zod) handle Convex handler arguments. Use when user asks to "validate this", "parse the response", "add form validation", or any time external/untrusted data is being processed. Applies implicitly whenever a feature handles API request bodies, AI tool calls, or other external input.
+summary: Zod at HTTP/AI boundaries
 ---
 
 <!--

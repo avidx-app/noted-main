@@ -30,5 +30,6 @@ The principles below are NON-NEGOTIABLE. `/speckit.plan`'s Constitution Check fa
 14. **team-os reflex.** Feature dossier + `ship-log.md` entry + `feature-index.yaml` updated before a feature is "done."
 15. **Analytics: track decisions, not clicks.** See the `event-tracking` skill.
 16. **Visual identity contract (DESIGN.md).** Every PR that touches pixels updates `DESIGN.md` in the same commit. Brand accents scoped to AI/CTA only. shadcn primitives are read-only (wrap, don't edit). New tokens require both light and dark counterparts. `npm run design:lint` and `/noted-review`'s DESIGN.md binding-contract trigger enforce.
+17. **Maps and generated indexes are checked, not trusted.** The `.ai/CONTRIBUTING.md` skill and command tables are generated from each asset's `summary:` frontmatter — never hand-edited between the `auto:` markers. Every markdown link and YAML path in the Team OS maps must resolve, or be declared absent in the row or in `team-os/INTENTIONAL-GAPS.md`. `npm run check:drift` enforces both, in CI and pre-commit.
 
 For governance, the full rationale, and skill cross-references, read [`team-os/engineering/constitution.md`](../../team-os/engineering/constitution.md).

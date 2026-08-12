@@ -1,6 +1,7 @@
 ---
 name: create-pr
 description: Codex-compatible mirror of `/create-pr`. Use when the user asks for `/create-pr`, `$create-pr`, or wants the repo's PR creation workflow targeting `staging`. Read `.ai/commands/create-pr.md` and follow it as the source of truth.
+summary: Open PR to `staging`
 ---
 
 # Create PR

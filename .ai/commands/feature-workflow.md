@@ -1,5 +1,6 @@
 ---
 description: End-to-end PM-driven feature workflow — brainstorm → spec → plan → implement → review → ship — with one Linear ticket / one branch / one PR enforced. Lighter than the Speckit suite, designed for PM-pace iteration.
+summary: Interactive feature dev phases
 ---
 
 <!--
@@ -74,7 +75,7 @@ Open with: *"Phase 2 — Spec. I'll draft a 1–2 page spec for the chosen direc
 Then:
 1. Use the `prd-writer` skill (already in `.ai/skills/`) to draft a focused spec, NOT a full multi-stage PRD. Sections: problem, user, success criteria (1 metric), scope-in, scope-out, design notes, instrumentation plan, rollout plan, risks.
 2. Save to `team-os/features/<slug>/spec-NOT-XXX.md`.
-3. Run the `pm-review` subagent (when available; otherwise self-review using the `prd-writer` skill's red-team mode) against the draft. Surface 3–5 substantive challenges.
+3. Red-team the draft using the `prd-writer` skill's red-team mode. Surface 3–5 substantive challenges. (`/pm-review` was planned for this and never built — see `.ai/commands/pm-review.md`.)
 4. Iterate with the user. Loop until they say "ship it as the spec."
 
 Output of this phase: an approved spec at `team-os/features/<slug>/spec-NOT-XXX.md`. Update the Linear ticket description with a link to the spec.
@@ -129,7 +130,7 @@ Open with: *"Phase 5 — Review. Running checks before we open the PR."*
 Then:
 1. Run `npm run format && npm run lint:fix && npm run type:check && npm run test` one more time.
 2. Run the `code-quality-checklist` skill against the diff.
-3. Run the `pm-review` (or `noted-review`) command on the staged changes for an opinionated multi-category review.
+3. Run `/noted-review` on the staged changes for an opinionated multi-category review.
 4. Surface findings to the user. Loop on fixes until the review comes back clean.
 
 ---

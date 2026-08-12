@@ -1,6 +1,7 @@
 ---
 name: design-md
 description: Visual-identity contract for noted-main, codified in DESIGN.md per the google-labs-code/design.md spec. Use when adding/modifying colors, typography, spacing, radii, or component styles; when designing a new component variant; when building marketing surfaces; when reviewing UI changes against the brand. Applies implicitly whenever a change touches `components/`, `app/(landing)/`, `app/globals.css`, `tailwind.config.ts`, or any Tailwind class affecting visual presentation — DESIGN.md must stay in sync.
+summary: DESIGN.md visual contract
 ---
 
 <!--

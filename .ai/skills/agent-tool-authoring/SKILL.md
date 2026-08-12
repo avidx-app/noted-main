@@ -1,6 +1,7 @@
 ---
 name: agent-tool-authoring
 description: How to author and wire up new AI Squad / Coworker tools in noted-main — the `tool({ description, inputSchema, execute })` shape from the Vercel AI SDK, where files live (`lib/agent/tools/<name>.ts`, `lib/agent/prompts/squad-prompts.ts`), how the streaming chat route assembles the toolset, the `createXxxTools(convex)` factory pattern, and the rules for return shapes that LLMs handle well. Use when adding a new capability the AI agents can call, rewriting a tool's prompt, or reviewing existing tool definitions. Replaces heatseeker's `generate-tool` skill.
+summary: AI Squad / Coworker tool shape and wiring
 ---
 
 <!--

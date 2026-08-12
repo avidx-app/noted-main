@@ -1,3 +1,8 @@
+---
+description: Infer a branch name and Conventional Commit from the diff, then branch and commit
+summary: Branch + commit workflow
+---
+
 # /branch-commit
 
 Looks at the local diff, infers a branch name and commit message, then branches, stages, and commits — no questions asked.

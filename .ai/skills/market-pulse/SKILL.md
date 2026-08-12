@@ -1,6 +1,7 @@
 ---
 name: market-pulse
 description: Produce a structured market pulse for the note-taking + AI-editor space
+summary: Market pulse for note-taking + AI space
 ---
 
 # Market Pulse

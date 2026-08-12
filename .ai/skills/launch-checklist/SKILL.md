@@ -1,6 +1,7 @@
 ---
 name: launch-checklist
 description: Risk-scaled pre/launch/post checklist for shipping a Noted feature
+summary: Pre/post launch checklist
 ---
 
 <!--

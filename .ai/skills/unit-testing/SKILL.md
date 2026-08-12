@@ -1,6 +1,7 @@
 ---
 name: unit-testing
 description: Concise unit testing patterns with Jest + React Testing Library — readable individual tests, minimal mocking, helper factories, and clear structure for noted-main. Use when user asks to "write a test", "add unit tests", "test this hook/component/util", or "how should I test this". Also use when creating .test.ts(x) files, deciding what to test, mocking Clerk/Convex, or structuring test cases. Applies implicitly whenever creating or modifying utility functions, hooks, services, data transformations, or any extractable logic — these MUST have unit tests.
+summary: Jest + RTL patterns
 ---
 
 <!--

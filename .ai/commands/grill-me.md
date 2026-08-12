@@ -1,5 +1,6 @@
 ---
 description: Quiz the user with tough questions about their PR (scaled to PR size) to verify they truly understand the code changes — especially useful for LLM-generated code.
+summary: Hard questions on a proposal
 ---
 
 <!--

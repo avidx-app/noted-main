@@ -4,12 +4,15 @@ Metric definitions, experiment results, investigations. The source of truth for 
 
 ## Doc index
 
-| Path | What it is |
-|---|---|
-| `metrics/` | Metric definitions — one file per product area. Definition, data source, how to calculate. |
-| `experiments/` | A/B test or feature-flag experiment writeups with results |
-| `investigations/` | Dated deep-dives — "why did X drop last week?" |
-| `dashboards.md` | Links to any live dashboards we rely on |
+| Path | What it is | Status |
+|---|---|---|
+| `metrics/` | Metric definitions — one directory per product area, one file per feature. Definition, data source, how to calculate. | `ai-features/` only |
+| `experiments/` | A/B test or feature-flag experiment writeups with results | Not created yet |
+| `investigations/` | Dated deep-dives — "why did X drop last week?" | Not created yet |
+| `dashboards.md` | Links to any live dashboards we rely on | Not created yet |
+
+Rows marked *not created yet* are the intended shape, not existing files. See
+[`../INTENTIONAL-GAPS.md`](../INTENTIONAL-GAPS.md) before filling one.
 
 ## Conventions
 
@@ -21,4 +24,5 @@ Metric definitions, experiment results, investigations. The source of truth for 
 ## Related
 
 - Convex schema lives in `convex/schema.ts`. Tables referenced by metrics here should mirror that.
-- When a new feature launches, its metric definitions are a **launch-gate requirement**. Use `/metrics-define` while drafting the PRD.
+- Amplitude events live in `lib/analytics.ts`. The typed `track*` helpers there are the complete list of events Noted actually emits — a metric citing anything else needs `[NEEDS INSTRUMENTATION]`.
+- When a new feature launches, its metric definitions are a **launch-gate requirement**. Use [`/metrics-define`](../../.ai/commands/metrics-define.md) while drafting the PRD.

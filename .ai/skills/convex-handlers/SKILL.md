@@ -1,6 +1,7 @@
 ---
 name: convex-handlers
 description: Picking the right Convex handler type for noted-main — `query` for reactive reads, `mutation` for transactional writes, `action` for external calls (HTTP, npm, encryption), and the `internalQuery` / `internalMutation` variants for server-only entry points. Covers indexes vs filters, recursion patterns, pagination, calling across handlers, and the `"use node"` boundary. Use when user asks to "create a Convex function", "should this be a query/mutation/action", "how do I call an API from Convex", "filter vs index", or when adding any new file under `convex/`. Applies implicitly whenever writing or reviewing Convex backend code.
+summary: query / mutation / action selection
 ---
 
 <!--

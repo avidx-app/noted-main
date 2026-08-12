@@ -1,6 +1,7 @@
 ---
 name: speckit.plan
 description: Codex-compatible mirror of `/speckit.plan`. Use when the user asks for `/speckit.plan`, `$speckit.plan`, or wants the repo's Speckit planning workflow. Read `.ai/commands/speckit.plan.md` and follow it as the source of truth.
+summary: Speckit plan + constitution check
 ---
 
 # Speckit Plan

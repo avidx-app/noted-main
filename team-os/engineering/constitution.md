@@ -1,9 +1,36 @@
 ---
 type: constitution
 last_ratified: 2026-05-06
-version: 1.1.0
+last_amended: 2026-08-13
+version: 1.2.0
 owner: avidx-app
 ---
+
+<!--
+SYNC IMPACT REPORT — v1.1.0 → v1.2.0 (MINOR: added §XVII, no existing principle changed)
+
+Added principles:
+- XVII. Maps and generated indexes are checked, not trusted
+
+Modified principles: none
+Removed principles: none
+
+Dependent artifacts verified in sync:
+✅ .ai/CONTRIBUTING.md — skills/commands tables now generated; auto markers in place
+✅ .ai/INSTRUCTIONS.md — Connected tools (MCP) section added with no-MCP fallbacks
+✅ .github/workflows/ci.yml — `npm run check:drift` step added to the validate job
+✅ scripts/install-git-hooks.mjs — pre-commit runs both drift checks
+✅ team-os/INTENTIONAL-GAPS.md — created; named as the register §XVII points at
+✅ .specify/memory/constitution.md — condensed mirror; §XVII summary added
+⚠️ .specify/templates/plan-template.md — Constitution Check gate unchanged; §XVII is
+   repo hygiene rather than a per-feature design constraint, so no gate entry is needed
+
+Follow-up TODOs: none
+
+Why this convention: an amendment that updates the principle but not the things that
+enforce it leaves the constitution describing a repo that no longer exists. Recording
+the propagation audit in the document makes skipping it visible.
+-->
 
 # Noted Engineering Constitution
 
@@ -148,6 +175,31 @@ Specific non-negotiables:
 - New color/typography/radii/spacing tokens require both light AND dark counterparts, justified in the PR description.
 - Permanent surfaces (cards, sidebars, navigation) use the `border` token for separation, not box-shadows. Shadows are reserved for transient surfaces (popovers, dropdowns, floating menus).
 - See the `design-md` skill for the full picking-the-right-token guide and the merge checklist.
+
+## XVII. Maps and generated indexes are checked, not trusted
+
+This repo asks agents to read a map instead of the whole tree: `team-os/feature-index.yaml`, the
+nested `CLAUDE.md` doc indexes, and the skills and commands tables in `.ai/CONTRIBUTING.md`. That
+trade only pays while the maps are true. A map pointing at a file nobody wrote is worse than no map,
+because it costs a read and returns nothing — and neither a human reviewer nor a passing test suite
+ever notices.
+
+So the maps are enforced rather than maintained by good intentions:
+
+- The skills and commands tables in `.ai/CONTRIBUTING.md` are **generated** from each asset's own
+  `summary:` frontmatter, between `<!-- auto:skills -->` and `<!-- auto:commands -->` markers. Do
+  not hand-edit between the markers. Change the asset's frontmatter and run `npm run check:index`.
+- Every markdown link and YAML path in those maps must resolve. `npm run check:links` fails if one
+  does not.
+- Both run in CI (`npm run check:drift`) and in the pre-commit hook.
+
+Deliberately empty is allowed; silently wrong is not. A path that does not exist yet must either say
+so in the row (`not created yet`, `null`, `[NEED: ...]`) or be listed in
+[`team-os/INTENTIONAL-GAPS.md`](../INTENTIONAL-GAPS.md) with the condition that would justify
+creating it.
+
+Adding a skill or command without regenerating the index is a finding. So is deleting a file that a
+map still points at.
 
 ---
 
