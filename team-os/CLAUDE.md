@@ -30,6 +30,6 @@ Shared knowledge base for the Noted team. Everyone reads from here. Everyone con
 
 - If a query is about a specific feature, go straight to `features/<slug>/CLAUDE.md`. Don't open every folder.
 - If a query is ambiguous ("what's happening with X?"), check `feature-index.yaml` first to find the right dossier.
-- If a query is about a *decision* (why did we choose X?), look in `product/` (if product-driven), `engineering/` (if technical), or the feature dossier's `index.md`.
+- If a query is about a *decision* (why did we choose X?), look in `product/` (if product-driven), `engineering/` (if technical), or the feature dossier's `index.md`. If none of them say **why**, try [`research/conversations/`](research/conversations/) — several decisions are recorded only in the thread that made them.
 - If a query is about *the market*, go to `research/`.
-- Meeting notes / call summaries / customer interviews do **not** live here yet — the team is small and doesn't currently run structured calls. See `research/market-pulse/` instead.
+- Customer interviews live in [`research/interviews/`](research/interviews/); the internal record — Slack, Linear, pre-decision Notion pages — is in [`research/conversations/`](research/conversations/). **Everything in both folders is constructed**, and each folder's `CLAUDE.md` says so on its face. Never quote either as evidence that demand exists.
