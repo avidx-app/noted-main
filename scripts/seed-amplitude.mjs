@@ -14,7 +14,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const fixturePath = path.resolve(__dirname, "fixtures/cohort-sample-data.json");
 const planPath = path.resolve(__dirname, "fixtures/amplitude-plan.json");
 const analyticsPath = path.resolve(__dirname, "../lib/analytics.ts");
-const endpoint = process.env.AMPLITUDE_ENDPOINT ?? "https://api2.amplitude.com/2/httpapi";
+const endpoint =
+  process.env.AMPLITUDE_ENDPOINT ?? "https://api2.amplitude.com/2/httpapi";
 const apiKey = process.env.AMPLITUDE_API_KEY;
 const dayMs = 24 * 60 * 60 * 1000;
 const minuteMs = 60 * 1000;
@@ -103,7 +104,9 @@ async function readEventCatalog() {
 }
 
 function compactObject(value) {
-  return Object.fromEntries(Object.entries(value).filter(([, entry]) => entry !== undefined));
+  return Object.fromEntries(
+    Object.entries(value).filter(([, entry]) => entry !== undefined),
+  );
 }
 
 function indexByUser(rows) {
@@ -139,7 +142,8 @@ function dayWeight(dayStartMs) {
 function shiftToWorkingDay(dayIndex, maxDay, windowStart, random) {
   let candidate = Math.max(0, Math.min(maxDay, dayIndex));
   for (let step = 0; step < 7 && candidate < maxDay; step += 1) {
-    if (random() <= dayWeight(windowStart + candidate * dayMs)) return candidate;
+    if (random() <= dayWeight(windowStart + candidate * dayMs))
+      return candidate;
     candidate += 1;
   }
   return candidate;
@@ -152,8 +156,15 @@ function dayStartFor(windowStart, dayIndex) {
 // Working hours, with a mid-morning and mid-afternoon bias rather than a flat
 // draw across the day.
 function sampleWorkingTime(windowStart, dayIndex, random) {
-  const hour = pick(random, [9, 9, 10, 10, 11, 11, 12, 13, 14, 14, 15, 15, 16, 17, 18, 20]);
-  return dayStartFor(windowStart, dayIndex) + hour * 60 * minuteMs + intBetween(random, 0, 59) * minuteMs;
+  const hour = pick(
+    random,
+    [9, 9, 10, 10, 11, 11, 12, 13, 14, 14, 15, 15, 16, 17, 18, 20],
+  );
+  return (
+    dayStartFor(windowStart, dayIndex) +
+    hour * 60 * minuteMs +
+    intBetween(random, 0, 59) * minuteMs
+  );
 }
 
 // Amplitude groups events into sessions by inactivity gap. Assigning real
@@ -172,7 +183,8 @@ function assignSessions(events) {
     let sessionStart = null;
     let previous = null;
     for (const event of list) {
-      if (previous === null || event.time - previous > sessionGapMs) sessionStart = event.time;
+      if (previous === null || event.time - previous > sessionGapMs)
+        sessionStart = event.time;
       event.session_id = sessionStart;
       previous = event.time;
     }
@@ -221,7 +233,9 @@ function personaDimensions(persona) {
 }
 
 function eventProperties(user, context, eventName, extra = {}) {
-  const [lifecycleStage, planTier, riskSegment] = personaDimensions(user.persona);
+  const [lifecycleStage, planTier, riskSegment] = personaDimensions(
+    user.persona,
+  );
   return compactObject({
     cohort: "cohort_1_sample",
     environment: "course_seed",
@@ -268,7 +282,10 @@ function generateEvents(plan, fixture, eventCatalog, options) {
   const baseSeed = plan.seed ?? 20260518;
   const random = mulberry32(baseSeed + 1);
   const windowDays = options.days ?? plan.windowDays;
-  const windowStart = windowStartUtc(options.anchor ?? defaultAnchor, windowDays);
+  const windowStart = windowStartUtc(
+    options.anchor ?? defaultAnchor,
+    windowDays,
+  );
   const users = fixture.users.slice(0, options.users ?? plan.userCountTarget);
   const documentsByUser = indexByUser(fixture.documents);
   const messagesByUser = new Map(
@@ -276,12 +293,24 @@ function generateEvents(plan, fixture, eventCatalog, options) {
   );
   const events = [];
 
-  const push = (eventName, day, user, context, extra = {}, maxDay = windowDays - 1) => {
+  const push = (
+    eventName,
+    day,
+    user,
+    context,
+    extra = {},
+    maxDay = windowDays - 1,
+  ) => {
     if (!eventCatalog.has(eventName)) return;
     const dayIndex = shiftToWorkingDay(day, maxDay, windowStart, random);
     const time = sampleWorkingTime(windowStart, dayIndex, random);
     events.push(
-      makeEvent(eventName, time, user, eventProperties(user, context, eventName, extra)),
+      makeEvent(
+        eventName,
+        time,
+        user,
+        eventProperties(user, context, eventName, extra),
+      ),
     );
   };
 
@@ -290,26 +319,47 @@ function generateEvents(plan, fixture, eventCatalog, options) {
   const pushAt = (eventName, time, user, context, extra = {}) => {
     if (!eventCatalog.has(eventName)) return;
     events.push(
-      makeEvent(eventName, time, user, eventProperties(user, context, eventName, extra)),
+      makeEvent(
+        eventName,
+        time,
+        user,
+        eventProperties(user, context, eventName, extra),
+      ),
     );
   };
 
   for (const [userIndex, user] of users.entries()) {
     const documents = documentsByUser.get(user.userId) ?? [];
-    const publishedDocuments = documents.filter((document) => document.isPublished);
+    const publishedDocuments = documents.filter(
+      (document) => document.isPublished,
+    );
     const messageCount = messagesByUser.get(user.userId) ?? 0;
-    const signupDay = Math.min(windowDays - 1, intBetween(random, 0, 8) + (userIndex % 4));
+    const signupDay = Math.min(
+      windowDays - 1,
+      intBetween(random, 0, 8) + (userIndex % 4),
+    );
     const finalDay = lastActiveDay(user.persona, signupDay, windowDays, random);
     const baseContext = {
       documentCount: documents.length,
       publishedDocumentCount: publishedDocuments.length,
       messageCount,
-      activationStatus: activationStatus(documents.length, publishedDocuments.length, messageCount),
+      activationStatus: activationStatus(
+        documents.length,
+        publishedDocuments.length,
+        messageCount,
+      ),
     };
 
     const featureIndex = intBetween(random, 0, 5);
     const landingProps = {
-      feature_name: ["AI Writing", "Editor", "Files", "Publish", "Search", "Squad"][featureIndex],
+      feature_name: [
+        "AI Writing",
+        "Editor",
+        "Files",
+        "Publish",
+        "Search",
+        "Squad",
+      ][featureIndex],
       page_path: [
         "/features/ai-writing",
         "/features/editor",
@@ -320,7 +370,10 @@ function generateEvents(plan, fixture, eventCatalog, options) {
       ][featureIndex],
     };
     const landingDay = shiftToWorkingDay(
-      Math.max(0, signupDay - 1), finalDay, windowStart, random,
+      Math.max(0, signupDay - 1),
+      finalDay,
+      windowStart,
+      random,
     );
     const landingAt = sampleWorkingTime(windowStart, landingDay, random);
     pushAt(
@@ -377,7 +430,11 @@ function generateEvents(plan, fixture, eventCatalog, options) {
       signupDay,
       user,
       { ...baseContext, featureArea: "ai_settings", funnelStage: "setup" },
-      { ai_provider: user.aiProvider, ai_model: user.aiModel, model_changed: random() < 0.38 },
+      {
+        ai_provider: user.aiProvider,
+        ai_model: user.aiModel,
+        model_changed: random() < 0.38,
+      },
     );
 
     for (const [docIndex, document] of documents.entries()) {
@@ -407,7 +464,11 @@ function generateEvents(plan, fixture, eventCatalog, options) {
           windowStart,
           random,
         );
-        const publishedAt = sampleWorkingTime(windowStart, publishDayIndex, random);
+        const publishedAt = sampleWorkingTime(
+          windowStart,
+          publishDayIndex,
+          random,
+        );
         pushAt(
           "Document Published",
           publishedAt,
@@ -436,7 +497,10 @@ function generateEvents(plan, fixture, eventCatalog, options) {
       // not retracted.
       if (!document.isPublished && !document.isArchived && random() < 0.022) {
         const shownDay = shiftToWorkingDay(
-          Math.min(finalDay, eventDay + 1), finalDay, windowStart, random,
+          Math.min(finalDay, eventDay + 1),
+          finalDay,
+          windowStart,
+          random,
         );
         const shownAt = sampleWorkingTime(windowStart, shownDay, random);
         pushAt(
@@ -447,7 +511,10 @@ function generateEvents(plan, fixture, eventCatalog, options) {
           documentProps,
         );
         const pulledDay = shiftToWorkingDay(
-          Math.min(finalDay, shownDay + intBetween(random, 1, 6)), finalDay, windowStart, random,
+          Math.min(finalDay, shownDay + intBetween(random, 1, 6)),
+          finalDay,
+          windowStart,
+          random,
         );
         pushAt(
           "Document Unpublished",
@@ -480,9 +547,11 @@ function generateEvents(plan, fixture, eventCatalog, options) {
     const firstMessageDay = Math.min(finalDay, signupDay + 2);
     const sittingDays = [];
     for (let day = firstMessageDay; day <= finalDay; day += 1) {
-      if (random() < dayWeight(dayStartFor(windowStart, day)) * 0.55) sittingDays.push(day);
+      if (random() < dayWeight(dayStartFor(windowStart, day)) * 0.55)
+        sittingDays.push(day);
     }
-    if (messageCount > 0 && sittingDays.length === 0) sittingDays.push(firstMessageDay);
+    if (messageCount > 0 && sittingDays.length === 0)
+      sittingDays.push(firstMessageDay);
 
     const weights = sittingDays.map(() => 0.5 + random());
     const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
@@ -491,7 +560,9 @@ function generateEvents(plan, fixture, eventCatalog, options) {
 
     for (const [sittingIndex, day] of sittingDays.entries()) {
       cumulativeWeight += weights[sittingIndex];
-      const target = Math.round((cumulativeWeight / totalWeight) * messageCount);
+      const target = Math.round(
+        (cumulativeWeight / totalWeight) * messageCount,
+      );
       const burst = target - sequence;
       if (burst <= 0) continue;
 
@@ -576,11 +647,17 @@ function printSummary(plan, events, options) {
   console.log("# Amplitude seed plan");
   console.log(`Cohort: ${plan.cohortName}`);
   console.log(`Seed: ${(plan.seed ?? 20260518) + 1} (derived from plan.seed)`);
-  console.log(`Window: ${sorted[0]} .. ${sorted[sorted.length - 1]} (anchor ${options.anchor})`);
+  console.log(
+    `Window: ${sorted[0]} .. ${sorted[sorted.length - 1]} (anchor ${options.anchor})`,
+  );
   console.log(`Events: ${events.length}`);
-  console.log(`Users seen: ${new Set(events.map((event) => event.user_id)).size}`);
+  console.log(
+    `Users seen: ${new Set(events.map((event) => event.user_id)).size}`,
+  );
   console.log(`Sessions: ${sessions.size}`);
-  console.log(`Events per session: ${(events.length / sessions.size).toFixed(2)}`);
+  console.log(
+    `Events per session: ${(events.length / sessions.size).toFixed(2)}`,
+  );
   console.log("");
   for (const [eventType, count] of [...byType.entries()].sort()) {
     console.log(`- ${eventType}: ${count}`);
@@ -606,7 +683,9 @@ async function main() {
 
   if (!options.apply) {
     console.log("");
-    console.log("Dry run only. Set AMPLITUDE_API_KEY and run npm run seed:amplitude to apply.");
+    console.log(
+      "Dry run only. Set AMPLITUDE_API_KEY and run npm run seed:amplitude to apply.",
+    );
     return;
   }
 

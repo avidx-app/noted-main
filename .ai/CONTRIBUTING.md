@@ -57,6 +57,7 @@ This folder is the source of truth for everything Claude Code, Codex, and Cursor
 | `react-components`       | forwardRef, cva, cn(), no premature memo               |
 | `repo-structure`         | Where code lives                                       |
 | `ship-log`               | Append ship-log entry                                  |
+| `smoke-diff`             | Prove the diff works, probe first                      |
 | `sorting`                | Sort at Convex layer or toSorted() client-side         |
 | `speckit.clarify`        | Speckit clarify phase                                  |
 | `speckit.implement`      | Speckit implement phase                                |
@@ -93,6 +94,7 @@ This folder is the source of truth for everything Claude Code, Codex, and Cursor
 | `/pm-review`         | Tombstone — never built, points at prd-writer and /noted-review |
 | `/prd-new`           | Draft a new PRD                                                 |
 | `/ship-log`          | Append ship-log entry                                           |
+| `/smoke-diff`        | Prove the diff works, probe first                               |
 | `/speckit.clarify`   | Speckit clarify phase                                           |
 | `/speckit.implement` | Speckit implement phase                                         |
 | `/speckit.plan`      | Speckit plan + constitution check                               |
