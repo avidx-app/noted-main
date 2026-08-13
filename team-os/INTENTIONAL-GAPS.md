@@ -33,6 +33,35 @@ was breaking it.
 **Before filling:** if you backfill, say so in the file, and say which PRs you read. A ship log that
 silently reconstructs history reads exactly like one written contemporaneously, and it is not.
 
+### Two claims in `research/conversations/` are wrong, and must stay wrong
+
+[`research/conversations/`](research/conversations/) holds the constructed internal record — Slack
+threads, Linear issues, pre-decision Notion pages. Two engineering claims in it are false, and both
+are settled in twenty lines of [`../convex/documents.ts`](../convex/documents.ts):
+
+| Claim | Where | Why it is false |
+| ----- | ----- | --------------- |
+| A reviewer needs an account to read a document at all | `slack/2026-04-29-…`, `slack/2026-05-04-…`, `linear/NOT-141-…` | `getById` returns any published, non-archived document to an unauthenticated caller. `app/(public)/(routes)/preview/[documentId]/` is that path in production, with `editable={false}` |
+| Therefore the draft-review option needs a permissions model first | `slack/2026-05-06-…`, and inherited by [`research/pain-landscape.md`](research/pain-landscape.md) | Unauthenticated read already exists. What is missing is per-recipient granularity — `documents` has one boolean, `isPublished` — and any comment primitive at all |
+
+**Why:** this is the single most useful thing this repo can teach. A claim entered the record in chat,
+nobody opened the code, an option was cancelled on it, and the claim was then laundered into a
+research artifact that reads like analysis. Anyone who triangulates across the conversation record and
+the code finds it in ten minutes. Anyone who trusts `team-os/` never does.
+
+Correcting the threads would delete the lesson and leave a repo where every document agrees with every
+other document — which is not what any repo looks like.
+
+**Before "fixing" either:** don't. If the surrounding product code changes so the claims become
+accidentally true, update this table and the note in
+[`research/conversations/CLAUDE.md`](research/conversations/CLAUDE.md) rather than the threads. The
+threads are a record of what people believed.
+
+**Also deliberate:** the `[NEED: decision recorded on why onboarding precedes draft review]` marker in
+`pain-landscape.md` stays unfilled even though `slack/2026-05-06-product-closing-not-141.md` contains
+the answer. The gap between "the decision was made" and "the decision reached the artifact" is the
+thing being shown.
+
 ### `feature-workflow` Phase 0 is a specified empty socket
 
 [`../.ai/skills/feature-workflow/SKILL.md`](../.ai/skills/feature-workflow/SKILL.md) makes user

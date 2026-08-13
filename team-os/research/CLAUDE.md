@@ -10,6 +10,7 @@ people say about using it.
 | [personas.md](personas.md)             | Five relationships people have with the product, synthesised from the interviews                                                        |
 | [pain-landscape.md](pain-landscape.md) | What hurts, ranked by independent mentions and what it gates                                                                            |
 | [interviews/](interviews/)             | Customer conversation transcripts. **All currently constructed** — read [interviews/CLAUDE.md](interviews/CLAUDE.md) before quoting one |
+| [conversations/](conversations/)       | Where decisions were actually made — Slack threads, Linear issues, pre-decision Notion pages. **All constructed**, and two claims in them are wrong about how Noted works. Read [conversations/CLAUDE.md](conversations/CLAUDE.md) first |
 | [market-pulse/](market-pulse/)         | Weekly/monthly pulses on the note-taking + AI-native editor space                                                                       |
 | [competitors/](competitors/)           | One folder per competitor: product teardown, pricing, positioning                                                                       |
 | `deep-dives/`                          | Multi-day research threads on a specific question (e.g., "what's the TAM of AI-native notes in 2026?")                                  |
