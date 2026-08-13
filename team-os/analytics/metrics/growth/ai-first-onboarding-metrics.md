@@ -9,13 +9,20 @@ last_updated: 2026-08-13
 
 # Metrics — AI-first onboarding
 
-Status is `not-yet-measurable` on purpose. Three of the four metrics below need events that do not
-exist, and the baseline for the primary metric comes from seeded data. Filing this now, honestly, is
-the point: the PRD asks for a 50/50 experiment, and this is the document that says the experiment
-cannot read out yet.
+Status is `partially-measurable` on purpose, and the word is doing work. Of the three metrics below,
+two can be computed today and one cannot be computed at all. Of the four guardrails, two cannot. And
+the baseline for the primary metric comes from seeded data, which is a different and worse problem
+than a missing event: the number exists, it is wrong, and nothing about it looks wrong. Filing this
+now, honestly, is the point — the PRD asks for a 50/50 experiment, and this is the document that
+says the experiment cannot read out yet.
 
-Events that exist today are the seventeen in [`lib/analytics.ts`](../../../../lib/analytics.ts).
-Anything not in that file is marked `[NEEDS INSTRUMENTATION]`.
+Events that exist today are the eighteen `track*` helpers in
+[`lib/analytics.ts`](../../../../lib/analytics.ts). Anything not in that file is marked
+`[NEEDS INSTRUMENTATION]`. Count them rather than trusting this sentence:
+
+```bash
+grep -c "^export const track" lib/analytics.ts
+```
 
 ## Primary
 
@@ -79,8 +86,11 @@ because the starter document _is_ the first document.
 
 **Not ready to run.** In order:
 
-1. Add the five onboarding events. `In-Editor AI Triggered` is done. Without the rest, two of four
-   metrics are uncomputable and the funnel in the PRD's data scope cannot be built.
+1. Add the four remaining onboarding events — `Onboarding Intent Prompt Shown`, `Onboarding Intent
+   Submitted`, `Onboarding Starter Document Created`, `Onboarding Intent Skipped`. Without them,
+   onboarding completion is uncomputable, one guardrail is blind, and the funnel in the PRD's data
+   scope cannot be built at all. The fifth, `In-Editor AI Triggered`, shipped with
+   [`specs/EXP-1-in-editor-ai-triggered/`](../../../../specs/EXP-1-in-editor-ai-triggered/spec.md).
 2. Verify `Document Created` fires from every creation path — sidebar, empty state, and the
    onboarding path. The PRD raises this as an open question and it is still open.
 3. Replace the seeded baseline with a real one, or change the primary metric. A target set against
