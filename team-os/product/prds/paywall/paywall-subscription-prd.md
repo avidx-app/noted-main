@@ -1,3 +1,13 @@
+---
+type: prd
+feature: paywall-subscription
+stage: 2 # Planning Review
+status: planning
+owner: raziiabraham
+last_updated: 2026-08-13
+note: Blocked by team-collaboration. Noted has no revenue.
+---
+
 # PRD: Paywall & Subscription (v1 scope)
 
 **Author:** raziiabraham
@@ -31,19 +41,19 @@ We believe pricing a **team plan at $15 / user / month** (monthly) and launching
 
 - **Why teams:** matches Notion's playbook (free for individuals, $18/seat for business). Copy the shape, undercut on price ($15/seat), don't charge for AI.
 - **Alternatives considered:**
-  - *Charge for AI (drop BYOK).* Rejected — it would erase our single positioning advantage.
-  - *Charge for storage/uploads beyond a cap.* Rejected for v1 — too small a value prop, too annoying, inevitable support cost.
-  - *Freemium on features (e.g., inline auto-complete for Plus).* We don't have inline auto-complete. Rejected for v1.
-  - *Sell support / SLA.* Reasonable long-tail — "Enterprise" line — but we have no enterprise demand today. Defer.
+  - _Charge for AI (drop BYOK)._ Rejected — it would erase our single positioning advantage.
+  - _Charge for storage/uploads beyond a cap._ Rejected for v1 — too small a value prop, too annoying, inevitable support cost.
+  - _Freemium on features (e.g., inline auto-complete for Plus)._ We don't have inline auto-complete. Rejected for v1.
+  - _Sell support / SLA._ Reasonable long-tail — "Enterprise" line — but we have no enterprise demand today. Defer.
 
 ## 4. Proposed v1 solution
 
 ### Pricing (v1)
 
-| Plan | Price | Who it's for | What they get vs Free |
-|---|---|---|---|
-| **Free** | $0 forever | Individuals | Everything Noted does today + a personal workspace. Unlimited pages, BYOK AI, publish-to-web, 25 MB file cap. |
-| **Team** | $15 / user / month (or $144 / user / year) | 2–10 person teams | Free + **shared workspaces**, **invite members**, **workspace-level roles**. *(All team-collab v1 features.)* |
+| Plan     | Price                                      | Who it's for      | What they get vs Free                                                                                         |
+| -------- | ------------------------------------------ | ----------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Free** | $0 forever                                 | Individuals       | Everything Noted does today + a personal workspace. Unlimited pages, BYOK AI, publish-to-web, 25 MB file cap. |
+| **Team** | $15 / user / month (or $144 / user / year) | 2–10 person teams | Free + **shared workspaces**, **invite members**, **workspace-level roles**. _(All team-collab v1 features.)_ |
 
 No Plus tier at v1. No Enterprise tier at v1. Keep it tight.
 
@@ -57,7 +67,7 @@ No Plus tier at v1. No Enterprise tier at v1. Keep it tight.
    - `subscriptions` table: `userId` (owner), `workspaceId` (billed entity), `stripeCustomerId`, `stripeSubscriptionId`, `status`, `currentPeriodEnd`, `seatCount`.
    - Plan flag on `workspaces` table.
 3. **Feature gate at the workspace level**
-   - The *create-workspace* action or the *invite-member* mutation checks the workspace's plan. If Free + already has ≥1 other member, block with an upgrade modal.
+   - The _create-workspace_ action or the _invite-member_ mutation checks the workspace's plan. If Free + already has ≥1 other member, block with an upgrade modal.
    - Gate implementation lives in one place (a `requireTeamPlan()` helper) — do not sprinkle across mutations.
 4. **Upgrade UX**
    - Upgrade modal triggers when a Free-plan workspace tries to add a second member.
@@ -79,13 +89,13 @@ No Plus tier at v1. No Enterprise tier at v1. Keep it tight.
 
 ## 5. Success metrics
 
-| Metric | Type | Baseline | Target | Timeframe |
-|---|---|---|---|---|
-| % of multi-member workspaces on a paid plan | Primary | N/A | 3% | 90 days after launch |
-| MRR (gross) | Primary | $0 | $5K | 180 days |
-| Checkout → active subscription conversion rate | Secondary | N/A | ≥85% | ongoing |
-| Involuntary churn (failed payments that don't recover) | Guardrail | N/A | ≤5% monthly | ongoing |
-| Support tickets tagged `billing` per paying customer per month | Guardrail | N/A | ≤0.2 | first 90 days |
+| Metric                                                         | Type      | Baseline | Target      | Timeframe            |
+| -------------------------------------------------------------- | --------- | -------- | ----------- | -------------------- |
+| % of multi-member workspaces on a paid plan                    | Primary   | N/A      | 3%          | 90 days after launch |
+| MRR (gross)                                                    | Primary   | $0       | $5K         | 180 days             |
+| Checkout → active subscription conversion rate                 | Secondary | N/A      | ≥85%        | ongoing              |
+| Involuntary churn (failed payments that don't recover)         | Guardrail | N/A      | ≤5% monthly | ongoing              |
+| Support tickets tagged `billing` per paying customer per month | Guardrail | N/A      | ≤0.2        | first 90 days        |
 
 **Anti-metric:** Users creating workspaces, hitting the 2-member gate, and abandoning Noted (as measured by zero activity for 14 days post-gate-hit). If this fires, the gate is too aggressive.
 
@@ -94,6 +104,7 @@ No Plus tier at v1. No Enterprise tier at v1. Keep it tight.
 **Approach:** launch to 100% on day one — no gradual rollout. This is a net-new flow; no one's already paying.
 
 **Prerequisites (blocking launch):**
+
 1. Team collaboration v1 must be shipped.
 2. Stripe account set up with products for "Team Monthly" and "Team Yearly" price IDs.
 3. Webhook handler tested end-to-end in staging.
@@ -102,13 +113,13 @@ No Plus tier at v1. No Enterprise tier at v1. Keep it tight.
 
 ## 7. Open questions
 
-| Question | Owner | Due |
-|---|---|---|
-| Legal entity + tax setup for Stripe — who handles? | `@raziiabraham` | before code starts |
-| Do we want annual-only pricing, monthly-only, or both at launch? Monthly adds churn risk; annual reduces conversion | `@raziiabraham` | before Stage 4 |
-| Which GitHub account is the "owner" for Stripe billing metadata? | TBD | before Stage 4 |
-| Refund policy — Stripe's default (30-day money-back) or stricter? | `@raziiabraham` | before launch |
-| `[NEED: data]` — how many Noted accounts *could* become multi-member teams today? Unknown | `@raziiabraham` | before launch |
+| Question                                                                                                            | Owner           | Due                |
+| ------------------------------------------------------------------------------------------------------------------- | --------------- | ------------------ |
+| Legal entity + tax setup for Stripe — who handles?                                                                  | `@raziiabraham` | before code starts |
+| Do we want annual-only pricing, monthly-only, or both at launch? Monthly adds churn risk; annual reduces conversion | `@raziiabraham` | before Stage 4     |
+| Which GitHub account is the "owner" for Stripe billing metadata?                                                    | TBD             | before Stage 4     |
+| Refund policy — Stripe's default (30-day money-back) or stricter?                                                   | `@raziiabraham` | before launch      |
+| `[NEED: data]` — how many Noted accounts _could_ become multi-member teams today? Unknown                           | `@raziiabraham` | before launch      |
 
 ## 8. Sequencing with other work
 
@@ -127,4 +138,4 @@ This PRD **blocks**:
 
 ---
 
-*Historical source: `specs/03-paywall-subscription.md` (removed 2026-04-18; see git history for the original Dec 2025 version). Superseded by this tighter rewrite.*
+_Historical source: `specs/03-paywall-subscription.md` (removed 2026-04-18; see git history for the original Dec 2025 version). Superseded by this tighter rewrite._

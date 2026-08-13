@@ -1,3 +1,13 @@
+---
+type: prd
+feature: ai-features
+stage: 6 # Impact Review
+status: retrospective
+owner: raziiabraham
+last_updated: 2026-08-13
+note: Written after the fact. Records what shipped against a Dec 2025 spec that largely did not.
+---
+
 # PRD: AI Features
 
 **Author:** raziiabraham
@@ -7,7 +17,7 @@
 **Feature index entry:** [`ai-features` in team-os/feature-index.yaml](../../../feature-index.yaml)
 **Current-state dossier:** [`team-os/features/ai-features/`](../../../features/ai-features/)
 
-> This PRD is a retrospective. The *current state* of AI features lives in the dossier. Read [dossier/index.md](../../../features/ai-features/index.md) for how things actually work today. This file exists to capture intent, trade-offs, and what the original plan got wrong.
+> This PRD is a retrospective. The _current state_ of AI features lives in the dossier. Read [dossier/index.md](../../../features/ai-features/index.md) for how things actually work today. This file exists to capture intent, trade-offs, and what the original plan got wrong.
 
 ---
 
@@ -64,12 +74,12 @@ See [`team-os/features/ai-features/index.md#gaps-vs-the-original-spec`](../../..
 
 Proposed instrumentation (Stage 6 follow-up):
 
-| Metric | Type | Source |
-|---|---|---|
-| % of active users who have configured at least one provider key | Primary | `aiSettings` table, indexed `by_user` |
-| 7-day AI Squad activation (≥3 messages in 7 days of first open) | Primary | `coworkerMessages`, filter role='user' & agentId != null |
-| Convex function error rate for `/api/ai/chat` and `/api/ai/coworker` | Guardrail | Convex Dashboard |
-| Messages-per-active-user trending **up** while completion rate trends **down** | Anti-metric | Same table |
+| Metric                                                                         | Type        | Source                                                   |
+| ------------------------------------------------------------------------------ | ----------- | -------------------------------------------------------- |
+| % of active users who have configured at least one provider key                | Primary     | `aiSettings` table, indexed `by_user`                    |
+| 7-day AI Squad activation (≥3 messages in 7 days of first open)                | Primary     | `coworkerMessages`, filter role='user' & agentId != null |
+| Convex function error rate for `/api/ai/chat` and `/api/ai/coworker`           | Guardrail   | Convex Dashboard                                         |
+| Messages-per-active-user trending **up** while completion rate trends **down** | Anti-metric | Same table                                               |
 
 These are now defined properly in
 [`team-os/analytics/metrics/ai-features/ai-squad-metrics.md`](../../../analytics/metrics/ai-features/ai-squad-metrics.md),
@@ -91,4 +101,4 @@ metrics for a new feature.
 
 ---
 
-*Historical source: `specs/01-ai-features.md` (removed 2026-04-18; see git history for the original Dec 2025 version). Superseded by this PRD + the dossier.*
+_Historical source: `specs/01-ai-features.md` (removed 2026-04-18; see git history for the original Dec 2025 version). Superseded by this PRD + the dossier._

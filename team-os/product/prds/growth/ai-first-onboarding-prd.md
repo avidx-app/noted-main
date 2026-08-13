@@ -1,3 +1,13 @@
+---
+type: prd
+feature: ai-first-onboarding
+stage: 2 # Planning Review
+status: planning
+owner: raziiabraham
+last_updated: 2026-08-13
+note: Prototype exists and is not a feature — see prototype-boundary.md. Experiment is not measurable yet.
+---
+
 # Hand off: AI-First Onboarding PRD (New feature)
 
 <aside>

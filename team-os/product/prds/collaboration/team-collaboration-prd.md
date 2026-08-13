@@ -1,3 +1,13 @@
+---
+type: prd
+feature: team-collaboration
+stage: 2  # Planning Review
+status: planning
+owner: raziiabraham
+last_updated: 2026-08-13
+note: Nothing built. Blocked on user research: 0 of 8 originally specced features shipped.
+---
+
 # PRD: Team Collaboration (v1 scope)
 
 **Author:** raziiabraham
@@ -14,7 +24,7 @@
 - `convex/schema.ts` has a single-owner `documents` table (`userId` field), no workspace / member / permission / comment tables.
 - The original Dec 2025 spec described 8 major collaboration features (workspaces, members, roles, sharing, comments, guest access, templates, activity). **0 of 8 were implemented.**
 
-This PRD replaces that spec and proposes a *trimmed* v1 that is realistic for a small team to build and maintain. We can expand later. We do not need Notion parity at v1.
+This PRD replaces that spec and proposes a _trimmed_ v1 that is realistic for a small team to build and maintain. We can expand later. We do not need Notion parity at v1.
 
 ## 1. Hypothesis
 
@@ -31,9 +41,9 @@ We believe shipping a **minimal team v1** — shared workspace, invite by email,
 
 - **Why this, why now:** the AI features are live and differentiated. Without a team story, we can't sell a team plan. Paywall (see [../paywall/paywall-subscription-prd.md](../paywall/paywall-subscription-prd.md)) is blocked on this.
 - **Alternatives considered:**
-  - *Skip collaboration, focus on individuals + creators.* Viable niche but smaller ceiling. Probably wrong for where we want to go.
-  - *Full Notion-parity collab (everything in the old spec).* Too much scope for a team of 3. Would take 4+ months and still be a worse Notion.
-  - *This proposal — minimal v1.* Workspaces, invites, two roles, plus existing publish-to-web. 4–6 weeks scope.
+  - _Skip collaboration, focus on individuals + creators._ Viable niche but smaller ceiling. Probably wrong for where we want to go.
+  - _Full Notion-parity collab (everything in the old spec)._ Too much scope for a team of 3. Would take 4+ months and still be a worse Notion.
+  - _This proposal — minimal v1._ Workspaces, invites, two roles, plus existing publish-to-web. 4–6 weeks scope.
 
 ## 4. Proposed v1 solution
 
@@ -72,12 +82,12 @@ Each of these is a reasonable v2 feature. Pick the one with the most user demand
 
 ## 5. Success metrics
 
-| Metric | Type | Baseline | Target | Timeframe |
-|---|---|---|---|---|
-| % of signups who invite ≥1 user within 14 days | Primary | N/A | 15% | 90 days after launch |
-| Workspaces with ≥2 active members / total workspaces | Primary | N/A | 10% | 90 days |
-| Convex `documents` query error rate after workspace migration | Guardrail | 0.X% baseline, TBD | ≤1.5× baseline | from launch |
-| Support tickets tagged `workspaces` or `invites` per week | Guardrail | 0 | ≤10 | first 4 weeks |
+| Metric                                                        | Type      | Baseline           | Target         | Timeframe            |
+| ------------------------------------------------------------- | --------- | ------------------ | -------------- | -------------------- |
+| % of signups who invite ≥1 user within 14 days                | Primary   | N/A                | 15%            | 90 days after launch |
+| Workspaces with ≥2 active members / total workspaces          | Primary   | N/A                | 10%            | 90 days              |
+| Convex `documents` query error rate after workspace migration | Guardrail | 0.X% baseline, TBD | ≤1.5× baseline | from launch          |
+| Support tickets tagged `workspaces` or `invites` per week     | Guardrail | 0                  | ≤10            | first 4 weeks        |
 
 **Anti-metric:** invites-sent going up while invite-accepted going down — signals broken email flow or confusing onboarding.
 
@@ -88,6 +98,7 @@ Instrumentation requires new Convex events (`workspace_created`, `invite_sent`, 
 **Approach:** gradual rollout with a migration.
 
 **Migration risk is the big thing.** Existing users need their current documents moved into a new "Personal" workspace without data loss. Plan:
+
 1. Ship workspace infrastructure (schema) without exposing UI.
 2. Background migrate: every existing user's docs → auto-created personal workspace with the user as sole owner.
 3. Verify migration on staging, then production.
@@ -98,12 +109,12 @@ Instrumentation requires new Convex events (`workspace_created`, `invite_sent`, 
 
 ## 7. Open questions
 
-| Question | Owner | Due |
-|---|---|---|
-| What does Clerk support for email invite flows? Can we use their existing invitation primitive, or do we need a custom Convex email action? | `@avidx-app` | before Stage 4 |
-| How do we handle the user's *current* documents during migration — auto-create one workspace, or prompt the user? | `@raziiabraham` | before Stage 4 |
-| Do we charge for multi-user workspaces, or keep v1 free to drive adoption? | blocked on [paywall PRD](../paywall/paywall-subscription-prd.md) | before launch |
-| `[NEED: 5 user interviews]` — do small teams actually want workspace-level sharing, or would they prefer per-doc sharing? | `@raziiabraham` | before Stage 3 |
+| Question                                                                                                                                    | Owner                                                            | Due            |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | -------------- |
+| What does Clerk support for email invite flows? Can we use their existing invitation primitive, or do we need a custom Convex email action? | `@avidx-app`                                                     | before Stage 4 |
+| How do we handle the user's _current_ documents during migration — auto-create one workspace, or prompt the user?                           | `@raziiabraham`                                                  | before Stage 4 |
+| Do we charge for multi-user workspaces, or keep v1 free to drive adoption?                                                                  | blocked on [paywall PRD](../paywall/paywall-subscription-prd.md) | before launch  |
+| `[NEED: 5 user interviews]` — do small teams actually want workspace-level sharing, or would they prefer per-doc sharing?                   | `@raziiabraham`                                                  | before Stage 3 |
 
 ## 8. What to read next
 
@@ -112,4 +123,4 @@ Instrumentation requires new Convex events (`workspace_created`, `invite_sent`, 
 
 ---
 
-*Historical source: `specs/02-team-collaboration.md` (removed 2026-04-18; see git history for the original Dec 2025 version). Superseded by this planning-stage rewrite.*
+_Historical source: `specs/02-team-collaboration.md` (removed 2026-04-18; see git history for the original Dec 2025 version). Superseded by this planning-stage rewrite._

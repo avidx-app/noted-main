@@ -24,13 +24,17 @@ import { repoRoot } from "./lib/ai-assets.mjs";
 
 const check = process.argv.includes("--check");
 
-/** Files whose links we police. */
+/**
+ * Files whose links we police: the agent instructions, and everything in the
+ * Team OS. Originally only the CLAUDE.md indexes were checked, which missed a
+ * PRD linking to a metrics file that had never been written — the documents
+ * people actually read cross-reference each other far more than the indexes do.
+ */
 const MAPS = [
   ".ai/INSTRUCTIONS.md",
   ".ai/CONTRIBUTING.md",
-  "team-os/feature-index.yaml",
   ...walk(path.join(repoRoot, "team-os"))
-    .filter((f) => path.basename(f) === "CLAUDE.md")
+    .filter((f) => /\.(md|ya?ml)$/.test(f))
     .map((f) => path.relative(repoRoot, f)),
 ];
 
@@ -51,9 +55,12 @@ const REPO_PREFIXES = [
   "specs/",
 ];
 
-/** A row that says "this does not exist yet" is telling the truth, so allow it. */
+/**
+ * A line that says "this does not exist yet" is telling the truth, so allow it.
+ * The point of the check is to catch maps that assert, not maps that promise.
+ */
 const DECLARED_ABSENT =
-  /\bnot (?:created |written |built )?yet\b|\bnull\b|\[NEED:|\bplanned\b|\bdoes not exist\b|\bnone yet\b/i;
+  /\bnot (?:created |written |built )?yet\b|\bnull\b|\[NEED:|\bplanned\b|\bdoes not exist\b|\bnone yet\b|\bif\/when\b|\bwhen we add\b/i;
 
 function walk(dir) {
   if (!fs.existsSync(dir)) return [];
