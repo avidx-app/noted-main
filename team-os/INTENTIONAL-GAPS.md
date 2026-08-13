@@ -12,13 +12,23 @@ quotes, or metrics.** An empty file that says so is worth more than a full one t
 
 ## The two that matter
 
-### Ship logs are empty, and there are 78 merged PRs
+### Ship logs are empty, and the merge history is not
 
 `team-os/features/*/ship-log.md` is empty except where explicitly backfilled and labelled as such.
 
 **Why:** the history is real and recoverable from git. Reconstructing it is a genuine exercise —
 `gh pr list --state merged` plus the diff tells you what shipped; the dossier tells you what the
 team thought it was shipping; the difference between those two is the interesting part.
+
+This heading used to state a count. It said 78, which was the highest pull request number rather
+than a count of the merged ones — five had been closed unmerged. Count it when you need it:
+
+```bash
+git log --merges --format=%s | grep -c "Merge pull request #"
+```
+
+A number in prose is a number nobody re-derives. That is the whole argument of §XVII, and this file
+was breaking it.
 
 **Before filling:** if you backfill, say so in the file, and say which PRs you read. A ship log that
 silently reconstructs history reads exactly like one written contemporaneously, and it is not.
