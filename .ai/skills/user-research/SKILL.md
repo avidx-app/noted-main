@@ -1,6 +1,7 @@
 ---
 name: user-research
 description: Synthesize raw research notes into ranked, evidence-backed insights
+summary: Synthesize research into insights
 ---
 
 <!--

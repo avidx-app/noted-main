@@ -1,6 +1,7 @@
 ---
 name: convex-react-hooks
 description: React-side patterns for Convex in noted-main — `useQuery` (reactive read), `useMutation` (transactional write), `useAction` (network/Node call), `usePaginatedQuery` (cursor-based lists). Covers the loading-vs-empty-vs-data ternary, optimistic updates, mutation toasts, and the "no manual invalidation" rule. Use when wiring a component to Convex, when the user asks "how do I fetch from Convex" or "how do I call a mutation", or when migrating a `fetch` inside `useEffect` to `useQuery`. Replaces the heatseeker `tanstack-queries` skill.
+summary: useQuery / useMutation / useAction patterns
 ---
 
 <!--

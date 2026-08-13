@@ -1,6 +1,7 @@
 ---
 name: nextjs-app-router
 description: Next.js 16 App Router conventions for noted-main including server/client components, file conventions, route groups, import order, and the `@/` path alias. Use when user asks to "create a page", "add a layout", "should this be a server or client component", or "set up an error boundary". Also use when adding 'use client' directives, creating loading.tsx or error.tsx files, organizing import order, or implementing dynamic imports for code splitting. Applies implicitly when implementing any feature that involves new pages, routing, or UI rendering.
+summary: Server/client components, routing
 ---
 
 <!--

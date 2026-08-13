@@ -1,5 +1,6 @@
 ---
 description: Get a one-shot answer about a feature's current state, talking points, and recent ships
+summary: Feature status from dossier + ship log
 argument-hint: "[feature slug or name]"
 ---
 

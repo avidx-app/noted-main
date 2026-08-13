@@ -1,6 +1,7 @@
 ---
 name: speckit.specify
 description: Codex-compatible mirror of `/speckit.specify`. Use when the user asks for `/speckit.specify`, `$speckit.specify`, or wants the repo's Speckit specify workflow. Read `.ai/commands/speckit.specify.md` and follow it as the source of truth.
+summary: Speckit specify phase
 ---
 
 # Speckit Specify

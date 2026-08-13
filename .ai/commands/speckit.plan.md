@@ -1,5 +1,6 @@
 ---
 description: Execute the implementation planning workflow using the plan template to generate design artifacts (research.md, data-model.md, contracts/, quickstart.md).
+summary: Speckit plan + constitution check
 handoffs:
     - label: Create Tasks
       agent: speckit.tasks

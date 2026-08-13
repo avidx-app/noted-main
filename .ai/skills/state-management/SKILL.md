@@ -1,6 +1,7 @@
 ---
 name: state-management
 description: 'State management patterns for noted-main — `useState` for component-local UI, Zustand stores in `hooks/use-*.tsx` for shared UI state across components, and Convex `useQuery`/`useMutation` for ALL remote data. Use when user asks to "add state", "create a store", "should this be local or global state", or "share state between components". Applies implicitly whenever a feature involves shared UI state. The strict rule: never mirror Convex data into Zustand.'
+summary: Convex for server data, Zustand for UI
 ---
 
 <!--

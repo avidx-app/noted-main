@@ -1,5 +1,6 @@
 ---
 description: Roll up the week's shipped PRs, new PRDs, and market signals into a team update
+summary: Team weekly digest
 argument-hint: "[week ending YYYY-MM-DD, optional]"
 ---
 

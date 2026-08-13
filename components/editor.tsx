@@ -36,6 +36,7 @@ import "@blocknote/xl-ai/style.css";
 
 import { Id } from "@/convex/_generated/dataModel";
 import { useFilePicker } from "@/hooks/use-file-picker";
+import { withAiTracking } from "@/lib/in-editor-ai-tracking";
 import { ImageIcon } from "lucide-react";
 
 interface EditorProps {
@@ -52,9 +53,11 @@ interface EditorProps {
 const SlashMenuWithAI = ({
   editor,
   hasAiConfig,
+  documentId,
 }: {
   editor: BlockNoteEditor;
   hasAiConfig: boolean;
+  documentId?: Id<"documents">;
 }) => {
   const dictionary = useDictionary();
 
@@ -75,7 +78,12 @@ const SlashMenuWithAI = ({
   const getMenuItems = useCallback(
     async (query: string): Promise<DefaultReactSuggestionItem[]> => {
       const defaultItems = getDefaultReactSlashMenuItems(editor);
-      const aiItems = hasAiConfig ? getAISlashMenuItems(editor) : [];
+      // Wrap the AI items so choosing one is measurable. Without this, "used
+      // AI" only ever means the Coworker panel and `/Ask AI` is invisible in
+      // every activation funnel.
+      const aiItems = hasAiConfig
+        ? withAiTracking(getAISlashMenuItems(editor), { documentId })
+        : [];
 
       const insertImageFromLibrary: DefaultReactSuggestionItem = {
         title: "File from Library",
@@ -104,7 +112,7 @@ const SlashMenuWithAI = ({
       // Use BlockNote's built-in filter function
       return filterSuggestionItems([...aiItems, insertImageFromLibrary, ...defaultItems], query);
     },
-    [editor, hasAiConfig, onOpen],
+    [editor, hasAiConfig, onOpen, documentId],
   );
 
   return (
@@ -268,7 +276,11 @@ const Editor = ({
           slashMenu={false}
           formattingToolbar={false}
         >
-          <SlashMenuWithAI editor={editor} hasAiConfig={hasAiConfig} />
+          <SlashMenuWithAI
+            editor={editor}
+            hasAiConfig={hasAiConfig}
+            documentId={documentId}
+          />
           <FormattingToolbarWithAI hasAiConfig={hasAiConfig} />
           {hasAiConfig && <AIMenuController />}
         </BlockNoteView>

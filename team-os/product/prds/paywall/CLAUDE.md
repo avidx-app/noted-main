@@ -1,7 +1,7 @@
 # PRDs — Paywall & Subscription
 
-| File | Stage | Summary |
-|---|---|---|
+| File                                                       | Stage               | Summary                                                                                                   |
+| ---------------------------------------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------- |
 | [paywall-subscription-prd.md](paywall-subscription-prd.md) | 2 — Planning Review | Pricing tiers, Stripe integration, feature gates. Nothing built. Blocked on team-collab v1 landing first. |
 
 ## Current state of monetization in Noted

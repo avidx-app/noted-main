@@ -1,6 +1,7 @@
 ---
 name: eslint-self-heal
 description: Self-healing loop when ESLint guardrails fail — read the error message, apply the fix recipe, re-run lint until clean on touched files. Use when lint:check fails, noted/no-hardcoded-color or noted/no-inline-style fires, @typescript-eslint/no-explicit-any fires, or the user asks to fix ESLint warnings from the AI playground guardrails. Never disable rules without constitution-level justification.
+summary: Fix ESLint guardrail failures in a loop until clean
 ---
 
 # ESLint self-heal

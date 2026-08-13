@@ -1,6 +1,7 @@
 ---
 name: repo-structure
 description: Where code lives in noted-main — `app/` (Next.js routes), `components/` (UI), `convex/` (backend), `hooks/` (custom hooks + Zustand stores), `lib/` (utilities + AI agent code), `team-os/` (team OS), `.ai/` (skills + commands), `.specify/` (Speckit). Use when user asks "where should I put this", "where does X live", or any time you're creating a new file and aren't certain of the folder. Replaces the heatseeker `monorepo-structure` skill.
+summary: Where code lives
 ---
 
 <!--

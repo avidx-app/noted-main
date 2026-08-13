@@ -1,6 +1,7 @@
 ---
 name: error-handling
 description: Error handling conventions for noted-main — using `throw new Error(message)` consistently, with naming conventions for messages (auth, not-found, ownership, validation) and the auth-then-ownership-then-validation order. Use when user asks to "add error handling", "throw the right error", or "handle failures". Also use when writing or reviewing any Convex handler, Next.js API route, or AI tool that can fail. Applies implicitly whenever writing server code — the auth + ownership + validation triad must always be in place.
+summary: throw new Error() conventions
 ---
 
 <!--

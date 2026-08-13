@@ -1,5 +1,6 @@
 ---
 description: PR review — the team's single source of truth for code review on noted-main. Reviews EVERY changed file in the PR (regardless of path) against six categories: architecture-doc compliance (HIGHEST PRIORITY — when binding contracts exist in `team-os/engineering/architecture/`), cross-chunk architecture, per-feature design quality, `.ai/skills/` compliance, Linear ticket alignment (NOT-XXXX), and recurring "other concerns" (custom parsers, icons, lodash re-impls, Convex auth ordering, BlockNote extension safety). Chunked multi-agent approach scales to 150-file PRs; emits a binary verdict + per-category scorecard + grouped fix list. Always produces a report — even on tiny meta/docs PRs. Non-interactive: never asks the user for direction.
+summary: PR review against skills + constitution
 allowed-tools: Read, Grep, Glob, Agent, Bash(git diff:*), Bash(git log:*), Bash(git status:*), Bash(git rev-parse:*), Bash(git fetch:*), Bash(git merge-base:*), Bash(gh pr view:*), Bash(gh pr checkout:*)
 ---
 

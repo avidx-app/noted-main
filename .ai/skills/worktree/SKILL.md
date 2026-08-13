@@ -1,6 +1,7 @@
 ---
 name: worktree
 description: Codex-compatible mirror of `/worktree`. Use when the user asks for `/worktree`, `$worktree`, or wants the repo's worktree creation workflow. Read `.ai/commands/worktree.md` and follow it as the source of truth.
+summary: Git worktree helper
 ---
 
 # Worktree

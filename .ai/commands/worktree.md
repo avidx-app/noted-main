@@ -1,5 +1,6 @@
 ---
 description: Create a git worktree with a Linear ticket, descriptive branch, and open it in a new editor window.
+summary: Git worktree helper
 ---
 
 <!--

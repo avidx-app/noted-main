@@ -1,6 +1,7 @@
 ---
 name: effect-to-event
 description: 'CRITICAL: Put interaction logic in event handlers, not in useEffect. Use when a useEffect performs a side effect (API call, toast, navigation, analytics) in response to a user action modeled as state, or when a boolean flag triggers an effect. Also use when writing or reviewing any component with useEffect that contains side-effect logic. Applies implicitly whenever a component uses useEffect for anything other than synchronization with an external system — if a user action caused it, it belongs in the handler.'
+summary: Side effects in handlers, not useEffect
 ---
 
 <!--

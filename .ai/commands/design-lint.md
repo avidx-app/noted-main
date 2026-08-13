@@ -1,5 +1,6 @@
 ---
 description: Validate DESIGN.md against the design.md spec — WCAG contrast, broken token references, orphaned tokens, structural correctness. Wraps `npx @google/design.md lint DESIGN.md` and surfaces findings in the standard PR-review format. Read-only.
+summary: Run design.md linter
 allowed-tools: Read, Grep, Bash(npx:*), Bash(npm:*)
 ---
 

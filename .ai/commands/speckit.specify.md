@@ -1,5 +1,6 @@
 ---
 description: Create or update the feature specification from a Linear ticket and/or natural language feature description. Supports explore mode (--explore) for spec drafting without a Linear ticket.
+summary: Speckit specify phase
 handoffs:
     - label: Build Technical Plan
       agent: speckit.plan

@@ -15,66 +15,93 @@ This folder is the source of truth for everything Claude Code, Codex, and Cursor
 
 ## Skills
 
-| Skill                    | Purpose                                               |
-| ------------------------ | ----------------------------------------------------- |
-| `agent-tool-authoring`   | AI Squad / Coworker tool shape and wiring             |
-| `api-routes-and-actions` | Convex vs Next.js API route boundaries                |
-| `code-quality-checklist` | Pre-commit / pre-PR quality gate                      |
-| `competitive-analysis`   | Competitor teardown                                   |
-| `component-composition`  | Split large components, reduce prop drilling          |
-| `convex-handlers`        | query / mutation / action selection                   |
-| `convex-queries`         | Indexed reads, joins, pagination                      |
-| `convex-react-hooks`     | useQuery / useMutation / useAction patterns           |
-| `convex-schema`          | defineTable, indexes, additive migrations             |
-| `date-handling`          | Store numbers, format with date-fns                   |
-| `derived-state`          | Derive during render — never sync props via useEffect |
-| `design-md`              | DESIGN.md visual contract                             |
-| `design-system`          | shadcn + Tailwind tokens                              |
-| `effect-to-event`        | Side effects in handlers, not useEffect               |
-| `error-handling`         | throw new Error() conventions                         |
-| `eslint-self-heal`       | Fix ESLint guardrail failures in a loop until clean   |
-| `event-tracking`         | Amplitude event conventions                           |
-| `feature-status`         | Answer "what's the status of X"                       |
-| `feature-workflow`       | End-to-end feature dev workflow                       |
-| `file-naming`            | kebab-case files, PascalCase exports                  |
-| `launch-checklist`       | Pre/post launch checklist                             |
-| `market-pulse`           | Market pulse for note-taking + AI space               |
-| `metrics-definer`        | Primary/secondary/guardrail metrics                   |
-| `nextjs-app-router`      | Server/client components, routing                     |
-| `prd-writer`             | PRD structure                                         |
-| `react-components`       | forwardRef, cva, cn(), no premature memo              |
-| `repo-structure`         | Where code lives                                      |
-| `ship-log`               | Log shipped PRs to feature dossiers                   |
-| `sorting`                | Sort at Convex layer or toSorted() client-side        |
-| `state-management`       | Convex for server data, Zustand for UI                |
-| `typescript-patterns`    | Strict types — no `any`                               |
-| `unit-testing`           | Jest + RTL patterns                                   |
-| `user-research`          | Synthesize research into insights                     |
-| `zod-schemas`            | Zod at HTTP/AI boundaries                             |
+<!-- auto:skills:start -->
+
+| Skill                    | Purpose                                                |
+| ------------------------ | ------------------------------------------------------ |
+| `agent-tool-authoring`   | AI Squad / Coworker tool shape and wiring              |
+| `api-routes-and-actions` | Convex vs Next.js API route boundaries                 |
+| `branch-commit`          | Branch + commit workflow                               |
+| `code-quality-checklist` | Pre-commit / pre-PR quality gate                       |
+| `commit`                 | Pre-commit quality gate                                |
+| `competitive-analysis`   | Competitor teardown                                    |
+| `component-composition`  | Split large components, reduce prop drilling           |
+| `convex-handlers`        | query / mutation / action selection                    |
+| `convex-queries`         | Indexed reads, joins, pagination                       |
+| `convex-react-hooks`     | useQuery / useMutation / useAction patterns            |
+| `convex-schema`          | defineTable, indexes, additive migrations              |
+| `create-pr`              | Open PR to `staging`                                   |
+| `date-handling`          | Store numbers, format with date-fns                    |
+| `derived-state`          | Derive during render — never sync props via useEffect  |
+| `design-diff`            | Compare UI against DESIGN.md                           |
+| `design-lint`            | Run design.md linter                                   |
+| `design-md`              | DESIGN.md visual contract                              |
+| `design-system`          | shadcn + Tailwind tokens                               |
+| `effect-to-event`        | Side effects in handlers, not useEffect                |
+| `error-handling`         | throw new Error() conventions                          |
+| `eslint-self-heal`       | Fix ESLint guardrail failures in a loop until clean    |
+| `event-tracking`         | Amplitude event conventions                            |
+| `feature-status`         | Feature status from dossier + ship log                 |
+| `feature-workflow`       | Interactive feature dev phases                         |
+| `file-naming`            | kebab-case files, PascalCase exports                   |
+| `grill-me`               | Hard questions on a proposal                           |
+| `launch-checklist`       | Pre/post launch checklist                              |
+| `market-pulse`           | Market pulse for note-taking + AI space                |
+| `market-scan`            | Market scan workflow                                   |
+| `metrics-define`         | Define primary, secondary, guardrail, and anti-metrics |
+| `metrics-definer`        | Primary/secondary/guardrail metrics                    |
+| `nextjs-app-router`      | Server/client components, routing                      |
+| `noted-review`           | PR review against skills + constitution                |
+| `prd-new`                | Draft a new PRD                                        |
+| `prd-writer`             | PRD structure                                          |
+| `react-components`       | forwardRef, cva, cn(), no premature memo               |
+| `repo-structure`         | Where code lives                                       |
+| `ship-log`               | Append ship-log entry                                  |
+| `sorting`                | Sort at Convex layer or toSorted() client-side         |
+| `speckit.clarify`        | Speckit clarify phase                                  |
+| `speckit.implement`      | Speckit implement phase                                |
+| `speckit.plan`           | Speckit plan + constitution check                      |
+| `speckit.specify`        | Speckit specify phase                                  |
+| `speckit.tasks`          | Speckit tasks breakdown                                |
+| `state-management`       | Convex for server data, Zustand for UI                 |
+| `typescript-patterns`    | Strict types — no `any`                                |
+| `unit-testing`           | Jest + RTL patterns                                    |
+| `user-research`          | Synthesize research into insights                      |
+| `weekly-digest`          | Team weekly digest                                     |
+| `worktree`               | Git worktree helper                                    |
+| `zod-schemas`            | Zod at HTTP/AI boundaries                              |
+
+<!-- auto:skills:end -->
 
 ## Commands
 
-| Command              | Purpose                                     |
-| -------------------- | ------------------------------------------- |
-| `/branch-commit`     | Branch + commit workflow                    |
-| `/commit`            | Pre-commit quality gate                     |
-| `/create-pr`         | Open PR to `staging`                        |
-| `/design-diff`       | Compare UI against DESIGN.md                |
-| `/design-lint`       | Run design.md linter                        |
-| `/feature-status`    | Feature status from dossier + ship log      |
-| `/feature-workflow`  | Interactive feature dev phases              |
-| `/grill-me`          | Hard questions on a proposal                |
-| `/market-scan`       | Market scan workflow                        |
-| `/noted-review`      | **PR review against skills + constitution** |
-| `/prd-new`           | Draft a new PRD                             |
-| `/ship-log`          | Append ship-log entry                       |
-| `/speckit.clarify`   | Speckit clarify phase                       |
-| `/speckit.implement` | Speckit implement phase                     |
-| `/speckit.plan`      | Speckit plan + constitution check           |
-| `/speckit.specify`   | Speckit specify phase                       |
-| `/speckit.tasks`     | Speckit tasks breakdown                     |
-| `/weekly-digest`     | Team weekly digest                          |
-| `/worktree`          | Git worktree helper                         |
+<!-- auto:commands:start -->
+
+| Command              | Purpose                                                         |
+| -------------------- | --------------------------------------------------------------- |
+| `/branch-commit`     | Branch + commit workflow                                        |
+| `/commit`            | Pre-commit quality gate                                         |
+| `/create-pr`         | Open PR to `staging`                                            |
+| `/design-diff`       | Compare UI against DESIGN.md                                    |
+| `/design-lint`       | Run design.md linter                                            |
+| `/feature-status`    | Feature status from dossier + ship log                          |
+| `/feature-workflow`  | Interactive feature dev phases                                  |
+| `/grill-me`          | Hard questions on a proposal                                    |
+| `/market-scan`       | Market scan workflow                                            |
+| `/metrics-define`    | Define primary, secondary, guardrail, and anti-metrics          |
+| `/noted-review`      | PR review against skills + constitution                         |
+| `/pm-review`         | Tombstone — never built, points at prd-writer and /noted-review |
+| `/prd-new`           | Draft a new PRD                                                 |
+| `/ship-log`          | Append ship-log entry                                           |
+| `/speckit.clarify`   | Speckit clarify phase                                           |
+| `/speckit.implement` | Speckit implement phase                                         |
+| `/speckit.plan`      | Speckit plan + constitution check                               |
+| `/speckit.specify`   | Speckit specify phase                                           |
+| `/speckit.tasks`     | Speckit tasks breakdown                                         |
+| `/weekly-digest`     | Team weekly digest                                              |
+| `/worktree`          | Git worktree helper                                             |
+
+<!-- auto:commands:end -->
 
 ## Runtime parity
 

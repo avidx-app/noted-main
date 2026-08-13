@@ -1,3 +1,13 @@
+---
+type: prd
+feature: ai-features
+stage: 6 # Impact Review
+status: retrospective
+owner: raziiabraham
+last_updated: 2026-08-13
+note: The four-outputs pivot. Records a scope decision and why the original framing did not survive the code.
+---
+
 # PRD: AI Agent — The Four-Outputs Pivot
 
 **Author:** raziiabraham
@@ -7,7 +17,7 @@
 **Feature index entry:** [`ai-features` in team-os/feature-index.yaml](../../../feature-index.yaml)
 **Current-state dossier:** [`team-os/features/ai-features/`](../../../features/ai-features/)
 
-> This is a short retrospective on a scope pivot. The original spec described a "four-outputs" agent framework tied to an Adology MCP integration. That vision was not built. What shipped is a simpler workspace-tool agent loop. This PRD captures the *why*.
+> This is a short retrospective on a scope pivot. The original spec described a "four-outputs" agent framework tied to an Adology MCP integration. That vision was not built. What shipped is a simpler workspace-tool agent loop. This PRD captures the _why_.
 
 ---
 
@@ -51,4 +61,4 @@ See [`team-os/features/ai-features/index.md#sub-feature-4-squad-agents`](../../.
 
 ---
 
-*Historical source: `specs/04-ai-agent.md` (removed 2026-04-18; see git history for the original Dec 2025 version). Superseded by this retrospective + the current dossier.*
+_Historical source: `specs/04-ai-agent.md` (removed 2026-04-18; see git history for the original Dec 2025 version). Superseded by this retrospective + the current dossier._

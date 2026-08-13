@@ -1,6 +1,7 @@
 ---
 name: convex-queries
 description: Convex query patterns for noted-main — efficient indexed reads, fan-out via `Promise.all`, in-handler "joins" between collections, pagination, the `.filter` vs `.withIndex` boundary, and the cost model (every `useQuery` is a live subscription). Use when writing a new Convex `query`, optimizing a slow query, joining two tables in a single read, paginating a list, or reviewing a query for performance. Companion to `convex-handlers` (handler-type selection) and `convex-schema` (table/index design).
+summary: Indexed reads, joins, pagination
 ---
 
 <!--

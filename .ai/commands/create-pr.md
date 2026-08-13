@@ -1,3 +1,8 @@
+---
+description: Open a pull request targeting `staging` using the repo PR template
+summary: Open PR to `staging`
+---
+
 # /create-pr
 
 Creates a pull request targeting `staging` (not `main`).
