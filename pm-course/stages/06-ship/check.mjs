@@ -1,5 +1,5 @@
 /**
- * Act 4 checker — grades a delivery record against the repo's own rules.
+ * Stage 6 checker — grades a delivery record against the repo's own rules.
  *
  *   node scripts/check.mjs 4 --file ~/noted-work/delivery-record.md --repo ../noted-main
  *

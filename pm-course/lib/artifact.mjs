@@ -70,7 +70,7 @@ export function citedPaths(text) {
     if (p.startsWith("/")) return;
     // A citation has to be precise enough to open: a file extension, or a
     // trailing slash for a directory. Without this, `feat/share-framing` —
-    // a branch name, which every Act 3 contract carries — resolves as a
+    // a branch name, which every Stage 4 contract carries — resolves as a
     // missing file and fails the map.
     if (!EXT.test(p) && !p.endsWith("/")) return;
     found.add(p);
@@ -92,7 +92,7 @@ export function citedPaths(text) {
  */
 export function isPlaceholder(body) {
   // A parenthetical spanning several lines is still one instruction. Checking
-  // line by line missed these, and the blank Act 4 template passed the section
+  // line by line missed these, and the blank Stage 6 template passed the section
   // the whole act is assessed on.
   const whole = (body ?? "").trim();
   if (whole.startsWith("(") && whole.endsWith(")")) return true;

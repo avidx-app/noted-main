@@ -1,5 +1,5 @@
 /**
- * Act 2's checker, tested.
+ * Stage 2's checker, tested.
  *
  * The independence check is the one that matters, so it gets both directions: a
  * row that correctly marks a constructed source as dependent passes, and the same

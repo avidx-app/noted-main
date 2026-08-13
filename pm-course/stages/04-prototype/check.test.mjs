@@ -1,5 +1,5 @@
 /**
- * Act 3's checker, tested against a fixture repo with a real diff.
+ * Stage 4's checker, tested against a fixture repo with a real diff.
  *
  * The reference contract describes four changed files, so the fixture changes
  * exactly those four. The coverage check is the one that matters, so it gets both

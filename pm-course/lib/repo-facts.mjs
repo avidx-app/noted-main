@@ -57,7 +57,7 @@ export function mergedPrs(repo, ref = "HEAD") {
  *
  * Offline, from merge-commit subjects — no `gh`, no network, no credentials. A
  * tracker saying "Done" and a pull request having merged are different facts, and
- * Act 2 turns on one case where they disagree.
+ * Stage 2 turns on one case where they disagree.
  */
 export function mergedPr(repo, n, ref = "HEAD") {
   const log = git(repo, ["log", ref, "--merges", "--format=%s"]);
@@ -170,7 +170,7 @@ export function frontmatter(text) {
  *
  * A row whose cells are all em-dashes or italic asides is a placeholder, not an
  * entry — that is exactly the shape of noted's empty ship log, and counting it
- * as one would hide the thing Act 1 is looking for.
+ * as one would hide the thing Stage 1 is looking for.
  */
 export function tableRows(text) {
   const lines = (text ?? "").split("\n");
