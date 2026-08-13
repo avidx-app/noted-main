@@ -1,5 +1,6 @@
 ---
 description: Compare DESIGN.md against an earlier version (a git ref or another file) to detect token-level visual identity changes — what was added, removed, or modified across colors, typography, radii, spacing, components. Wraps `npx @google/design.md diff`. Read-only.
+summary: Compare UI against DESIGN.md
 allowed-tools: Read, Bash(npx:*), Bash(git show:*), Bash(git rev-parse:*)
 ---
 

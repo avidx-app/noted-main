@@ -1,5 +1,6 @@
 ---
 description: Generate a new market pulse for the note-taking + AI-editor space
+summary: Market scan workflow
 argument-hint: "[period: weekly | biweekly | monthly]"
 ---
 

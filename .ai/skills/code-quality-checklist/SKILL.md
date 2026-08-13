@@ -1,6 +1,7 @@
 ---
 name: code-quality-checklist
 description: Pre-commit quality checklist covering formatting, linting, type checking, testing, and DRY compliance. Use when user asks to "check code quality", "verify before commit", "run the checklist", or "make sure everything passes". Also use before completing any coding task to verify new Convex handlers, hooks, components, and shared utilities follow conventions and have proper tests.
+summary: Pre-commit / pre-PR quality gate
 ---
 
 <!--

@@ -1,6 +1,7 @@
 ---
 name: feature-status
 description: Answer "what's the status of feature X" using the feature dossier + ship log + code
+summary: Feature status from dossier + ship log
 ---
 
 # Feature Status

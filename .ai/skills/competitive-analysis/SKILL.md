@@ -1,6 +1,7 @@
 ---
 name: competitive-analysis
 description: Teardown a competitor's product decisions with specific, evidence-backed insights
+summary: Competitor teardown
 ---
 
 <!--

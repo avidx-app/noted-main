@@ -1,6 +1,7 @@
 ---
 name: grill-me
 description: Codex-compatible mirror of `/grill-me`. Use when the user asks for `/grill-me`, `$grill-me`, or wants the repo's hard-questions workflow on a plan or proposal. Read `.ai/commands/grill-me.md` and follow it as the source of truth.
+summary: Hard questions on a proposal
 ---
 
 # Grill Me

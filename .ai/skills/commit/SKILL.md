@@ -1,6 +1,7 @@
 ---
 name: commit
 description: Codex-compatible mirror of `/commit`. Use when the user asks for `/commit`, `$commit`, or wants the repo's commit workflow with validation, review, and commit steps. Read `.ai/commands/commit.md` and follow it as the source of truth.
+summary: Pre-commit quality gate
 ---
 
 # Commit

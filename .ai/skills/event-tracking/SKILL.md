@@ -1,6 +1,7 @@
 ---
 name: event-tracking
 description: Amplitude event tracking conventions for noted-main — major user-facing features and key interactions must have analytics events. Use when building new features, pages, or significant UI flows. Also use when adding primary CTAs, form submissions, feature activations, or destructive actions. Applies implicitly whenever creating or modifying major UI features — analytics coverage on key actions is always required, even if not directly requested.
+summary: Amplitude event conventions
 ---
 
 <!--

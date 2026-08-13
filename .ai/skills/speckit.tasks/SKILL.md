@@ -1,6 +1,7 @@
 ---
 name: speckit.tasks
 description: Codex-compatible mirror of `/speckit.tasks`. Use when the user asks for `/speckit.tasks`, `$speckit.tasks`, or wants the repo's Speckit task-breakdown workflow. Read `.ai/commands/speckit.tasks.md` and follow it as the source of truth.
+summary: Speckit tasks breakdown
 ---
 
 # Speckit Tasks

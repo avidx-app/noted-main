@@ -1,6 +1,7 @@
 ---
 name: derived-state
 description: 'CRITICAL: Derive state during render — never sync props or computed values into state via useEffect. Use when user writes a useEffect that calls setState based on props or other state, syncs a prop into local state, or computes a value from existing state and stores it separately. Also use when writing or reviewing any component with useEffect. Applies implicitly whenever a component has useEffect + setState together — this combination is almost always wrong.'
+summary: Derive during render — never sync props via useEffect
 ---
 
 <!--

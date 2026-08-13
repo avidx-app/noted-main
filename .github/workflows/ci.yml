@@ -33,8 +33,18 @@ jobs:
       - name: Run ESLint rule unit tests
         run: npm run test:eslint-rules
 
+      # The drift checks gate this pipeline, so they get tested like the lint
+      # rules do — a false negative in them passes silently by construction.
+      - name: Run harness script tests
+        run: npm run test:scripts
+
       - name: Run ESLint
         run: npm run lint:check
+
+      # The .ai/ index tables are generated and the Team OS maps are load-bearing.
+      # Both rot silently, so failing here is cheaper than a stale map an agent trusts.
+      - name: Check generated indexes and doc links
+        run: npm run check:drift
 
       - name: Run Tests
         run: npm run test:coverage

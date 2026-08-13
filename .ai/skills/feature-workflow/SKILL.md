@@ -1,16 +1,16 @@
 ---
 name: feature-workflow
 description: End-to-end feature development workflow for noted-main — from ideation through merge and smoke test. Every feature MUST begin with user grounding against the noted Customer Understanding OS (personas, pain landscape, behavioural cohorts). Use when starting a new feature, planning implementation, or checking what step comes next in the dev process. Pairs with the `/feature-workflow` slash command, which walks an agent through the same phases interactively.
+summary: Interactive feature dev phases
 ---
 
 <!--
 Adapted from Razii's personal feature-workflow skill (originally written for
 heatseeker-next). This is the noted-main version. Three things changed:
 
-1. The Customer Understanding OS link, the personas, the pain themes, the
-   customer quotes, and the Amplitude cohorts all need to be replaced with
-   noted-specific equivalents. Until those exist they're marked
-   `[NEED: ...]` — see "Activating this skill" at the bottom.
+1. The personas, pain themes and customer quotes are now noted's own, in
+   `team-os/research/`. Amplitude cohorts per persona are still missing —
+   see "Activating this skill" at the bottom.
 2. Heatseeker conventions (pnpm, HST-XXXX, /heatseeker-review,
    docs/architecture/*) → noted conventions (npm, NOT-XXXX, /noted-review,
    noted skills as architecture docs).
@@ -28,7 +28,11 @@ A complete end-to-end guide for shipping a feature in noted-main — from raw id
 
 **Non-negotiable:** Every feature must be user-grounded before any planning begins. No feature gets built on a hunch. If Phase 0 cannot be completed, pause and flag it — do not proceed to Phase 1.
 
-> **Status:** the _phases_ are noted-ready and match the rest of the .ai stack (Speckit, `/noted-review`, the skills suite). The _user-grounding content_ — Customer Understanding OS link, persona list, pain themes, Amplitude cohorts — is marked `[NEED: ...]` until the noted Customer Understanding OS exists. See "Activating this skill" at the bottom for the one-time fill-in steps.
+> **Status:** active. The phases match the rest of the `.ai` stack, and Phase 0 now grounds against
+> [`team-os/research/`](../../../team-os/research/) — five personas, a ranked pain landscape, and eleven
+> interview transcripts, all in the repo and readable with no connectors. Two things are still
+> missing and are marked `[NEED: ...]`: per-persona Amplitude cohorts, and the population sizes that
+> would let a persona support a claim about how many people it covers.
 
 ---
 
@@ -36,55 +40,68 @@ A complete end-to-end guide for shipping a feature in noted-main — from raw id
 
 ### The source of truth
 
-Every feature starts by opening the **noted Customer Understanding OS** Notion page:
+Every feature starts by opening the customer evidence in this repo:
 
-🔗 **`[NEED: noted Customer Understanding OS — Notion URL]`**
-(Notion ID: `[NEED: notion page id]`)
+🔗 **[`team-os/research/`](../../../team-os/research/)** — [personas](../../../team-os/research/personas.md), [pain landscape](../../../team-os/research/pain-landscape.md), and the [interview transcripts](../../../team-os/research/interviews/) behind both.
 
-**Required action:** Fetch this page at the start of every feature using the Notion MCP (`notion-fetch` with the URL or ID above). Do not rely on a summary from memory — the doc is living and updates. Re-read the Pain Landscape, Behavioural Reality, and Customer-by-Customer sections before planning.
+**Required action:** read the personas and pain landscape at the start of every feature, then open at
+least one transcript and take the quote from the transcript rather than from the summary. A summary
+of a summary is how grounding quietly becomes assertion.
 
-### What's in noted's Customer Understanding OS (summary — for orientation only, always open the real doc)
+> **Provenance, every time:** the transcripts are **constructed** for a teaching simulation. They are
+> valid for exercising this workflow and invalid as proof that demand exists. Any artifact that
+> grounds on them must say so. See [interviews/CLAUDE.md](../../../team-os/research/interviews/CLAUDE.md).
 
-- **`[NEED: list noted's personas — defined by relationship to the product, not job title]`** (e.g. "01 — The Daily Note-Taker", "02 — The AI-First Drafter", "03 — The Editor", "04 — The Public Publisher" — placeholders only; replace with what your interviews actually surfaced)
-- **`[NEED: list noted's pain themes, ordered by frequency across interviews]`**
-- **Amplitude behavioural cohorts** for each persona (project: `[NEED: noted Amplitude project ID]`)
-- **Closed Loop: Insight → Action** table — how every insight type maps to a measurable behavioural signal (template below — usable as-is once the cohorts and signals exist)
-- **Priority interview queue** — where current evidence gaps are
+If a Notion Customer Understanding OS exists for your team, fetch it with the Notion MCP as well —
+but `team-os/research/` is the copy that ships with the repo and works with no connectors.
 
 ### Then answer these four questions in writing (Linear ticket is a good home):
 
 ### 1. Which persona is this for?
 
-Pick one (or explicitly more than one, if unavoidable):
+Pick one (or explicitly more than one, if unavoidable). Full descriptions in [personas.md](../../../team-os/research/personas.md):
 
-- **`[NEED: persona 01]`** — `[one-line role description]`. `[Amplitude cohort URL]`
-- **`[NEED: persona 02]`** — `[one-line role description]`. `[Amplitude cohort URL]`
-- **`[NEED: persona 03]`** — `[one-line role description]`. `[Amplitude cohort URL]`
-- **`[NEED: persona 04]`** — `[one-line role description]`. `[Amplitude cohort URL]`
+- **01 — The Drafter** — comes to think, leaves before publishing. High AI use, near-zero publish.
+- **02 — The Reviewer** — never drafts here; gets pulled into someone else's nearly-ready draft. Wants comment-only, will not create an account.
+- **03 — The Newcomer** — got value in session one, stalled at anything needing setup.
+- **04 — The Tinkerer** — configures providers and models on purpose. Most articulate, most likely to be over-served.
+- **05 — The Expander** — already sold, trying to bring a team in, blocked by a missing step.
 
-If the feature "is for everyone," it's probably for no one. Force a choice.
+If the feature "is for everyone," it's probably for no one. Force a choice. Personas 01 and 04 want
+opposite things from the same roadmap, so "everyone" resolves a real conflict by ignoring it.
 
-### 2. Which pain from the Pain Landscape does it address?
+`[NEED: Amplitude behavioural cohort per persona]` — the personas are qualitative only today. No
+persona has a population size, so do not use one to argue a segment is big.
 
-Pick one (again — be specific, not generic):
+### 2. Which pain does it address?
 
-1. `[NEED: pain theme #1]`
-2. `[NEED: pain theme #2]`
-3. `[NEED: pain theme #3]`
-4. `[NEED: pain theme #4]`
-5. `[NEED: pain theme #5]`
-6. `[NEED: pain theme #6]`
+Pick one, from [pain-landscape.md](../../../team-os/research/pain-landscape.md), ordered by how many
+independent transcripts raise it:
+
+1. No step between private draft and public page — 7 of 11
+2. Squad asks for configuration before it gives value — 5 of 11
+3. The reviewer has to be recruited into the product — 3 of 11
+4. AI makes weak work sound finished — 2 of 11
+5. Model and prompt attribution is opaque — 2 of 11
 
 Quote the evidence. Which interview, which customer, which Amplitude signal surfaced this pain?
 
+If you are not working pain #1, say why in writing. Working a lower-ranked pain is often correct —
+it may be smaller, testable, or unblocked — but it should be a stated choice.
+
 ### 3. What customer quote or behavioural signal justifies this feature?
 
-Use real user words from the Customer Understanding OS, or a specific Amplitude cohort behaviour. **No quote = no grounding = stop.**
+Real user words from a transcript, or a specific behavioural signal. **No quote = no grounding = stop.**
 
-Examples (the _shape_; replace with noted-specific evidence once the OS exists):
+The quote must be copied from a file in
+[interviews/](../../../team-os/research/interviews/), with the person and date attached, e.g.
 
-- > _`[NEED: noted user quote — interview source + customer name]`_
-- `[NEED: noted Amplitude behavioural signal — e.g. "X events to Y events ratio across N orgs over T days"]`
+- > _"There is no middle state. Right now I choose between secrecy and overexposure."_ — Mia, 2026-04-08
+- > _"It just felt like configuration before value."_ — Ethan, 2026-04-24
+
+Behavioural signals come from the events in [`lib/analytics.ts`](../../../lib/analytics.ts). Anything
+sourced from `scripts/fixtures/` is **seeded, not production** — label it, and never quote a seeded
+baseline as a real one.
 
 ### 4. What action should this feature trigger, and how will we measure it?
 
@@ -347,16 +364,16 @@ Don't edit [package.json](/Users/raziiabraham/Documents/GitHub/noted-main/packag
 npm run format && npm run lint:fix && npm run type:check && npm run test
 ```
 
-## Quick Reference: Customer Understanding OS
+## Quick Reference: customer evidence
 
 Always open at the start of a feature, and re-open whenever in doubt about persona, pain, or expected signal:
-🔗 **`[NEED: noted Customer Understanding OS — Notion URL]`**
+🔗 **[`team-os/research/`](../../../team-os/research/)** — [personas](../../../team-os/research/personas.md) · [pain landscape](../../../team-os/research/pain-landscape.md) · [transcripts](../../../team-os/research/interviews/)
 
 ## Quick Reference: Step Order
 
 | #   | Step                                                                                                                 | Tool/Command                                                               |
 | --- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| 0   | **User ground against Customer OS**                                                                                  | Notion MCP (`notion-fetch`)                                                |
+| 0   | **User ground against `team-os/research/`**                                                                          | Read personas + pain landscape + one transcript                            |
 | 1   | Brainstorm (anchored to persona + pain)                                                                              | Claude Code                                                                |
 | 2   | Plan (names persona + pain)                                                                                          | Claude Code Plan Mode                                                      |
 | 3   | Update ticket (includes User Grounding block)                                                                        | Linear MCP                                                                 |
@@ -376,21 +393,18 @@ Always open at the start of a feature, and re-open whenever in doubt about perso
 
 ## Activating this skill
 
-This skill is structurally complete but has placeholder content for the noted-specific user research. To make it fully active, do these once and commit them in a follow-up PR:
+Phase 0 is live. Two gaps remain, and both need data rather than writing:
 
-1. **Build (or link to) the noted Customer Understanding OS.** The heatseeker version lives in Notion — follow the same shape:
-   - Pain Landscape (themes ranked by interview frequency)
-   - Behavioural Reality (Amplitude cohort behaviours per persona)
-   - Customer-by-Customer (per-org notes from real interviews)
-   - Closed Loop: Insight → Action table (template above)
-   - Priority interview queue
-2. **Replace every `[NEED: ...]` marker** in this file with the real value:
-   - The Notion URL + page ID at the top of Phase 0 and in Quick Reference
-   - The persona list (4 or so, defined by relationship to the product, not job title)
-   - The pain themes (6 or so, ordered by frequency)
-   - One example customer quote
-   - One example Amplitude behavioural signal (you'll need at least a few weeks of `track*` data flowing per the `event-tracking` skill before this is meaningful)
-   - The Amplitude project ID and per-persona cohort URLs
-3. **Sanity-check the Closed Loop table.** The framework template is universal, but each row's "Amplitude signal to watch" should map to actual `track*` events from `lib/analytics.ts`. If a row has no concrete event today, leave a `[NEED: event]` note rather than aspirational text.
+1. **Per-persona Amplitude behavioural cohorts.** The five personas are qualitative — synthesised
+   from transcripts, with no population behind them. Until cohorts exist, a persona can tell you
+   _what someone wants_ and never _how many_. Building them needs `track*` data accumulating in a
+   real project (see the `event-tracking` skill); the seeded cohort in `scripts/fixtures/` cannot
+   substitute, because it describes a fixture.
+2. **A real interview.** All eleven transcripts are constructed. One real conversation, carrying
+   `provenance: real`, would be worth more than all of them for any decision that leaves the team.
 
-Until step 1 happens, treat the skill as a _framework_ — agents should not pretend they have grounding evidence they don't. The **mandatory** rule still holds: features without grounding don't get built. If the Customer OS doesn't exist yet for a given feature area, **the feature gets paused** while a grounding interview happens — not the other way around.
+Until then the rule holds and is unchanged: **features without grounding don't get built.** What has
+changed is that grounding is now possible offline for any feature these personas cover. If the
+feature you are working on is not covered — a churn question, a pricing question, anything about
+mobile — the landscape says so explicitly, and the feature gets paused while evidence is gathered
+rather than proceeding on a plausible guess.

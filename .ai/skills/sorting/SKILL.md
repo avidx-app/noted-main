@@ -1,6 +1,7 @@
 ---
 name: sorting
 description: Sorting conventions for noted-main — sort at the Convex query layer with `.order("asc"|"desc")` whenever possible (cheap, indexed, reactive). Use native `Array.prototype.toSorted()` for client-only sorts; never `.sort()` mutating in place. Use when user asks to "sort this list", "order results", "newest first", or anywhere ordering is involved. Applies implicitly whenever code orders an array — server- or client-side.
+summary: Sort at Convex layer or toSorted() client-side
 ---
 
 <!--

@@ -1,5 +1,6 @@
 ---
 description: Scaffold a new hand-off PRD using team-os conventions
+summary: Draft a new PRD
 argument-hint: "[area/slug or free-form feature name]"
 ---
 

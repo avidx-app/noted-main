@@ -1,5 +1,6 @@
 ---
 description: Log a merged PR to the right feature's ship-log.md so non-engineers see what's live
+summary: Append ship-log entry
 argument-hint: "[PR number or URL]"
 ---
 

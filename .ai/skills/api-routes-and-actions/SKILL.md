@@ -1,6 +1,7 @@
 ---
 name: api-routes-and-actions
 description: Picking the right server surface in noted-main — Convex `query`/`mutation`/`action` for almost all backend logic, vs Next.js API routes (`app/api/.../route.ts`) for HTTP-specific boundaries (third-party webhooks, AI streaming endpoints, file-upload service handlers). Use when the user asks "should this be a Convex action or an API route", "where do I put this webhook", or any time new server-side functionality is added. Replaces the heatseeker `api-endpoints` skill (which assumed every server feature is an API route — noted's split is different).
+summary: Convex vs Next.js API route boundaries
 ---
 
 <!--

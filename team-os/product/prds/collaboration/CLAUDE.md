@@ -1,7 +1,7 @@
 # PRDs — Collaboration
 
-| File | Stage | Summary |
-|---|---|---|
+| File                                                   | Stage               | Summary                                                                                                                          |
+| ------------------------------------------------------ | ------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | [team-collaboration-prd.md](team-collaboration-prd.md) | 2 — Planning Review | Team workspaces, members, comments, real-time presence. Nothing shipped yet. Needs scoping to a realistic v1 before engineering. |
 
 ## Current state of collaboration in Noted

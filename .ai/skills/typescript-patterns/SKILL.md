@@ -1,6 +1,7 @@
 ---
 name: typescript-patterns
 description: TypeScript type safety patterns including strict no-any rules, discriminated unions, type guards, utility types (Pick/Omit/Partial), and const assertions. Use when user asks to "define a type", "should I use interface or type", "how do I avoid any", or "add a type guard". Also use when narrowing unknown data, choosing between enum and union types, avoiding type assertions, or ensuring strict type safety across the codebase.
+summary: Strict types — no `any`
 ---
 
 <!--

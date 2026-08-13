@@ -1,6 +1,7 @@
 ---
 name: design-lint
 description: Codex-compatible mirror of `/design-lint`. Use when the user asks for `/design-lint`, `$design-lint`, or wants the repo's DESIGN.md lint workflow. Read `.ai/commands/design-lint.md` and follow it as the source of truth.
+summary: Run design.md linter
 ---
 
 # Design Lint

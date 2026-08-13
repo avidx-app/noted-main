@@ -1,6 +1,7 @@
 ---
 name: component-composition
 description: Guidelines for splitting large components in noted-main into small, composable files with clear boundaries, minimal prop drilling, and localized state. Use when user asks to "split this component", "this file is too big", "extract a subcomponent", "reduce prop drilling", or "refactor component structure". Also use when creating new feature pages, reviewing component file sizes, or deciding whether state should be local or shared. Applies implicitly whenever building or modifying UI features.
+summary: Split large components, reduce prop drilling
 ---
 
 <!--

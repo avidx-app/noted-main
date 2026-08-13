@@ -1,6 +1,7 @@
 ---
 name: file-naming
 description: File and directory naming conventions for noted-main — kebab-case files (e.g., `coworker-message.tsx`), camelCase Convex modules (e.g., `aiSettings.ts`), kebab-case directories, and PascalCase component exports. Use when creating any new TypeScript file, React component, hook, test, or directory; when asked "how should I name this file"; or when reviewing a PR for naming consistency. Applies implicitly whenever creating new files as part of any feature implementation.
+summary: kebab-case files, PascalCase exports
 ---
 
 <!--

@@ -1,6 +1,7 @@
 ---
 name: prd-writer
 description: Draft or refine a Noted PRD using the team-standard hand-off format with context, assumptions, scope, metrics, experiment design, and launch plan
+summary: PRD structure
 ---
 
 <!--

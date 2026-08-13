@@ -1,6 +1,7 @@
 ---
 name: metrics-definer
 description: Define primary, secondary, guardrail, and anti-metrics for a Noted feature
+summary: Primary/secondary/guardrail metrics
 ---
 
 <!--
