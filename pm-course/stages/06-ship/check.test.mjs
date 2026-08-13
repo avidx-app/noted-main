@@ -1,5 +1,5 @@
 /**
- * Act 4's checker, tested against a fixture repo with a real diff.
+ * Stage 6's checker, tested against a fixture repo with a real diff.
  *
  * The section this act is assessed on is "What I did not verify", so it gets
  * three tests: filled passes, empty fails, and "nothing" fails. That third one
@@ -17,7 +17,7 @@ import { makeFixture, removeFixture } from "../../lib/fixture-repo.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
-/** The Act 3 diff, plus the team-os reflex the reference record describes. */
+/** The Stage 4 diff, plus the team-os reflex the reference record describes. */
 const CHANGED = [
   "app/(main)/_components/publish.tsx",
   "lib/share-copy.ts",

@@ -31,7 +31,7 @@ test("tableRows drops the header and the separator", () => {
 
 test("tableRows does not count a placeholder row as an entry", () => {
   // This is exactly the shape of noted's empty ship log. Counting its
-  // "(No entries yet…)" row as an entry would hide the thing Act 1 looks for.
+  // "(No entries yet…)" row as an entry would hide the thing Stage 1 looks for.
   const shipLog = [
     "| Date | PR | Author | What changed | Deploy |",
     "|---|---|---|---|---|",

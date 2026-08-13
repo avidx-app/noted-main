@@ -1,5 +1,5 @@
 /**
- * Act 3 checker — grades a prototype contract against the diff it describes.
+ * Stage 4 checker — grades a prototype contract against the diff it describes.
  *
  *   node scripts/check.mjs 3 --file ~/noted-work/prototype-contract.md --repo ../noted-main
  *

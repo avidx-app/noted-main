@@ -70,7 +70,7 @@ says that if you backfill you must say so and name the PRs you read. So the inst
 silently reconstruct_, and the exercise is _reconstruct and label it_. Those are compatible, and the
 distinction between them is the entire point.
 
-Worth writing down because it is the failure mode in the other direction. Act 1 rewards finding
+Worth writing down because it is the failure mode in the other direction. Stage 1 rewards finding
 contradictions, so an agent asked for them will promote near-misses, and a rule plus its stated
 exception reads exactly like a rule being broken. I nearly took it.
 
