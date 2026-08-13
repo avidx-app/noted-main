@@ -116,9 +116,13 @@ const eslintConfig = [
   },
   {
     // In-product status colors with no token: archived-banner rose, Coworker
-    // presence dots (yellow/green), Coworker "thinking" spark (orange), the
-    // confirm-modal red that should be `bg-destructive`, and the settings-modal
-    // "connected" green. `bg-destructive` covers some of these today.
+    // presence dots (yellow/green), Coworker "thinking" spark (orange), and the
+    // settings-modal "connected" green. Each still needs a design call — a
+    // documented status pair in DESIGN.md, or a neutral rework.
+    //
+    // `red` came off this list once the two uses that were plainly `destructive`
+    // were swapped to the token (confirm-modal's confirm button and
+    // single-image-dropzone's rejected-file state).
     files: [
       "app/(main)/_components/banner.tsx",
       "app/(main)/_components/coworker-card.tsx",
@@ -130,7 +134,7 @@ const eslintConfig = [
       "noted/no-hardcoded-color": [
         "error",
         {
-          allowPaletteFamilies: ["green", "orange", "red", "rose", "yellow"],
+          allowPaletteFamilies: ["green", "orange", "rose", "yellow"],
         },
       ],
     },
