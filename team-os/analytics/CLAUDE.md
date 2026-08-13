@@ -6,7 +6,7 @@ Metric definitions, experiment results, investigations. The source of truth for 
 
 | Path | What it is | Status |
 |---|---|---|
-| `metrics/` | Metric definitions — one directory per product area, one file per feature. Definition, data source, how to calculate. | `ai-features/` only |
+| `metrics/` | Metric definitions — one directory per product area, one file per feature. Definition, data source, how to calculate. | `ai-features/` and `growth/` |
 | `experiments/` | A/B test or feature-flag experiment writeups with results | Not created yet |
 | `investigations/` | Dated deep-dives — "why did X drop last week?" | Not created yet |
 | `dashboards.md` | Links to any live dashboards we rely on | Not created yet |
