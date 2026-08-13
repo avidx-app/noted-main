@@ -21,11 +21,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { repoRoot } from "./lib/ai-assets.mjs";
-import {
-  REPO_PREFIXES,
-  DECLARED_ABSENT,
-  pathsOn,
-} from "./lib/doc-links.mjs";
+import { REPO_PREFIXES, DECLARED_ABSENT, pathsOn } from "./lib/doc-links.mjs";
 
 const check = process.argv.includes("--check");
 

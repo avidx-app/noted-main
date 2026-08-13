@@ -283,7 +283,9 @@ function printPlan(fixture) {
   console.log(`Users: ${fixture.users.length}`);
   console.log(`Documents: ${fixture.documents.length}`);
   console.log(`Files: ${fixture.files.length}`);
-  console.log(`Coworker message user buckets: ${fixture.coworkerMessages.length}`);
+  console.log(
+    `Coworker message user buckets: ${fixture.coworkerMessages.length}`,
+  );
   console.log(`Squad agents: ${fixture.squadAgents.length}`);
   console.log("");
   console.log("Insights this sample supports:");
@@ -307,7 +309,9 @@ async function main() {
 
   if (!options.install) {
     console.log("");
-    console.log("Dry run only. Run npm run seed:convex to seed your connected Convex deployment.");
+    console.log(
+      "Dry run only. Run npm run seed:convex to seed your connected Convex deployment.",
+    );
     return;
   }
 
@@ -321,8 +325,16 @@ async function main() {
   console.log("");
   console.log("Pushing Convex functions and running seed mutation...");
   runCommand("npx", ["convex", "dev", "--once"], options.target);
-  runCommand("npx", ["convex", "run", "cohortSampleSeed:seed", '{"reset":true}'], options.target);
-  runCommand("npx", ["convex", "run", "cohortSampleSeed:summary"], options.target);
+  runCommand(
+    "npx",
+    ["convex", "run", "cohortSampleSeed:seed", '{"reset":true}'],
+    options.target,
+  );
+  runCommand(
+    "npx",
+    ["convex", "run", "cohortSampleSeed:summary"],
+    options.target,
+  );
 }
 
 main().catch((error) => {
