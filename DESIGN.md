@@ -218,7 +218,11 @@ Anything outside those two layers — `sky`, `emerald`, `rose`, `amber`, `teal`,
 - **Raw neutral utilities.** `text-neutral-700`, `bg-zinc-900` and friends are the same hue as the shell but bypass its tokens. They're widespread on marketing surfaces and not flagged. Prefer the token (`text-muted-foreground`, `bg-background`) in new code.
 - **Brand-accent context.** `bg-blue-600` is the sanctioned way to apply the brand accent, so the rule can't tell a legitimate AI affordance from a stray blue button. Scope is still binding — see the Don'ts below and Constitution §XVI.
 
-A per-path allowlist in `eslint.config.mjs` carries the off-palette uses that predate the rule (marketing "check" chips, Coworker presence dots, the confirm-modal red that should be `bg-destructive`). That list ratchets to zero — it is debt, not a sanctioned exception, and new files get no exemption.
+A per-path allowlist in `eslint.config.mjs` carries the off-palette uses that predate the rule (marketing emerald/amber "check" and "callout" chips, Coworker presence dots, the "thinking" spark, the archived-banner rose, the settings-modal "connected" green). That list ratchets to zero — it is debt, not a sanctioned exception, and new files get no exemption.
+
+`red` is off that list: every red use that was plainly *destructive intent* now uses the token — the confirm-modal confirm button and `single-image-dropzone`'s rejected-file state. What remains is genuinely undecided, because it wants a **status** color this contract does not have: success (Coworker "online", settings "connected", marketing checkmarks), warning (Coworker "away", marketing callouts) and a "working" accent (the `thinking` spark). Reaching for `destructive` there would be wrong — none of it is destructive. Clearing that debt means either adding a documented status pair here with both light and dark modes, then wiring it through `app/globals.css` and `tailwind.config.ts` per Constitution §XVI, or reworking those surfaces to neutral. Until that call is made the allowlist stays.
+
+One wiring note if a status token does get added: token colors are declared as `hsl(var(--token))` with no `<alpha-value>` placeholder, so the legacy `bg-opacity-*` utilities do **not** apply to them — they set `--tw-bg-opacity`, which the token never reads, and the fill silently renders fully opaque. Use the slash modifier (`bg-destructive/10`), which compiles to `hsl(var(--destructive) / 0.1)`.
 
 ## Typography
 
