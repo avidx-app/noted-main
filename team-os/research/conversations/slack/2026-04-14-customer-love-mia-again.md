@@ -45,9 +45,17 @@ subject: Mia call — publish friction
 
 ---
 
-_"Cannot share with a single reviewer without making it public" is the sentence that reached
-[`../../../product/prds/collaboration/team-collaboration-prd.md`](../../../product/prds/collaboration/team-collaboration-prd.md)
-and [`../../pain-landscape.md`](../../pain-landscape.md). It is not what Mia said. Mia said she can
-send it and chooses not to, because of what publishing means. Those two framings point at different
-features: one needs a permissions model, the other needs a different word on a button and a way to
-un-say it._
+_"Cannot share a draft with a single reviewer without making it public" is not what Mia said. She
+said she can send it and chooses not to, because of what publishing means. Those two framings point
+at different features: one needs a permissions model, the other needs a different word on a button
+and a way to un-say it._
+
+_The interesting part is what happened next. [`../../pain-landscape.md`](../../pain-landscape.md)
+**did not** inherit this reformulation — it kept the framing, in as many words: "the vocabulary is
+part of the pain, not decoration on it", and what people want is "comment-only, one or two readers,
+no account for the reviewer". The landscape got it right._
+
+_The reformulation survived in the thread, and the thread is what
+[`../linear/NOT-141-comment-only-share-link.md`](../linear/NOT-141-comment-only-share-link.md) was
+scoped from two weeks later — as an access problem, at three weeks, cancelled. So the good artifact
+existed, in the repo, saying the cheaper thing, and the decision was made from the chat anyway._
