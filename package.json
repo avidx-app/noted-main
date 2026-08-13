@@ -17,6 +17,7 @@
     "format:check": "prettier --check .github eslint-rules eslint.config.mjs jest.config.ts lib/blocknote-content.ts lib/coworker-message-ui.tsx lib/coworker-message-ui.test.ts lib/design-tokens.ts lib/design-tokens.test.ts lib/tree-indent-class.ts lib/tree-indent-class.test.ts lib/blocknote-content.test.ts .ai/CONTRIBUTING.md .ai/INSTRUCTIONS.md .ai/commands/create-pr.md .ai/commands/commit.md .ai/skills/code-quality-checklist .ai/skills/feature-workflow .ai/skills/eslint-self-heal team-os/engineering/CLAUDE.md team-os/engineering/reference-implementations.md",
     "format:check:repo": "prettier --check app components convex hooks lib scripts eslint-rules .github .ai \"*.{json,mjs,ts}\"",
     "test:eslint-rules": "node eslint-rules/noted/no-hardcoded-color.test.mjs && node eslint-rules/noted/no-inline-style.test.mjs",
+    "test:scripts": "node --test \"scripts/lib/*.test.mjs\"",
     "type:check": "tsc --noEmit",
     "seed:convex:plan": "node scripts/seed-convex.mjs",
     "seed:convex": "node scripts/seed-convex.mjs --run --yes",
@@ -28,7 +29,7 @@
     "check:index": "node scripts/check-ai-index.mjs",
     "check:links": "node scripts/check-doc-links.mjs --check",
     "check:drift": "node scripts/check-ai-index.mjs --check && node scripts/check-doc-links.mjs --check",
-    "ci:local": "npm run format:check && npm run test:eslint-rules && npm run lint:check && npm run type:check && npm run check:drift && npm run test",
+    "ci:local": "npm run format:check && npm run test:eslint-rules && npm run test:scripts && npm run lint:check && npm run type:check && npm run check:drift && npm run test",
     "design:lint": "npx --yes @google/design.md lint DESIGN.md",
     "postinstall": "node scripts/sync-ai.mjs && node scripts/install-git-hooks.mjs"
   },

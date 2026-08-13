@@ -11,7 +11,9 @@ const config: Config = {
   coverageProvider: "v8",
   testEnvironment: "jest-environment-jsdom",
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
-  testPathIgnorePatterns: ["<rootDir>/eslint-rules/"],
+  // Both of these hold node:test suites, not Jest ones — they run under
+  // `npm run test:eslint-rules` and `npm run test:scripts`.
+  testPathIgnorePatterns: ["<rootDir>/eslint-rules/", "<rootDir>/scripts/"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",
   },

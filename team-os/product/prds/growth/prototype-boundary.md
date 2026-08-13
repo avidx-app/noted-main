@@ -12,7 +12,8 @@ What the AI-first onboarding prototype actually does, and what it only appears t
 
 This exists because a prototype is a research instrument, and an instrument you cannot describe the
 limits of produces evidence you cannot trust. Every claim below is checkable against
-[`app/(main)/(routes)/documents/start/page.tsx`](../../../../app/%28main%29/%28routes%29/documents/start/page.tsx).
+[`app/(main)/(routes)/documents/start/`](../../../../app/%28main%29/%28routes%29/documents/start/page.tsx)
+and [`lib/onboarding-scaffolds.ts`](../../../../lib/onboarding-scaffolds.ts), where the routing lives.
 
 None of this is a defect. The prototype was built to find out whether people understand the offer
 and want the thing — and for that question, the shortcuts below are the correct shortcuts. They only
@@ -34,7 +35,8 @@ become a problem when someone reads the route as a working feature.
   plus a `default`. A participant whose job does not fall into meeting / launch / study / interview
   / brainstorm gets "Starter Document — Overview, Key Points, Next Steps, Notes".
 - **The example prompts.** `EXAMPLE_PROMPTS` are fixed and were written to match the five scaffolds,
-  which means a participant who clicks one is on a rail that always produces a good result.
+  so a participant who clicks one is on a rail — except that **one of the five does not do what it
+  says**. See below.
 
 ## What is simulated
 

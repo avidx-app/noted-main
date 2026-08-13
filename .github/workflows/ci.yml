@@ -33,6 +33,11 @@ jobs:
       - name: Run ESLint rule unit tests
         run: npm run test:eslint-rules
 
+      # The drift checks gate this pipeline, so they get tested like the lint
+      # rules do — a false negative in them passes silently by construction.
+      - name: Run harness script tests
+        run: npm run test:scripts
+
       - name: Run ESLint
         run: npm run lint:check
 
