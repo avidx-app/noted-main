@@ -58,14 +58,31 @@ Each stage has a checker. From the repo root:
 npm run course -- 1 --file pm-course/my-work/orientation-map.md
 ```
 
-It prints two lists: what it verified mechanically, and what it refuses to judge. The second list is
-the point. A pass is the floor, not the bar — trade artifacts with someone else and answer the second
-list about each other's.
+It prints two lists: what it verified mechanically, and what it refuses to judge. **The second list is
+the point.** A pass is the floor, not the bar.
 
-Every stage also has an `expected/` reference answer. You can read it before writing your own, and
-some people will. Each one opens by saying _"one good answer, not the answer"_ and shows its reasoning
-rather than its conclusions — but reading it first makes the checker pass and teaches you nothing, so
-that is your call to make honestly.
+## If you are on your own
+
+Most people will be. This course is self-paced by design — fork the repo and work through it at
+whatever speed suits you. Nothing here waits on anyone else.
+
+The one thing solitude costs you is a second reader, and the second list is exactly what a second
+reader is for. So the reference answers do that job, in a specific order:
+
+1. **Write your artifact.** All of it, including the parts you are unsure about.
+2. **Run the checker.** Fix what it mechanically fails.
+3. **Answer the "not checked" list yourself**, in writing, at the bottom of your own artifact. Four
+   sentences. This is the step people skip and it is the whole exercise.
+4. **Then** open the stage's `expected/` reference answer and compare **the reasoning, not the
+   conclusions.** A different conclusion reached honestly is a pass. The same conclusion reached by
+   guessing is not.
+
+Reading the reference before step 1 makes the checker pass and teaches you nothing. It is right there
+in the repo and nobody is stopping you — which makes it your call, honestly made, and the first of
+many in this course that nobody will audit.
+
+Each reference opens by saying _"one good answer, not the answer"_ and shows its working for that
+reason.
 
 ## If you are running this as a workshop
 

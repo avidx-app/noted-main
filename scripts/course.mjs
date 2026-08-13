@@ -83,8 +83,16 @@ async function main() {
     console.log(`  ${mark(c.ok)} ${c.name.padEnd(width)}  ${D}${c.detail}${O}`);
   }
 
-  console.log(`\nNot checked — you or a colleague has to read this`);
+  // Most people take this course alone, so the second list cannot assume a
+  // colleague. The reference answer is the substitute: written, then compared.
+  console.log(`\nNot checked — read these against your own artifact`);
   for (const u of unchecked) console.log(`  ${D}·${O} ${u}`);
+  console.log(
+    `\n  ${D}On your own? Answer them, then open ${path.join(spec.dir, "expected", spec.artifact)}`,
+  );
+  console.log(
+    `  ${D}and compare the reasoning rather than the conclusions.${O}`,
+  );
 
   const failed = checked.filter((c) => c.ok === false);
   console.log(
