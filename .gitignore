@@ -47,3 +47,6 @@ next-env.d.ts
 # themselves ARE tracked so fresh clones / GitHub web work without an install.
 # Source of truth lives in .ai/. Run `npm run sync-ai` to repair symlinks if
 # they break (e.g., on Windows without Developer Mode).
+
+# Learner artifacts from pm-course. Their notes should not end up in a slice PR.
+pm-course/my-work/

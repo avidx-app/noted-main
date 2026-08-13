@@ -38,9 +38,15 @@ const check = process.argv.includes("--check");
 const MAPS = [
   ".ai/INSTRUCTIONS.md",
   ".ai/CONTRIBUTING.md",
-  ...walk(path.join(repoRoot, "team-os"))
-    .filter((f) => /\.(md|ya?ml)$/.test(f))
-    .map((f) => path.relative(repoRoot, f)),
+  // pm-course/ is checked for the same reason team-os/ is, and more urgently: a
+  // new hire following a dead link on their first morning concludes the repo is
+  // rotten, and they are not wrong. Its briefs cross-reference the Team OS
+  // heavily, so it is the folder most likely to break when something moves.
+  ...["team-os", "pm-course"].flatMap((dir) =>
+    walk(path.join(repoRoot, dir))
+      .filter((f) => /\.(md|ya?ml)$/.test(f))
+      .map((f) => path.relative(repoRoot, f)),
+  ),
 ];
 
 function walk(dir) {
