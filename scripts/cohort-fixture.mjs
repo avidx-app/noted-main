@@ -126,7 +126,11 @@ function expandGeneratedFixture(fixture) {
         bytesUsed: intBetween(random, config.bytes[0], config.bytes[1]),
       });
 
-      const docCount = intBetween(random, config.documents[0], config.documents[1]);
+      const docCount = intBetween(
+        random,
+        config.documents[0],
+        config.documents[1],
+      );
       let publishedForUser = 0;
 
       for (let docIndex = 1; docIndex <= docCount; docIndex += 1) {
@@ -173,9 +177,14 @@ function expandGeneratedFixture(fixture) {
         }
       }
 
-      const baseMessages = intBetween(random, config.messageCount[0], config.messageCount[1]);
+      const baseMessages = intBetween(
+        random,
+        config.messageCount[0],
+        config.messageCount[1],
+      );
       const gapBoost =
-        publishedForUser === 0 && (persona === "churned_users" || persona === "casual_users")
+        publishedForUser === 0 &&
+        (persona === "churned_users" || persona === "casual_users")
           ? intBetween(random, 15, 40)
           : 0;
       coworkerMessages.push({
@@ -203,8 +212,14 @@ function expandGeneratedFixture(fixture) {
             "Launch Reviewer",
             "Skeptical PM",
           ]),
-          description: "Synthetic sample agent for Week 3 and Week 4 data exploration",
-          icon: pick(random, ["pencil", "magnifying-glass", "rocket", "test-tube"]),
+          description:
+            "Synthetic sample agent for Week 3 and Week 4 data exploration",
+          icon: pick(random, [
+            "pencil",
+            "magnifying-glass",
+            "rocket",
+            "test-tube",
+          ]),
           instructionsDocSeedTitle,
         });
       }
