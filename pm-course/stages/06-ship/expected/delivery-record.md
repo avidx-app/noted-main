@@ -2,7 +2,7 @@
 
 **By:** reference answer · **Date:** 2026-08-13 · **Branch:** `feat/share-framing` · **PR:** into `staging`
 
-One good answer, not the answer. It carries the Act 3 prototype through the repo's own workflow, and
+One good answer, not the answer. It carries the Stage 4 prototype through the repo's own workflow, and
 the sections that matter are the two nobody wants to write.
 
 ## The slice

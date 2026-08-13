@@ -1,8 +1,8 @@
 # Evidence map — the draft review gap
 
-**By:** reference answer · **Date:** 2026-08-13 · **Claim taken from:** my Act 1 observation
+**By:** reference answer · **Date:** 2026-08-13 · **Claim taken from:** my Stage 1 observation
 
-One good answer, not the answer. Yours will start from your own Act 1 observation and may well reach
+One good answer, not the answer. Yours will start from your own Stage 1 observation and may well reach
 a different verb — what matters is that the verb follows from the table.
 
 ## The claim I am testing

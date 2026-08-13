@@ -8,8 +8,10 @@
  * What makes this more than a linter: when the map names a contradiction, the
  * checker goes and looks. Every entry in KNOWN below carries a `verify()` that
  * re-derives the claim from the noted tree, so the result is "you said the ship
- * log is empty next to 77 merged PRs; I counted, and it is" rather than "you
- * used the words ship log".
+ * log is empty next to N merged pull requests; I counted, and it is" rather than
+ * "you used the words ship log". N is deliberately not written down here — it has
+ * changed four times since this file was written, and a comment stating it would
+ * be one more copy to go stale in the file arguing hardest against exactly that.
  *
  * Finding a contradiction that is not in KNOWN is a better outcome, not a worse
  * one. Those pass with a note asking a human to confirm, because a checker that
@@ -35,7 +37,7 @@ import {
 /** Trust labels the map is allowed to use. Anything else is a made-up scale. */
 const TRUST = ["fact", "interpretation", "unknown"];
 
-/** The three verdicts Act 1 accepts. "Both are right" is the interesting one. */
+/** The three verdicts Stage 1 accepts. "Both are right" is the interesting one. */
 const VERDICTS = [
   {
     re: /\bboth\b.*\bright\b|\bneither\b.*\bwrong\b|\bthe (gap|disagreement) is the finding\b/i,

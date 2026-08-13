@@ -1,9 +1,9 @@
 /**
- * Act 2 checker — reads an evidence map, and checks the two things that matter.
+ * Stage 2 checker — reads an evidence map, and checks the two things that matter.
  *
  *   npm run course -- 2 --file ~/noted-work/evidence-map.md --repo ../noted-main
  *
- * Act 1 asks whether the cited files exist. Act 2 asks something harder and more
+ * Stage 1 asks whether the cited files exist. Stage 2 asks something harder and more
  * mechanical than it sounds:
  *
  *   1. Did you consult the source that settles the claim? For the claim this act

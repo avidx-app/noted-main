@@ -2,7 +2,7 @@
 
 **By:** reference answer · **Date:** 2026-08-13 · **Branch:** `feat/share-framing` · **Diff:** `git diff workshop-v1`
 
-One good answer, not the answer. It follows the reference Act 2 decision — **narrow** — so the thing
+One good answer, not the answer. It follows the reference Stage 2 decision — **narrow** — so the thing
 built is the cheapest test of that decision, and the contract is honest about how little it is.
 
 Four files changed:
@@ -81,7 +81,7 @@ question directly, because there is no fake in the path.
 
 ## What I deliberately did not build
 
-- **A `shares` table, recipients, capabilities, revocation.** The Act 2 evidence says the auth blocker
+- **A `shares` table, recipients, capabilities, revocation.** The Stage 2 evidence says the auth blocker
   is not real, but "not blocked" is not "worth building". This tests whether the cheap thing is enough
   before anyone commits to the expensive thing.
 - **Comments.** One CS note in a constructed corpus says customers ask to _send_, never to _comment_.
