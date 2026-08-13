@@ -232,6 +232,22 @@ export const trackAISettingsUpdated = (
         Pick<AmplitudeEventProperties, "ai_model" | "model_changed">,
 ) => trackPageEvent("AI Settings Updated", properties);
 
+/**
+ * AI flow: the user invoked an in-editor AI action from the slash menu.
+ *
+ * This is the counterpart to `trackCoworkerMessageSent`. Without it, "used AI"
+ * means "used the Coworker panel", and the `/Ask AI` surface — which several
+ * customers describe as the faster path to value — is invisible in every
+ * activation funnel. `mode` distinguishes the BlockNote AI items so the two
+ * surfaces can be compared rather than merged.
+ *
+ * Never pass the prompt, the selection, or any generated text.
+ */
+export const trackInEditorAiTriggered = (
+    properties: Required<Pick<AmplitudeEventProperties, "mode">> &
+        Pick<AmplitudeEventProperties, "document_id">,
+) => trackPageEvent("In-Editor AI Triggered", properties);
+
 /** Auth: a signed-out visitor became a signed-in user. */
 export const trackUserLoggedIn = () => trackPageEvent("User Logged In");
 

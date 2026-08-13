@@ -2,7 +2,7 @@
 type: metrics
 feature: ai-first-onboarding
 prd: team-os/product/prds/growth/ai-first-onboarding-prd.md
-status: not-yet-measurable
+status: partially-measurable
 owner: raziiabraham
 last_updated: 2026-08-13
 ---
@@ -39,8 +39,11 @@ who create a second document within 7 days of the first.
 **First-session AI activation** — share of new users who trigger any AI surface in their first
 session.
 
-- **Source:** `Coworker Message Sent` (exists) covers the Coworker panel only. In-editor `/Ask AI`
-  emits nothing. `[NEEDS INSTRUMENTATION: In-Editor AI Triggered]`
+- **Source:** `Coworker Message Sent` and `In-Editor AI Triggered` (both exist). The second was
+  added by [`specs/EXP-1-in-editor-ai-triggered/`](../../../../specs/EXP-1-in-editor-ai-triggered/spec.md);
+  before it, "used AI" meant the Coworker panel only and `/Ask AI` was invisible. Forward-only —
+  there is no history for this event, so the first cohort that can be measured is the one after it
+  shipped.
 - **Why it matters:** it moves faster than the primary metric and is not near a ceiling, so it is the
   better read on whether intent-first framing works.
 
@@ -76,8 +79,8 @@ because the starter document _is_ the first document.
 
 **Not ready to run.** In order:
 
-1. Add the five onboarding events and `In-Editor AI Triggered`. Without them, three of four metrics
-   are uncomputable and the funnel in the PRD's data scope cannot be built.
+1. Add the five onboarding events. `In-Editor AI Triggered` is done. Without the rest, two of four
+   metrics are uncomputable and the funnel in the PRD's data scope cannot be built.
 2. Verify `Document Created` fires from every creation path — sidebar, empty state, and the
    onboarding path. The PRD raises this as an open question and it is still open.
 3. Replace the seeded baseline with a real one, or change the primary metric. A target set against
