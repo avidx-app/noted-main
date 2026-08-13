@@ -114,16 +114,16 @@ Before writing new code:
 
 ## Common Issues
 
-| Issue                                                       | Fix                                                                                    |
-| ----------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Prettier CI failure                                         | `npm run format` locally, then `npm run format:check` to verify                        |
-| ESLint `noted/no-hardcoded-color`                           | Replace hex/rgb with Tailwind tokens — see `design-system` and `eslint-self-heal`      |
-| ESLint `noted/no-inline-style`                              | Tailwind utilities or `getTreeIndentClass` — see `eslint-self-heal`                    |
-| ESLint `@typescript-eslint/no-explicit-any`                 | Use `unknown`, Zod, `Doc<>`, `Id<>` — see `typescript-patterns` and `eslint-self-heal` |
-| Type errors                                                 | `npm run type:check` and read the message — usually missing import or wrong arg type   |
-| Convex handler crashes after deploy                         | Schema change without re-running `npx convex dev` to push it                           |
-| Test fails with "useUser" or "useQuery" undefined           | Missing Clerk/Convex mock at top of test file                                          |
-| Symlinks broken (CLAUDE.md missing on a teammate's machine) | `npm run sync-ai`                                                                      |
+| Issue                                                       | Fix                                                                                                    |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Prettier CI failure                                         | `npm run format` locally, then `npm run format:check` to verify                                        |
+| ESLint `noted/no-hardcoded-color`                           | Replace hex/rgb/hsl **or an off-palette hue** with tokens — see `design-system` and `eslint-self-heal` |
+| ESLint `noted/no-inline-style`                              | Tailwind utilities or `getTreeIndentClass` — see `eslint-self-heal`                                    |
+| ESLint `@typescript-eslint/no-explicit-any`                 | Use `unknown`, Zod, `Doc<>`, `Id<>` — see `typescript-patterns` and `eslint-self-heal`                 |
+| Type errors                                                 | `npm run type:check` and read the message — usually missing import or wrong arg type                   |
+| Convex handler crashes after deploy                         | Schema change without re-running `npx convex dev` to push it                                           |
+| Test fails with "useUser" or "useQuery" undefined           | Missing Clerk/Convex mock at top of test file                                                          |
+| Symlinks broken (CLAUDE.md missing on a teammate's machine) | `npm run sync-ai`                                                                                      |
 
 ## Branch Flow Reminder
 

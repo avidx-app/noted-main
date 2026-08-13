@@ -169,8 +169,9 @@ Skipping (3) is the single most common drift. `npm run design:lint` catches some
 
 Specific non-negotiables:
 
-- No inline hex/rgb/hsl in `className` or `style` props. Always use a token.
-- Brand accents (`bg-blue-*`, `bg-violet-*`) are scoped to AI affordances and marketing CTAs only. Anywhere else is a finding.
+- No inline hex/rgb/hsl in `className` or `style` props. Always use a token. `noted/no-hardcoded-color` errors on all three.
+- No off-palette hues. Tailwind palette families that appear nowhere in DESIGN.md (`sky`, `emerald`, `rose`, `amber`, `teal`, …) have no token and no dark counterpart; `noted/no-hardcoded-color` errors on them. A per-path allowlist in `eslint.config.mjs` carries the pre-existing uses as debt that ratchets to zero — adding a family to that list instead of fixing the code needs the same justification as weakening any other guardrail.
+- Brand accents (`bg-blue-*`, `bg-violet-*`) are scoped to AI affordances and marketing CTAs only. Anywhere else is a finding. Lint cannot judge context — this one is `/noted-review`'s job, and DESIGN.md § Off-palette hues records it as a known limit rather than implying it is gated.
 - shadcn primitives in `components/ui/` are read-only (already principle XII). Wrap; don't edit. New variants are added via `cva` in the primitive file AND documented in DESIGN.md `components:`.
 - New color/typography/radii/spacing tokens require both light AND dark counterparts, justified in the PR description.
 - Permanent surfaces (cards, sidebars, navigation) use the `border` token for separation, not box-shadows. Shadows are reserved for transient surfaces (popovers, dropdowns, floating menus).

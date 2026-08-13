@@ -207,6 +207,19 @@ The brand accents are **not in the shadcn token system** — they're applied dir
 
 **When in doubt, stay neutral.** New components should be a shadcn primitive on the neutral palette. Reach for brand-blue/violet only when the surface is explicitly an AI affordance or a marketing-conversion CTA.
 
+### Off-palette hues
+
+Anything outside those two layers — `sky`, `emerald`, `rose`, `amber`, `teal`, `indigo` and the rest of the Tailwind palette — is **off-palette**. An off-palette hue has no token, no hex in this file, and no dark-mode counterpart, so it can't be themed, audited, or changed in one place. There is no "success green" and no "info blue" in this contract; the statuses that need a color use `destructive`, and everything else is neutral.
+
+`noted/no-hardcoded-color` enforces this: any `bg-`/`text-`/`border-`/`fill-`/`ring-`… class on an off-palette family is an ESLint **error**, including behind `dark:`/`hover:` variants and opacity suffixes. If a new hue is genuinely needed, add it here first — with both modes — and then wire it through `app/globals.css` and `tailwind.config.ts`.
+
+**What the rule deliberately does not enforce** (both are `/noted-review` judgement calls, not static ones):
+
+- **Raw neutral utilities.** `text-neutral-700`, `bg-zinc-900` and friends are the same hue as the shell but bypass its tokens. They're widespread on marketing surfaces and not flagged. Prefer the token (`text-muted-foreground`, `bg-background`) in new code.
+- **Brand-accent context.** `bg-blue-600` is the sanctioned way to apply the brand accent, so the rule can't tell a legitimate AI affordance from a stray blue button. Scope is still binding — see the Don'ts below and Constitution §XVI.
+
+A per-path allowlist in `eslint.config.mjs` carries the off-palette uses that predate the rule (marketing "check" chips, Coworker presence dots, the confirm-modal red that should be `bg-destructive`). That list ratchets to zero — it is debt, not a sanctioned exception, and new files get no exemption.
+
 ## Typography
 
 Typography is **system-first**: Geist sans-serif (loaded via `next/font` in `app/layout.tsx`) for everything, GeistMono for code blocks. The hierarchy is intentionally short — most of the product is body text inside the editor; the hierarchy exists to support nav, document titles, and editor block-level styles.
@@ -276,8 +289,9 @@ When you need a variant that doesn't exist, **add it to `components/ui/<primitiv
 **Don't**
 
 - Don't use `bg-blue-*`, `bg-violet-*`, or any other branded color outside the AI-feature and marketing-CTA contexts. The brand accent is scarce on purpose.
+- Don't reach for an off-palette hue (`text-sky-500`, `bg-emerald-100`, `text-rose-500`) for status, emphasis, or "it looked right". Use a token, or add the hue to this file with both modes first. ESLint errors on these.
 - Don't introduce a new color token without updating the dark-mode counterpart. Every neutral and every brand accent has both modes.
-- Don't write inline `style={{ color: '#hex' }}` or use raw hex/rgb in `className`. Always use the token.
+- Don't write inline `style={{ color: '#hex' }}` or use raw hex, `rgb()` or literal `hsl()` in `className`. Always use the token.
 - Don't modify files under `components/ui/` to change a primitive's appearance for one feature — wrap, don't edit. (See Constitution §XII.)
 - Don't add typography tokens for one-off marketing surfaces. The hierarchy exists; reuse Body, Body SM, or Caption.
 - Don't use box-shadows on permanent surfaces. Borders structure space; shadows lift transients.
