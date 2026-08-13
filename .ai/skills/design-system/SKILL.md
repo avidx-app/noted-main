@@ -289,22 +289,23 @@ The body font is `Inter` (loaded via `next/font/google` in `app/layout.tsx`). DE
 
 When `noted/no-hardcoded-color` or `noted/no-inline-style` fires, apply these replacements then re-run lint:
 
-| Violation                                | Fix                                                                |
-| ---------------------------------------- | ------------------------------------------------------------------ |
-| `text-[#3F3F3F]` / `dark:text-[#CFCFCF]` | `text-foreground`                                                  |
-| `dark:bg-[#1F1F1F]`                      | `dark:bg-background` (DESIGN.md dark canvas)                       |
-| `style={{ width: "40%" }}`               | `w-2/5` or `w-[40%]`                                               |
-| `style={{ animationDelay: "200ms" }}`    | `[animation-delay:200ms]`                                          |
-| Tree `paddingLeft` from `level`          | `getTreeIndentClass(level, basePx)` from `@/lib/tree-indent-class` |
-| Hex required by third-party JS API       | `@/lib/design-tokens` only                                         |
+| Violation                                           | Fix                                                                                    |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `text-[#3F3F3F]` / `dark:text-[#CFCFCF]`            | `text-foreground`                                                                      |
+| `dark:bg-[#1F1F1F]`                                 | `dark:bg-background` (DESIGN.md dark canvas)                                           |
+| `text-sky-500` / `bg-emerald-100` (off-palette hue) | A token (`text-muted-foreground`, `bg-destructive`) — see DESIGN.md § Off-palette hues |
+| `style={{ width: "40%" }}`                          | `w-2/5` or `w-[40%]`                                                                   |
+| `style={{ animationDelay: "200ms" }}`               | `[animation-delay:200ms]`                                                              |
+| Tree `paddingLeft` from `level`                     | `getTreeIndentClass(level, basePx)` from `@/lib/tree-indent-class`                     |
+| Hex required by third-party JS API                  | `@/lib/design-tokens` only                                                             |
 
 Full loop: [eslint-self-heal](../eslint-self-heal/SKILL.md).
 
 ## Checklist for new UI
 
 - [ ] Built on a shadcn primitive from `components/ui/`, not raw HTML
-- [ ] All colors via tokens (`bg-primary`, `text-foreground`, `border-input`, `brand-blue` for AI/CTA only)
-- [ ] No inline hex; no `bg-[#...]`
+- [ ] All colors via tokens (`bg-primary`, `text-foreground`, `border-input`; raw `blue-600` / `violet-600` for AI/CTA only)
+- [ ] No inline hex; no `bg-[#...]`; no off-palette hue (`sky`, `emerald`, `rose`, `amber`, …)
 - [ ] Conditional / merged classes use `cn()` from `@/lib/utils`
 - [ ] Icons from `lucide-react`, sized via Tailwind utilities
 - [ ] If a new variant was added: it's in the primitive's `cva` block AND in `DESIGN.md`

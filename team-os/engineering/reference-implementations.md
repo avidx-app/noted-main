@@ -37,11 +37,11 @@ When you change one of these files in a way that establishes a new pattern, upda
 
 Custom rules in `eslint-rules/noted/` enforce patterns that skills alone cannot guarantee:
 
-| Rule                                 | What it catches                              | Fix guidance                                                                                          |
-| ------------------------------------ | -------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `noted/no-hardcoded-color`           | Hex / rgb in strings (e.g. `text-[#3F3F3F]`) | Use Tailwind tokens from `app/globals.css` — see design-system skill                                  |
-| `noted/no-inline-style`              | `style={{…}}` on JSX                         | Use Tailwind classes; see design-system skill                                                         |
-| `@typescript-eslint/no-explicit-any` | `: any`, `as any`                            | Use `unknown`, Zod, `Doc<>`, `Id<>` — see typescript-patterns skill (warn today, error after cleanup) |
+| Rule                                 | What it catches                                                                                                               | Fix guidance                                                                                                                                                                                       |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `noted/no-hardcoded-color`           | Hex / rgb / literal hsl in strings (e.g. `text-[#3F3F3F]`), plus off-palette Tailwind hues (`text-sky-500`, `bg-emerald-100`) | Use Tailwind tokens from `app/globals.css` — see design-system skill and DESIGN.md § Off-palette hues (error; legacy uses carry a per-path allowlist in `eslint.config.mjs` that ratchets to zero) |
+| `noted/no-inline-style`              | `style={{…}}` on JSX                                                                                                          | Use Tailwind classes; see design-system skill                                                                                                                                                      |
+| `@typescript-eslint/no-explicit-any` | `: any`, `as any`                                                                                                             | Use `unknown`, Zod, `Doc<>`, `Id<>` — see typescript-patterns skill (warn today, error after cleanup)                                                                                              |
 
 ## Code self-healing loop
 

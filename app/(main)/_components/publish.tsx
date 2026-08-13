@@ -87,7 +87,7 @@ export const Publish = ({ initialData }: PublishProps) => {
         <Button size="sm" variant="ghost">
           Publish
           {initialData.isPublished && (
-            <Globe className="ml-2 h-4 w-4 text-sky-500" />
+            <Globe className="ml-2 h-4 w-4 text-muted-foreground" />
           )}
         </Button>
       </PopoverTrigger>
@@ -95,8 +95,8 @@ export const Publish = ({ initialData }: PublishProps) => {
         {initialData.isPublished ? (
           <div className="space-y-4">
             <div className="flex items-center gap-x-2">
-              <Globe className=" h-4 w-4 animate-pulse text-sky-500" />
-              <p className="text-xs font-medium text-sky-500">
+              <Globe className=" h-4 w-4 animate-pulse text-muted-foreground" />
+              <p className="text-xs font-medium text-muted-foreground">
                 This note is live on the web.
               </p>
             </div>
