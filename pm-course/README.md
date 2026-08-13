@@ -30,25 +30,84 @@ the failure being taught against is a PRD with no evidence behind it, or a pull 
 Your own work goes in `pm-course/my-work/`, which is gitignored. That keeps the pull request you open
 in stage 6 containing a slice rather than your notes.
 
-## Before stage 1
+## Before stage 1 — and this part is not optional
 
-You need the product running locally **and** deployed. That is a real afternoon of work and none of it
-is taught — nobody learns product judgment from pasting environment variables, which is exactly why it
-happens before the course rather than during it.
+You need the product **running locally, deployed, and full of your own data.** That is a real afternoon,
+and none of it is taught: nobody learns product judgment from pasting environment variables. It happens
+before the course rather than during it, which is also the only way stage 7 works — you cannot deploy
+_and_ ship a change through the deploy in the same sitting.
 
-1. Fork this repository, clone your fork, `npm install`.
-2. Free-tier accounts at **Convex**, **Clerk**, **EdgeStore**, **Amplitude** and **Render**.
-3. `cp .env.example .env.local` and fill it in. That file is the canonical list and marks which values
-   are server-side secrets. Your own keys, never anyone else's.
-4. `npx convex dev`, then `npm run dev`. Sign in, create a document, upload a cover image.
-5. Seed your working data: `npm run seed:convex` then `npm run seed:amplitude`. Two of the sources you
-   will use in stage 2 do not exist until you do.
-6. **Deploy to Render**, staging and production, following [`../DEPLOYMENT.md`](../DEPLOYMENT.md).
-   `staging` branch deploys to Staging, `main` to Production.
-7. Smoke-test the live URL: sign in, create a document, confirm Convex and Amplitude received it.
+### Everything is yours. Nothing is shared.
 
-**The gate is your staging URL.** Stage 7 verifies a change on a real deploy, and you cannot deploy and
-also ship through it in the same session.
+Five free-tier accounts, all in your own name:
+
+| Service       | What it gives you                 | Why it cannot be shared                                                |
+| ------------- | --------------------------------- | ---------------------------------------------------------------------- |
+| **Convex**    | Database and backend              | The cohort is seeded into _your_ deployment. Stage 2 queries it        |
+| **Clerk**     | Sign-in                           | Auth is per-deployment; a shared app means signing in as somebody else |
+| **EdgeStore** | File uploads                      | Cover images, and both keys are server-side                            |
+| **Amplitude** | Analytics and experiments         | Forty people's fixtures in one project makes every funnel meaningless  |
+| **Render**    | The staging and production deploy | Stage 7 verifies on a real URL, and it has to be yours to break        |
+
+```bash
+cp .env.example .env.local
+```
+
+`.env.example` is the canonical list and marks which values are server-side secrets. **Never paste a key
+from a walkthrough, a screenshot, or a teammate.** Anything holding a secret key can act as your
+application, and a key that reaches more than one laptop is a key somebody has to rotate.
+
+```bash
+npm run data -- --check
+```
+
+That reports which credentials are still unset, one line each, without ever printing a value.
+
+### Run it, then deploy it
+
+```bash
+npx convex dev      # leave running
+npm run dev         # second terminal
+```
+
+Sign in, create a document, upload a cover image. Then generate the AES key that encrypts the AI
+provider key you will paste into Settings:
+
+```bash
+openssl rand -base64 32
+```
+
+Then **deploy to Render**, staging and production, following [`../DEPLOYMENT.md`](../DEPLOYMENT.md). The
+`staging` branch deploys to Staging and `main` to Production, which is what makes stage 6's pull request
+and stage 7's verification real rather than described.
+
+Smoke-test the live URL: sign in, create a document, and confirm Convex and Amplitude both received
+something. An app can look right and be writing nowhere.
+
+**The gate is your staging URL.** Send it before you start stage 1.
+
+### Then seed your data, because stage 2 has nothing to read without it
+
+```bash
+npm run seed:convex:plan     # then: npm run seed:convex
+npm run seed:amplitude:plan  # then: npm run seed:amplitude
+```
+
+Two of stage 2's six evidence sources do not exist until you run these. The cohort was generated to plant
+specific patterns, and each one carries a question a new PM should be able to answer from it:
+
+```bash
+npm run data
+```
+
+That prints the per-persona counts out of your own Convex — users, documents, publishes, Coworker
+messages, and how many used AI and never published — followed by the four questions. It does **not**
+print the answers. The fixture records what pattern each question should surface, and reading that
+instead of querying your own data is exactly the habit this course is against.
+
+One of the four is answerable from Convex only. That is not an oversight: it is the pattern behind the
+top-ranked pain in the research, and no Amplitude event sees it, because publish intent is not
+instrumented. Anyone working from charts alone will miss the most important thing in the dataset.
 
 ## Checking your work
 

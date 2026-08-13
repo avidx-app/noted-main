@@ -11,6 +11,17 @@ You produce **`evidence-map.md`**. Run 1 fills sections 1 to 4, run 2 fills 5 to
 | Check it | `npm run course -- 2`                                                                                     |
 | You need | The seeded cohort — `npm run seed:convex` and `npm run seed:amplitude`. See [the README](../../README.md) |
 
+## Start by looking at your own data
+
+```bash
+npm run data
+```
+
+Per-persona counts out of your own Convex, then the four questions the cohort was built to answer. One
+of them is answerable from Convex only — no Amplitude event sees it, because publish intent is not
+instrumented. That is the pattern behind the top-ranked pain in the research, so anyone working from
+charts alone misses the most important thing in the dataset.
+
 ## The six sources
 
 All six ship with the fork. No connectors, no logins you do not own.

@@ -33,7 +33,8 @@
     "design:lint": "npx --yes @google/design.md lint DESIGN.md",
     "postinstall": "node scripts/sync-ai.mjs && node scripts/install-git-hooks.mjs",
     "smoke": "node scripts/smoke-diff.mjs",
-    "course": "node scripts/course.mjs"
+    "course": "node scripts/course.mjs",
+    "data": "node scripts/cohort-data.mjs"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.23",
