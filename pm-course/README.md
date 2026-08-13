@@ -61,6 +61,11 @@ npm run course -- 1 --file pm-course/my-work/orientation-map.md
 It prints two lists: what it verified mechanically, and what it refuses to judge. **The second list is
 the point.** A pass is the floor, not the bar.
 
+**Three stages grade work, not just a document.** Stages 4, 6 and 7 read your actual diff, and stage 5
+reads your `specs/` bundle. So `--expected` on those correctly fails in a clean checkout — there is
+nothing to grade yet, and the checker says so rather than pretending. Their reference answers are proven
+against a fixture repo by `npm run test:scripts`.
+
 ## If you are on your own
 
 Most people will be. This course is self-paced by design — fork the repo and work through it at

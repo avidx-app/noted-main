@@ -22,6 +22,15 @@ const repoRoot = path.resolve(
 /** Stages that have a checker. The rest say so in their brief. */
 export const STAGES = {
   1: { dir: "pm-course/stages/01-day-one", artifact: "orientation-map.md" },
+  2: { dir: "pm-course/stages/02-evidence", artifact: "evidence-map.md" },
+  3: { dir: "pm-course/stages/03-prd", artifact: "prd.md" },
+  4: {
+    dir: "pm-course/stages/04-prototype",
+    artifact: "prototype-contract.md",
+  },
+  5: { dir: "pm-course/stages/05-spec", artifact: "spec-record.md" },
+  6: { dir: "pm-course/stages/06-ship", artifact: "delivery-record.md" },
+  7: { dir: "pm-course/stages/07-verify", artifact: "verification-record.md" },
 };
 
 function arg(flag) {
