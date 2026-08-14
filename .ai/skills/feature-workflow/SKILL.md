@@ -1,6 +1,6 @@
 ---
 name: feature-workflow
-description: End-to-end feature development workflow for noted-main — from ideation through merge and smoke test. Every feature MUST begin with user grounding against the noted Customer Understanding OS (personas, pain landscape, behavioural cohorts). Use when starting a new feature, planning implementation, or checking what step comes next in the dev process. Pairs with the `/feature-workflow` slash command, which walks an agent through the same phases interactively.
+description: End-to-end feature development workflow for noted-main — from ideation through merge and smoke test. Every feature MUST begin with user grounding against the noted Customer Understanding OS (personas, pain landscape, behavioral cohorts). Use when starting a new feature, planning implementation, or checking what step comes next in the dev process. Pairs with the `/feature-workflow` slash command, which walks an agent through the same phases interactively.
 summary: Interactive feature dev phases
 ---
 
@@ -70,7 +70,7 @@ Pick one (or explicitly more than one, if unavoidable). Full descriptions in [pe
 If the feature "is for everyone," it's probably for no one. Force a choice. Personas 01 and 04 want
 opposite things from the same roadmap, so "everyone" resolves a real conflict by ignoring it.
 
-`[NEED: Amplitude behavioural cohort per persona]` — the personas are qualitative only today. No
+`[NEED: Amplitude behavioral cohort per persona]` — the personas are qualitative only today. No
 persona has a population size, so do not use one to argue a segment is big.
 
 ### 2. Which pain does it address?
@@ -89,9 +89,9 @@ Quote the evidence. Which interview, which customer, which Amplitude signal surf
 If you are not working pain #1, say why in writing. Working a lower-ranked pain is often correct —
 it may be smaller, testable, or unblocked — but it should be a stated choice.
 
-### 3. What customer quote or behavioural signal justifies this feature?
+### 3. What customer quote or behavioral signal justifies this feature?
 
-Real user words from a transcript, or a specific behavioural signal. **No quote = no grounding = stop.**
+Real user words from a transcript, or a specific behavioral signal. **No quote = no grounding = stop.**
 
 The quote must be copied from a file in
 [interviews/](../../../team-os/research/interviews/), with the person and date attached, e.g.
@@ -99,7 +99,7 @@ The quote must be copied from a file in
 - > _"There is no middle state. Right now I choose between secrecy and overexposure."_ — Mia, 2026-04-08
 - > _"It just felt like configuration before value."_ — Ethan, 2026-04-24
 
-Behavioural signals come from the events in [`lib/analytics.ts`](../../../lib/analytics.ts). Anything
+Behavioral signals come from the events in [`lib/analytics.ts`](../../../lib/analytics.ts). Anything
 sourced from `scripts/fixtures/` is **seeded, not production** — label it, and never quote a seeded
 baseline as a real one.
 
@@ -113,7 +113,7 @@ Map to the **Closed Loop: Insight → Action** table in the Customer OS. The fra
 | Feature gap        | New feature                           | New `track*` event fires after ship (see `event-tracking`)     |
 | JTBD misalignment  | Onboarding copy / CTA change          | Improved `Onboarding Completed`                                |
 | Persona signal     | Cohort tag + research flag            | Org-level property in Amplitude                                |
-| Blocking behaviour | Fix friction point                    | Drop-off event drops, success event rises                      |
+| Blocking behavior  | Fix friction point                    | Drop-off event drops, success event rises                      |
 | Champion loss      | Re-engagement + multi-user onboarding | Second user activated within 30 days                           |
 
 ### Output of Phase 0
@@ -126,7 +126,7 @@ Write a short **User Grounding block** into the Linear ticket description at the
 - **Persona:** [01 / 02 / 03 / 04]
 - **Pain:** [# from Pain Landscape + one-line rephrasing]
 - **Evidence:** [Quote or Amplitude signal]
-- **Expected action + signal:** [What changes in behaviour, which `track*` event proves it]
+- **Expected action + signal:** [What changes in behavior, which `track*` event proves it]
 ```
 
 If any of these four are hand-waved or blank, **stop**. Re-interview, re-read the OS, or pick a different feature. Do not proceed to Phase 1.
@@ -395,7 +395,7 @@ Always open at the start of a feature, and re-open whenever in doubt about perso
 
 Phase 0 is live. Two gaps remain, and both need data rather than writing:
 
-1. **Per-persona Amplitude behavioural cohorts.** The five personas are qualitative — synthesised
+1. **Per-persona Amplitude behavioral cohorts.** The five personas are qualitative — synthesized
    from transcripts, with no population behind them. Until cohorts exist, a persona can tell you
    _what someone wants_ and never _how many_. Building them needs `track*` data accumulating in a
    real project (see the `event-tracking` skill); the seeded cohort in `scripts/fixtures/` cannot

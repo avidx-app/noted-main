@@ -573,7 +573,7 @@ Pattern: `<file:line> — <what's wrong>. <why it matters / what breaks>. Fix: <
 ### Other concerns
 
 - `convex/documents.ts:88-94` — `.query("documents").filter((q) => q.eq(q.field("userId"), userId))` runs without an index. As the documents collection grows, this scan will get slower; existing `by_user` index should be used instead. Fix: switch to `.query("documents").withIndex("by_user", (q) => q.eq("userId", userId))`.
-- `components/header.tsx:7` — Icon imported from `react-icons/fa`; the project standardises on `lucide-react`. Mixing libraries inflates the bundle and breaks visual consistency. Fix: use `lucide-react` instead.
+- `components/header.tsx:7` — Icon imported from `react-icons/fa`; the project standardizes on `lucide-react`. Mixing libraries inflates the bundle and breaks visual consistency. Fix: use `lucide-react` instead.
 - `components/ui/button.tsx:24` — Modified the shadcn primitive directly. Future shadcn updates will conflict. Fix: revert this change and create a wrapper component in `components/<feature>/` instead.
 ```
 

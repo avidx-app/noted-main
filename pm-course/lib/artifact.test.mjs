@@ -77,7 +77,7 @@ test("isPlaceholder is true for an unfilled template section", () => {
   assert.equal(isPlaceholder("<your answer here>"), true);
 });
 
-test("isPlaceholder does not try to recognise template wording", () => {
+test("isPlaceholder does not try to recognize template wording", () => {
   // "**Between:** `path/one` and `path/two`" left untouched is a placeholder,
   // but not one this function can see — it is a sentence with words in it.
   // It gets caught a layer up, because `path/one` does not resolve in the

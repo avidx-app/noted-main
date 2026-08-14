@@ -205,7 +205,7 @@ export function check({ text, repo }) {
         ? pass("Paths cited", `${cited.length} of ${cited.length} exist`)
         : note(
             "Paths cited",
-            "no file paths — acceptable here, since this stage is about behaviour",
+            "no file paths — acceptable here, since this stage is about behavior",
           ),
   );
 
@@ -246,7 +246,7 @@ export function check({ text, repo }) {
   return {
     checked,
     unchecked: [
-      "Whether you verified the behaviour the PRD cared about, or the behaviour that was easy to check.",
+      "Whether you verified the behavior the PRD cared about, or the behavior that was easy to check.",
       "Whether a signal you named will actually move if the bet is right.",
       "Whether the thing you did not verify is the thing most likely to be broken.",
       "Whether, four weeks from now, this record would let somebody else pick the work up.",

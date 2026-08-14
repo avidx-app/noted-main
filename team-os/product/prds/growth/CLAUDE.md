@@ -14,7 +14,7 @@ A prototype of the proposed flow exists at
 [`app/(main)/(routes)/documents/start/page.tsx`](../../../../app/%28main%29/%28routes%29/documents/start/page.tsx).
 **It is a prototype, not a feature.** Read
 [prototype-boundary.md](prototype-boundary.md) before reasoning about it or citing it as evidence —
-most of what it appears to do is simulated, and the PRD describes analytics and flag behaviour that
+most of what it appears to do is simulated, and the PRD describes analytics and flag behavior that
 is not implemented.
 
 ## Grounding
@@ -28,6 +28,6 @@ Until they are, the PRD's assumption rows citing them are **partially validated 
 cannot open**, which is exactly the condition `feature-workflow` Phase 0 exists to catch. Do not
 promote this PRD past Stage 2 on the strength of quotes nobody can check.
 
-The behavioural half is available today: `scripts/fixtures/` seeds a synthetic cohort, and
+The behavioral half is available today: `scripts/fixtures/` seeds a synthetic cohort, and
 `npm run seed:convex` prints the four insights it supports. The 92–96% second-document baseline in
 the PRD comes from that seed — it is **seeded, not production truth**, and the PRD says so.

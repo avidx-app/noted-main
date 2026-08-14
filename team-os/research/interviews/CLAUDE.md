@@ -6,7 +6,7 @@ recorded by Priya. April 2026.
 ## Provenance — read this first
 
 **These conversations are constructed.** They come from the Vibe PM @ Noted simulation and were
-written so the discovery workflow has evidence to practise on. No customer said any of it.
+written so the discovery workflow has evidence to practice on. No customer said any of it.
 
 That does not make them useless — they are internally consistent, they describe the product as it
 actually exists today, and the friction they name is real friction in the current build. It makes
@@ -20,7 +20,7 @@ separated — a folder where you cannot tell the two apart is worse than no fold
 value of a quote is that someone said it.
 
 The repo rule this implements is in [`.ai/INSTRUCTIONS.md`](../../../.ai/INSTRUCTIONS.md): never
-fabricate data, quotes, or metrics. Constructed evidence is allowed when it is labelled; unlabelled
+fabricate data, quotes, or metrics. Constructed evidence is allowed when it is labeled; unlabelled
 is fabrication regardless of intent.
 
 ## Sarah — discovery interviews
@@ -49,13 +49,13 @@ Adoption, objections, expansion pressure, and the language support hears.
 | 2026-04-21 | Nora   | model attribution / power-user ergonomics |
 | 2026-04-24 | Ethan  | Squad-agent onboarding cliff              |
 
-## How these line up with the behavioural data
+## How these line up with the behavioral data
 
 Four of the call themes match insight ids planted in the seeded cohort (`scripts/fixtures/`, printed
 by `npm run seed:convex`): `chat_to_publish_gap`, `squad_agent_onboarding_cliff`,
 `draft_review_pressure`, `power_user_publish_rate`.
 
-That correspondence is the point. Qualitative evidence explains _why_; the seeded behavioural data
+That correspondence is the point. Qualitative evidence explains _why_; the seeded behavioral data
 shows _how often_. Neither settles a question alone, and agreement between them is not
 confirmation — they were built together, so of course they agree. Real triangulation needs sources
 that could have disagreed.
@@ -65,7 +65,7 @@ that could have disagreed.
 - **Quote, do not paraphrase.** The exact words are the evidence; a paraphrase is already an
   interpretation.
 - **Separate what someone said from what they did.** These are all stated preference. Nobody was
-  observed. Behaviour outranks opinion, and there is no behaviour in this folder.
+  observed. Behavior outranks opinion, and there is no behavior in this folder.
 - **Two interviews are not a pattern.** Eleven conversations across seven segments will support
   almost any story if you go looking for one.
 - **Preserve contradictions.** Where two people want opposite things, that is the finding.

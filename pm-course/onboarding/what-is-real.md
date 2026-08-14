@@ -9,7 +9,7 @@ The one page in `pm-course/` that is not in character. Read it once, then go bac
 
 Noted is a **real product** in a **real repository** with a **real workflow**. The people are invented
 and most of the evidence is constructed. That combination is deliberate, and knowing which is which is
-the difference between practising product judgment and rehearsing a fiction.
+the difference between practicing product judgment and rehearsing a fiction.
 
 ## Real — lean on it, and it settles arguments
 
@@ -39,7 +39,7 @@ the disagreement is usually the most interesting thing you will find that day.
 Every one of those files carries `provenance: constructed` in its frontmatter and repeats it on its
 face. That is not decoration. It means:
 
-- **Valid** for exercising the workflow, for practising triangulation, for drafting a PRD that has to
+- **Valid** for exercising the workflow, for practicing triangulation, for drafting a PRD that has to
   cite something.
 - **Invalid** as evidence that demand exists. Never quote a line from it in anything a customer, an
   investor, or a public artifact will read.
@@ -76,7 +76,7 @@ They are not errors to report. They are the exercise. Finding them takes about t
 
 Don't, except here. Inside the simulation, act like a colleague: cite the provenance the way a careful
 person at a company with constructed research would, and let the workflow refuse you when the grounding
-is not there. That is not pretending — it is the actual professional behaviour, practised on material
+is not there. That is not pretending — it is the actual professional behavior, practiced on material
 that cannot hurt anyone.
 
 The one thing that would be pretending is treating a constructed transcript as market proof. That is

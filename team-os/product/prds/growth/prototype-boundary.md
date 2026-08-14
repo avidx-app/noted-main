@@ -74,7 +74,7 @@ headings match the job they had in mind, and what they expect "Open in editor" t
 rate, whether keyword routing is accurate enough, how failures feel, or anything at all about
 mobile.
 
-**Reading behaviour off this prototype is the specific trap.** A participant who completes the flow
+**Reading behavior off this prototype is the specific trap.** A participant who completes the flow
 has completed a flow that always works, in 1.8 seconds, with an answer chosen from five. The real
 version would sometimes be slow, sometimes be wrong, and sometimes fail. Observed enthusiasm here is
 evidence about the _offer_, not about the _product_.

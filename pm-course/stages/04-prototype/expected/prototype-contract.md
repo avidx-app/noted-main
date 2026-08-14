@@ -55,8 +55,8 @@ Stopping means reverting the copy, not iterating on it.
 
 Nothing, and that is the interesting part of this contract.
 
-There is no timer, no fixture, no placeholder generation. Every behaviour a participant can trigger is
-the real behaviour. I am stating it explicitly rather than leaving the section empty, because an empty
+There is no timer, no fixture, no placeholder generation. Every behavior a participant can trigger is
+the real behavior. I am stating it explicitly rather than leaving the section empty, because an empty
 heading reads as "not applicable" and here it is a finding: this prototype is cheap _and_ faithful,
 which is unusual, and it is only true because the decision was to change framing rather than build a
 mechanism.
@@ -73,7 +73,7 @@ question directly, because there is no fake in the path.
   into Amplitude only if a key is present. I have a key locally and I have not confirmed the event
   lands in a dashboard, so the funnel this was supposed to make measurable does not exist yet.
 - **Nothing is recorded about hesitation.** The event fires when the popover opens. If someone opens
-  it, reads the copy, and closes it — the exact behaviour the whole claim is about — that produces one
+  it, reads the copy, and closes it — the exact behavior the whole claim is about — that produces one
   open event and no signal that they backed out. **This is the gap that matters** and I noticed it
   writing this section rather than while building.
 - **No notification.** Nobody is told a link was shared, because there is no recipient — the model is

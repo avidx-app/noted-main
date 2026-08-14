@@ -29,7 +29,7 @@ describe("aiModeFromTitle", () => {
         expect(aiModeFromTitle("TRANSLATE TO FRENCH")).toBe("edit");
     });
 
-    it("falls back to ask for an item it does not recognise", () => {
+    it("falls back to ask for an item it does not recognize", () => {
         // BlockNote owns this list and changes it between versions. An unknown
         // item should still produce a usable event rather than nothing.
         expect(aiModeFromTitle("Summon a wizard")).toBe("ask");

@@ -14,7 +14,7 @@ quotes, or metrics.** An empty file that says so is worth more than a full one t
 
 ### Ship logs are empty, and the merge history is not
 
-`team-os/features/*/ship-log.md` is empty except where explicitly backfilled and labelled as such.
+`team-os/features/*/ship-log.md` is empty except where explicitly backfilled and labeled as such.
 
 **Why:** the history is real and recoverable from git. Reconstructing it is a genuine exercise —
 `gh pr list --state merged` plus the diff tells you what shipped; the dossier tells you what the
@@ -65,7 +65,7 @@ thing being shown.
 ### `feature-workflow` Phase 0 is a specified empty socket
 
 [`../.ai/skills/feature-workflow/SKILL.md`](../.ai/skills/feature-workflow/SKILL.md) makes user
-grounding mandatory and stops the workflow without it — personas, pain landscape, behavioural
+grounding mandatory and stops the workflow without it — personas, pain landscape, behavioral
 cohorts, and a real customer quote. For most features those inputs do not exist yet, and the
 `[NEED: ...]` placeholders are deliberately left visible.
 
@@ -74,7 +74,7 @@ is the most useful thing this repo can show a reader. Hiding it with invented pe
 the process look complete and teach the opposite of what it should.
 
 **Before filling:** ground it in something real. The seeded cohort in `scripts/fixtures/` supports
-behavioural claims; interview evidence belongs in `team-os/research/` with its provenance stated.
+behavioral claims; interview evidence belongs in `team-os/research/` with its provenance stated.
 Fill it per feature, not globally.
 
 ## Directories that are shape, not content

@@ -191,12 +191,16 @@ export function tableRows(text) {
   }
 
   const [, ...body] = rows; // drop the header
-  return body.filter(
-    (cells) =>
-      !cells.every(
-        (c) => c === "" || c === "—" || c === "-" || /^\*.*\*$/.test(c),
-      ),
-  );
+  // Emphasis is matched in both markdown spellings on purpose. Prettier
+  // normalises `*aside*` to `_aside_`, and this check only knew the asterisk
+  // form — so running prettier over team-os/ turned the empty ship log into a
+  // one-entry ship log and the stage 1 checker started failing against its own
+  // reference answer. Third time markdown normalisation has broken a checker
+  // here, and the third time the fix is to accept both forms rather than to
+  // assume which one is on disk.
+  const placeholder = (c) =>
+    c === "" || c === "—" || c === "-" || /^([*_]{1,2}).*\1$/.test(c);
+  return body.filter((cells) => !cells.every(placeholder));
 }
 
 /** Count `[NEED: ...]` and `[NEEDS ...]` markers — the repo's own word for a gap. */

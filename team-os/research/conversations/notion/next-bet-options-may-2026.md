@@ -42,7 +42,7 @@ C is interesting and I am dropping it because A and B both beat it on evidence.
 Three things, written down so I cannot pretend later that I did not know.
 
 1. **I am choosing by measurability, not by size of pain.** That is defensible once. It is not
-   defensible as a pattern, because it systematically favours whatever is already instrumented, and
+   defensible as a pattern, because it systematically favors whatever is already instrumented, and
    what is already instrumented is whatever we happened to build first.
 2. **B's primary metric has a ceiling.** Second-document-within-7-days sits at 92–96% in the seeded
    data. Even if that number were real there is almost no headroom, so a lift will not be visible at

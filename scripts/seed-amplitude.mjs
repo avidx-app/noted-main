@@ -31,7 +31,7 @@ const sessionGapMs = 30 * minuteMs;
 // Not every event a product sends arrives in the warehouse. A slice of users
 // run a blocker or strict privacy mode and are close to invisible to analytics
 // while remaining fully active in the product database; everyone else loses an
-// occasional beacon when a tab closes before it flushes. Modelling this is the
+// occasional beacon when a tab closes before it flushes. Modeling this is the
 // point: a seed that reconciles perfectly with the product tables teaches a
 // reconciliation that no real product ever gets.
 const blockedUserShare = 0.12;
@@ -213,7 +213,7 @@ function applyDelivery(events, blocked, seed) {
 // Trials expire, and a trial cohort still active on day 30 is the clearest sign
 // that a seed was built without thinking about lifecycle. Everyone else runs to
 // the end of the window — including the churn-risk cohort, whose label is a
-// judgment somebody recorded rather than a behaviour anybody observed.
+// judgment somebody recorded rather than a behavior anybody observed.
 function lastActiveDay(persona, signupDay, windowDays, random) {
   if (persona === "trial_users") {
     return Math.min(windowDays - 1, signupDay + intBetween(random, 10, 15));

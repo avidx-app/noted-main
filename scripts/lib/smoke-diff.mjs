@@ -4,7 +4,7 @@
  * The baseline gates tell you the repo still compiles. They say nothing about
  * whether the thing you just built behaves correctly, and that gap is where real
  * bugs live: a function with inverted logic passes format, lint and type checks
- * cleanly. So the driver puts a targeted behavioural probe first and runs the
+ * cleanly. So the driver puts a targeted behavioral probe first and runs the
  * baselines underneath as a regression net.
  *
  * Ported from a heatseeker-next personal skill. Two deliberate differences: the

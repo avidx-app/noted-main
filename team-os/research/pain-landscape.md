@@ -38,7 +38,7 @@ The vocabulary is part of the pain, not decoration on it. "Publish" tells both t
 reader that the thing is finished; Rina reports the format overriding an explicit verbal _"ignore
 the roughness."_
 
-**Why this is easy to misread.** The behavioural signature is high AI usage and low publish rate,
+**Why this is easy to misread.** The behavioral signature is high AI usage and low publish rate,
 which reads as "publish isn't valuable" or "users abandon."
 
 > "Low publish doesn't mean low intent. It means the product is solving the first half of the
@@ -95,7 +95,7 @@ catch what fluent output hides. Marcus's version is tone and implication carryin
 check himself.
 
 This is a strength report as much as a complaint: it is the pain of a product that got someone to a
-draft fast enough that judgement became the bottleneck.
+draft fast enough that judgment became the bottleneck.
 
 ## 5. Attribution is opaque
 
@@ -112,7 +112,7 @@ people who ask for it most clearly are the people already retained.
 ## What is missing from this landscape
 
 - **Churn.** No transcript is from someone who left, so no pain that causes leaving is represented.
-- **Behaviour.** All stated preference. The seeded cohort provides frequency for four of these
+- **Behavior.** All stated preference. The seeded cohort provides frequency for four of these
   themes, but it was authored alongside the interviews and so cannot corroborate them.
 - **Cost, pricing, and performance.** Nobody raised any of the three. That is more likely a property
   of who was interviewed than evidence that they do not matter.

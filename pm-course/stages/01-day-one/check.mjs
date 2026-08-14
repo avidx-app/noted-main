@@ -102,7 +102,7 @@ export const KNOWN = [
       return {
         holds: seeded && ceiling,
         detail:
-          "the primary metric's 92–96% baseline is labelled seeded, and the PRD asks for a 50/50 experiment against it",
+          "the primary metric's 92–96% baseline is labeled seeded, and the PRD asks for a 50/50 experiment against it",
       };
     },
   },
@@ -210,7 +210,7 @@ export function check({ text, repo }) {
   /* ---- 4. Trust labels ----------------------------------------------- */
   if (found.repo) {
     const rows = tableRows(found.repo.body);
-    const labelled = rows.filter((cells) =>
+    const labeled = rows.filter((cells) =>
       cells.some((c) => TRUST.includes(c.toLowerCase().replace(/[^a-z]/g, ""))),
     );
     checked.push(
@@ -219,12 +219,12 @@ export function check({ text, repo }) {
             "Repo table",
             `${rows.length} rows — fill at least three of the five questions`,
           )
-        : labelled.length < rows.length
+        : labeled.length < rows.length
           ? fail(
               "Trust labels",
-              `${rows.length - labelled.length} of ${rows.length} rows carry no label from ${TRUST.join(" / ")}`,
+              `${rows.length - labeled.length} of ${rows.length} rows carry no label from ${TRUST.join(" / ")}`,
             )
-          : pass("Trust labels", `${rows.length} rows, every one labelled`),
+          : pass("Trust labels", `${rows.length} rows, every one labeled`),
     );
   }
 

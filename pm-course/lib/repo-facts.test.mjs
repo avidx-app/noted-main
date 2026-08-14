@@ -40,6 +40,19 @@ test("tableRows does not count a placeholder row as an entry", () => {
   assert.deepEqual(tableRows(shipLog), []);
 });
 
+test("a placeholder stays a placeholder after prettier rewrites the emphasis", () => {
+  // Prettier normalises `*aside*` to `_aside_` and pads the cells. Running it
+  // over team-os/ once turned the empty ship log into a one-entry ship log,
+  // which failed stage 1 against its own reference answer — the third time
+  // markdown normalisation has broken a checker in this repo.
+  const prettified = [
+    "| Date (merged) | PR  | Author | What changed | Deploy status |",
+    "| ------------- | --- | ------ | ------------ | ------------- |",
+    "| —             | —   | —      | _(No entries yet.)_ | —        |",
+  ].join("\n");
+  assert.deepEqual(tableRows(prettified), []);
+});
+
 test("tableRows stops at the end of the first table", () => {
   const rows = tableRows(
     "| A |\n| --- |\n| 1 |\n\nprose\n\n| B |\n| --- |\n| 2 |",

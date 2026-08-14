@@ -151,7 +151,7 @@ next to the merged pull requests and it counts both — merge commits from `git 
 Every path you cite has to resolve. Then it prints four things it cannot check, which are the four
 things this stage is actually about.
 
-A contradiction it does not recognise is not a failure. It passes with a note asking for a human to
+A contradiction it does not recognize is not a failure. It passes with a note asking for a human to
 confirm it, because finding a new one is the better outcome — and on your own, that human is you an
 hour later, with `convex/` open.
 
