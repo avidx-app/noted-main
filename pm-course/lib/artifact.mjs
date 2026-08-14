@@ -11,7 +11,7 @@
 /** Headings we treat as section starts, in the artifacts these labs ask for. */
 const HEADING = /^(#{2,3})\s+(.*?)\s*$/;
 
-/** Normalise a heading for matching: lowercase, no numbering, no punctuation. */
+/** Normalize a heading for matching: lowercase, no numbering, no punctuation. */
 export function slugHeading(text) {
   return text
     .toLowerCase()

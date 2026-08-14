@@ -63,7 +63,7 @@ const hooks = [
 ];
 
 function hooksDir() {
-  // Honour core.hooksPath and worktrees rather than assuming .git/hooks — the
+  // Honor core.hooksPath and worktrees rather than assuming .git/hooks — the
   // repo's own /worktree command creates worktrees, where .git is a file.
   const gitPath = path.join(repoRoot, ".git");
   if (!fs.existsSync(gitPath)) return null;

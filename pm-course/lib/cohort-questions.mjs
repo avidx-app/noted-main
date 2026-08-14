@@ -27,7 +27,7 @@ export function cohortQuestions(repo) {
  *
  * Every one of these is answerable from Convex, and three are *also* visible in
  * Amplitude — which is the interesting part, because the Amplitude view looks like
- * independent behavioural evidence and is the same fixture replayed.
+ * independent behavioral evidence and is the same fixture replayed.
  */
 export const ANSWERABLE_FROM = {
   chat_to_publish_gap: ["Convex", "Amplitude"],
@@ -35,7 +35,7 @@ export const ANSWERABLE_FROM = {
   squad_agent_onboarding_cliff: ["Convex"],
   // Convex only, and that is the finding. This is the pattern behind the
   // top-ranked pain in the landscape, and nothing in Amplitude sees it — there is
-  // no publish-intent event, so the behaviour the research cares most about is
+  // no publish-intent event, so the behavior the research cares most about is
   // invisible in the analytics half of the evidence.
   draft_review_pressure: ["Convex"],
 };

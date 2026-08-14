@@ -173,7 +173,7 @@ function amplitude() {
   }
   console.log(
     `\n  ${Y}Worth knowing before you trust a chart:${O} ${D}this data is a fixture you replayed` +
-      `\n  into a real product. It looks like independent behavioural evidence and it is not.` +
+      `\n  into a real product. It looks like independent behavioral evidence and it is not.` +
       `\n  See pm-course/onboarding/what-is-real.md.${O}`,
   );
 }

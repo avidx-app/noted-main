@@ -41,7 +41,7 @@ const VERBS = ["proceed", "revise", "narrow", "pivot", "stop", "investigate"];
 const CLAIMS_INDEPENDENT = /^(yes|y|independent|could have)/i;
 
 /**
- * What this repo can settle for you, re-derived rather than recognised.
+ * What this repo can settle for you, re-derived rather than recognized.
  *
  * `match` decides whether the map is talking about it; `verify` goes and looks.
  */
@@ -262,7 +262,7 @@ export function check({ text, repo }) {
             `${unlabelled.length} of ${rows.length} rows carry no label from ${KINDS.join(" / ")}`,
           )
         : rows.length
-          ? pass("Kind labels", `${rows.length} rows, every one labelled`)
+          ? pass("Kind labels", `${rows.length} rows, every one labeled`)
           : note("Kind labels", "no rows to label"),
     );
 

@@ -139,4 +139,4 @@ Mention the ship log without touching one in the diff and it will say so. Change
 It also checks you are not on `main` or `staging`.
 
 Then four things it cannot check — including whether a reviewer who did not write this would reach the
-same verdict. Trade records with your neighbour for that one.
+same verdict. Trade records with your neighbor for that one.

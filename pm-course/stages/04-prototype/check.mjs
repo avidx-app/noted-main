@@ -21,7 +21,7 @@ import {
 } from "../../lib/artifact.mjs";
 import { changedFiles, exists, BASE, read } from "../../lib/repo-facts.mjs";
 
-/** Files a contract never needs to mention. Noise, not behaviour. */
+/** Files a contract never needs to mention. Noise, not behavior. */
 const IGNORED = [
   /^package-lock\.json$/,
   /^\.env/,

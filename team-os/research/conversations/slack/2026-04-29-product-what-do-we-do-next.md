@@ -34,7 +34,7 @@ subject: what do we do next
 **Sarah** · 09:34
 
 > That's the thing Carlos said in almost those words — "you're asking me to join your product to do
-> you a favour."
+> you a favor."
 
 **Hana** · 09:36
 

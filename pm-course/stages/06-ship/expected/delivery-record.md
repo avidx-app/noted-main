@@ -33,7 +33,7 @@ That is scope I did not plan and it is the correct scope — the alternative was
 skipped the step the constitution makes mandatory.
 
 **§XV is a partial and I am not claiming otherwise.** The event fires on popover open. Someone who reads
-the copy and backs out — the behaviour the whole bet is about — produces an open and nothing else. The
+the copy and backs out — the behavior the whole bet is about — produces an open and nothing else. The
 honest fix is a second event on dismissal, and it is not in this PR.
 
 ## What I verified, and how

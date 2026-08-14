@@ -10,7 +10,7 @@ checkers are all in here, and they travel with your fork.
 
 Then, before you cite anything: [`onboarding/what-is-real.md`](onboarding/what-is-real.md). Noted is a
 real product with a real workflow and mostly constructed evidence. Knowing which is which is the
-difference between practising product judgment and rehearsing a fiction.
+difference between practicing product judgment and rehearsing a fiction.
 
 ## The chain
 

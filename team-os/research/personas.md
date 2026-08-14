@@ -11,14 +11,14 @@ evidence: team-os/research/interviews/
 Five relationships people have with Noted. Not job titles — the same person can be two of these in
 one week, and two people with the same title are often different personas here.
 
-**Every persona below is synthesised from the eleven transcripts in
+**Every persona below is synthesized from the eleven transcripts in
 [`interviews/`](interviews/), which are constructed for a simulation.** They are internally
 consistent and describe the product as it actually is, but nobody real said any of it. Grounding a
 feature in these is legitimate practice and illegitimate proof. Read
 [`interviews/CLAUDE.md`](interviews/CLAUDE.md) before citing one.
 
-Behavioural sizing is **absent on purpose**. The seeded cohort in `scripts/fixtures/` can tell you
-how often a behaviour occurs in a fixture, not in the product. Every persona below therefore carries
+Behavioral sizing is **absent on purpose**. The seeded cohort in `scripts/fixtures/` can tell you
+how often a behavior occurs in a fixture, not in the product. Every persona below therefore carries
 `[NEED: real population size]`, and none of them should be used to argue that a segment is big.
 
 ---
@@ -147,7 +147,7 @@ solutions."_
 
 - **Anyone who churned.** Every transcript is an active user. The reasons people leave are absent
   entirely, and no persona here can speak to them.
-- **Any observed behaviour.** All eleven are stated preference. Nobody was watched using the product.
+- **Any observed behavior.** All eleven are stated preference. Nobody was watched using the product.
 - **Any team already collaborating in Noted.** Persona 05 is aspiration, not practice.
 - **A daily note-taker.** The source set names a Lena — daily note-taker interview that was not in
   the export. `[NEED: Lena — daily note-taker transcript]`

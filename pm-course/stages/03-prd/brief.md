@@ -70,7 +70,7 @@ Copy [`team-os/templates/prd.md`](../../../team-os/templates/prd.md) into
 npm run course -- 3
 ```
 
-Sections from the template. Assumptions each labelled. Every cited path resolves. Something links back
+Sections from the template. Assumptions each labeled. Every cited path resolves. Something links back
 to your evidence map or to `team-os/research/`, because a PRD with no ancestry is an opinion with
 headings. Then two re-derivations against the tree: the seeded baseline, and whether the events you
 name are ones this product emits.

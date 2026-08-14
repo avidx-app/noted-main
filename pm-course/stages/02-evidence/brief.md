@@ -161,7 +161,7 @@ Copy this into `evidence-map.md`.
 npm run course -- 2
 ```
 
-It re-derives, rather than recognising. Name a contradiction it knows and it goes and checks whether
+It re-derives, rather than recognizing. Name a contradiction it knows and it goes and checks whether
 that contradiction actually holds in your tree — reading the query, the schema, the merge history, or
 the transcript, as appropriate. Two checks are worth knowing about in advance, because they are the
 act:

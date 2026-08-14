@@ -16,7 +16,7 @@ second is the one everything downstream depends on, and it is the one nobody had
 
 ## What would change my mind
 
-- **On the behaviour:** if published-document counts tracked draft counts closely, the stopping is
+- **On the behavior:** if published-document counts tracked draft counts closely, the stopping is
   not happening at the rate the research implies.
 - **On the cause:** if an unauthenticated visitor can already read a published document, then access
   is not the blocker and the cause is something else — most likely what publishing _means_, not who
@@ -33,7 +33,7 @@ Written before searching. The second one turned out to be the entire exercise.
 | The running product                                                               | Publish is a single toggle. A document is private to me, or on the public web at a preview URL. There is no third state                                                                                                                                | fact                       | Yes — nobody authored the app to agree with the docs                                     |
 | `convex/documents.ts`                                                             | **`getById` returns any published, non-archived document before it checks for an identity.** An unauthenticated reader can already open one. `app/(public)/(routes)/preview/[documentId]/page.tsx` is that path in production, with `editable={false}` | fact                       | Yes                                                                                      |
 | `convex/schema.ts`                                                                | `documents` carries exactly one sharing field, `isPublished: v.boolean()`. No shares table, no comments table                                                                                                                                          | fact                       | Yes                                                                                      |
-| `team-os/research/pain-landscape.md`                                              | Ranks this pain first, 7 of 11 transcripts, and says any solution requiring the reviewer to sign up does not solve it                                                                                                                                  | interpretation             | No — authored with the interviews it summarises                                          |
+| `team-os/research/pain-landscape.md`                                              | Ranks this pain first, 7 of 11 transcripts, and says any solution requiring the reviewer to sign up does not solve it                                                                                                                                  | interpretation             | No — authored with the interviews it summarizes                                          |
 | `team-os/research/conversations/slack/2026-05-04-engineering-share-link-scope.md` | Scopes the fix at three weeks because "every read goes through `getUserIdentity()`, so the recipient has to be a Clerk user"                                                                                                                           | contradiction              | No — authored with the research                                                          |
 | `team-os/research/interviews/2026-04-08-mia-publish-friction-draft-review-gap.md` | Mia: publish "already feels like a state change"; "even if I technically only send the link to one person, the action itself feels too final"                                                                                                          | fact (about what she said) | No                                                                                       |
 | Amplitude, my own project                                                         | Publish events are sparse relative to document creation                                                                                                                                                                                                | interpretation             | **No** — my events came from `npm run seed:amplitude`, which replays `scripts/fixtures/` |
@@ -44,7 +44,7 @@ together, and their agreement is not corroboration — it is one author being co
 
 **Amplitude is the one I nearly got wrong.** It arrives through a real analytics product, with real
 charts, and it is a fixture I replayed into it myself an hour earlier. If I had counted it as
-behavioural confirmation I would have had three "independent" sources all restating one.
+behavioral confirmation I would have had three "independent" sources all restating one.
 
 ## Contradictions I am keeping
 

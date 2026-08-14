@@ -24,7 +24,7 @@ import {
 } from "../../lib/artifact.mjs";
 import { exists, read } from "../../lib/repo-facts.mjs";
 
-/** How the template asks an assumption to be labelled. */
+/** How the template asks an assumption to be labeled. */
 const VALIDATION =
   /\b(validated|partially validated|pending validation|unvalidated)\b/i;
 
@@ -147,12 +147,12 @@ export function check({ text, repo }) {
       .split(/\n(?=\s*[-*]\s)/)
       .map((b) => b.trim())
       .filter((b) => /^[-*]\s/.test(b));
-    // Strip emphasis before testing. Prettier normalises `*pending validation.*`
+    // Strip emphasis before testing. Prettier normalizes `*pending validation.*`
     // to `_pending validation._`, and `_` is a word character — so the leading
-    // \b never matched and three of four labelled assumptions read as unlabelled.
-    // Second time markdown normalisation has broken a checker; both times it
+    // \b never matched and three of four labeled assumptions read as unlabelled.
+    // Second time markdown normalization has broken a checker; both times it
     // failed the reference against itself, which is how it surfaced.
-    const labelled = bullets.filter((b) =>
+    const labeled = bullets.filter((b) =>
       VALIDATION.test(b.replace(/[_*]/g, "")),
     );
     checked.push(
@@ -161,14 +161,14 @@ export function check({ text, repo }) {
             "Assumptions",
             `${bullets.length} listed — a PRD resting on one assumption is hiding the others`,
           )
-        : labelled.length < bullets.length
+        : labeled.length < bullets.length
           ? fail(
               "Assumption status",
-              `${bullets.length - labelled.length} of ${bullets.length} carry no validation status. The template asks for validated / partially validated / pending validation`,
+              `${bullets.length - labeled.length} of ${bullets.length} carry no validation status. The template asks for validated / partially validated / pending validation`,
             )
           : pass(
               "Assumption status",
-              `${bullets.length} assumptions, every one labelled`,
+              `${bullets.length} assumptions, every one labeled`,
             ),
     );
   }
