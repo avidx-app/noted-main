@@ -31,7 +31,7 @@ Welcome. This is the part of the repo where **anyone on the team** — not just 
 
 1. Pull `main`: `git pull origin main`
 2. Create a branch: `git checkout -b yourname/short-description`
-3. Edit with your favourite editor. If you use Claude Code, just ask — skills like `/prd-new` will scaffold a file for you.
+3. Edit with your favorite editor. If you use Claude Code, just ask — skills like `/prd-new` will scaffold a file for you.
 4. Commit and push: `git add team-os/… && git commit -m "…" && git push -u origin HEAD`
 5. Open a PR on GitHub.
 

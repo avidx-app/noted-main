@@ -36,7 +36,7 @@ three messages to any squad agent within 7 days.
   week cohort. `Coworker Message Sent` covers the event side.
 - **Baseline:** `[NEED: query against production Convex]`
 - **Why three messages:** one message is a trial, two is a retry. Three is the first count that
-  suggests a loop rather than a look. That threshold is a judgement, not a finding — if it is ever
+  suggests a loop rather than a look. That threshold is a judgment, not a finding — if it is ever
   used to make a real decision, test its sensitivity first.
 
 ## Secondary

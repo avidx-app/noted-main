@@ -34,7 +34,7 @@ word rather than the wall — measured by whether share-control opens convert to
 ## Key assumptions:
 
 - **The stopping happens at the rate the research implies** — _pending validation._ Seven of eleven
-  transcripts, all constructed (`team-os/research/interviews/CLAUDE.md`). No behavioural signal exists,
+  transcripts, all constructed (`team-os/research/interviews/CLAUDE.md`). No behavioral signal exists,
   because publish intent is not instrumented.
 - **The friction is the word rather than the access** — _partially validated._ One transcript says it
   directly: Mia, in `team-os/research/interviews/2026-04-08-mia-publish-friction-draft-review-gap.md`,
@@ -73,7 +73,7 @@ migration, no dependency. Days.
 - `Share Control Opened` — **[NEEDS INSTRUMENTATION]**. This PRD adds it.
 - `Document Published` — exists.
 - Missing, and worth naming: a dismissal event. Without it, someone who opens the control, reads the
-  copy and backs out produces an open and nothing else — which is the behaviour the whole bet is about.
+  copy and backs out produces an open and nothing else — which is the behavior the whole bet is about.
   That is a second slice and this PRD does not deliver it.
 
 ## Ops scope:

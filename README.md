@@ -147,11 +147,11 @@ Use the deployment keys this way:
 
 Set the Amplitude keys in both local development and deployed environments:
 
-| Where                        | Why                                                   | Variables                                                                                                                                                               |
-| ---------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Where                        | Why                                                   | Variables                                                                                                                               |
+| ---------------------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `.env.local`                 | Runs analytics and feature flags on your local app    | `NEXT_PUBLIC_AMPLITUDE_API_KEY`, `AMPLITUDE_EXPERIMENT_SERVER_DEPLOYMENT_KEY`, `NEXT_PUBLIC_AMPLITUDE_EXPERIMENT_CLIENT_DEPLOYMENT_KEY` |
 | Render service → Environment | Runs analytics and feature flags on your deployed URL | `NEXT_PUBLIC_AMPLITUDE_API_KEY`, `AMPLITUDE_EXPERIMENT_SERVER_DEPLOYMENT_KEY`, `NEXT_PUBLIC_AMPLITUDE_EXPERIMENT_CLIENT_DEPLOYMENT_KEY` |
-| Terminal command only        | Seeds synthetic Amplitude events                      | `AMPLITUDE_API_KEY=<same project API key as NEXT_PUBLIC_AMPLITUDE_API_KEY>`                                                                                             |
+| Terminal command only        | Seeds synthetic Amplitude events                      | `AMPLITUDE_API_KEY=<same project API key as NEXT_PUBLIC_AMPLITUDE_API_KEY>`                                                             |
 
 Seed the sample Amplitude events after your project exists:
 

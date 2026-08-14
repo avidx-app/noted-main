@@ -34,7 +34,7 @@ that does it.
 for specifying this work and invalid as evidence anyone wants it. The spec is buildable; the bet is
 unproven, and those are different claims.
 
-`[NEED: Amplitude behavioural cohort per persona]` is still open in Phase 0 and this spec does not close
+`[NEED: Amplitude behavioral cohort per persona]` is still open in Phase 0 and this spec does not close
 it. No claim here rests on how many Drafters there are.
 
 ## What clarify changed
@@ -68,7 +68,7 @@ Check that returns all passes on a real change has usually been pattern-matched 
 
 ## What is still open
 
-- **The dismissal event.** Without it the specific behaviour the bet is about — open, read, back out — is
+- **The dismissal event.** Without it the specific behavior the bet is about — open, read, back out — is
   invisible. Named in the PRD, absent from this spec, and it needs its own slice.
 - **The returning-sharer copy.** One variant ships. Whether that costs anything is unknown.
 - **Who decides the stop condition has fired.** The PRD names the condition; nothing here names the person

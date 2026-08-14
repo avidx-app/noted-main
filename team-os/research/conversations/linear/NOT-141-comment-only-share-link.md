@@ -28,7 +28,7 @@ Smallest slice that resolves it:
 - A draft can be shared with one named recipient.
 - The recipient can read it and leave a comment.
 - The recipient does not have to create an account. **This is the constraint that matters** — Carlos
-  was explicit that being asked to join the product to do someone a favour is the reason he does not.
+  was explicit that being asked to join the product to do someone a favor is the reason he does not.
 - The owner can revoke.
 
 Out of scope: teams, roles, real-time collaboration, presence, anything resembling the
@@ -48,7 +48,7 @@ Out of scope: teams, roles, real-time collaboration, presence, anything resembli
 > two-day version, and onboarding is a week and measurable. Revisit when we build the members table
 > for teams.
 >
-> Recording that this is a sequencing decision, not a judgement that the pain is small. It is the
+> Recording that this is a sequencing decision, not a judgment that the pain is small. It is the
 > most-raised pain in the landscape.
 
 ## Why this one is worth reading twice

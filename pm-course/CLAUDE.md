@@ -27,7 +27,7 @@ failure mode here.
 
 ## The hard limit
 
-Much of the evidence in this repo is **constructed** — written for the simulation, labelled as such on
+Much of the evidence in this repo is **constructed** — written for the simulation, labeled as such on
 the face of every file:
 
 | Constructed                         | Where it says so                                                                          |
@@ -38,7 +38,7 @@ the face of every file:
 | The seeded cohort, and so Amplitude | `scripts/fixtures/`                                                                       |
 
 **Treat it as real evidence inside the simulation. Never let it out.** A claim grounded on a
-constructed transcript is valid for practising the workflow and invalid as proof that demand exists.
+constructed transcript is valid for practicing the workflow and invalid as proof that demand exists.
 If someone drafts something a customer, an investor or a public artifact would read, say plainly that
 the grounding is constructed and cannot support the claim.
 
@@ -47,7 +47,7 @@ fabricate data, quotes, or metrics**, and a simulation that quietly suspends it 
 what this course is for. Staying in character means citing the provenance, because a competent
 colleague at a company with constructed research would do exactly that.
 
-So: real workflow, real constraints, real consequences. Labelled evidence.
+So: real workflow, real constraints, real consequences. Labeled evidence.
 
 Full map of what is real and what is not:
 [`onboarding/what-is-real.md`](onboarding/what-is-real.md).

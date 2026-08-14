@@ -75,7 +75,7 @@ test("strips trailing punctuation that belongs to the sentence", () => {
   ]);
 });
 
-test("normalises a trailing slash so a directory matches once", () => {
+test("normalizes a trailing slash so a directory matches once", () => {
   assert.deepEqual(pathsOn("[dir](team-os/research/)", ""), [
     "team-os/research",
   ]);

@@ -36,7 +36,7 @@ prompts does not do what it says.
 `components/` or `app/` has to hold to it, and `npm run design:lint` says whether it does.
 
 This matters more than it sounds. An agent asked to build a share dialog will produce something that
-looks plausible and uses colours that are not in the palette. The design gate is the first place
+looks plausible and uses colors that are not in the palette. The design gate is the first place
 in this workshop where the repo says no to an agent, and watching that happen is worth more than the
 feature.
 
@@ -90,12 +90,12 @@ turn a "the prototype does not persist anything" claim into a false one.
 
 Then fill the four boundaries. Every changed file goes somewhere:
 
-| Boundary          | Means                                                                                        |
-| ----------------- | -------------------------------------------------------------------------------------------- |
-| **Real**          | A participant experiences the actual thing. Findings about it are valid                      |
-| **Hard-coded**    | Works for the cases someone chose in advance, and only those                                 |
-| **Simulated**     | Looks like behaviour, is a timer or a fixture. Whatever it teaches is a property of the fake |
-| **Not connected** | Appears to do something and does nothing                                                     |
+| Boundary          | Means                                                                                       |
+| ----------------- | ------------------------------------------------------------------------------------------- |
+| **Real**          | A participant experiences the actual thing. Findings about it are valid                     |
+| **Hard-coded**    | Works for the cases someone chose in advance, and only those                                |
+| **Simulated**     | Looks like behavior, is a timer or a fixture. Whatever it teaches is a property of the fake |
+| **Not connected** | Appears to do something and does nothing                                                    |
 
 Then the two that make it a contract rather than a description: a **learning question** — the one
 thing this exists to find out — and a **stop condition**, a result that would end the experiment

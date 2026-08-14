@@ -7,7 +7,7 @@ people say about using it.
 
 | Path                                   | What it is                                                                                                                              |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| [personas.md](personas.md)             | Five relationships people have with the product, synthesised from the interviews                                                        |
+| [personas.md](personas.md)             | Five relationships people have with the product, synthesized from the interviews                                                        |
 | [pain-landscape.md](pain-landscape.md) | What hurts, ranked by independent mentions and what it gates                                                                            |
 | [interviews/](interviews/)             | Customer conversation transcripts. **All currently constructed** — read [interviews/CLAUDE.md](interviews/CLAUDE.md) before quoting one |
 | [conversations/](conversations/)       | Where decisions were actually made — Slack threads, Linear issues, pre-decision Notion pages. **All constructed**, and two claims in them are wrong about how Noted works. Read [conversations/CLAUDE.md](conversations/CLAUDE.md) first |

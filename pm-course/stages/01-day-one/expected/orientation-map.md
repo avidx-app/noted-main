@@ -21,18 +21,18 @@ provider key. The empty state didn't tell me that; I found it by clicking around
 
 ## 2. What the repo says it is
 
-| Question               | Where it is answered                       | What it says                                                                                                                                                                              | Trust          |
-| ---------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| What does it do today? | `README.md`, and the running app           | An AI-native note-taking app: documents in a hierarchy, a BlockNote editor, in-editor AI, a Coworker chat panel, publish-to-web                                                           | fact           |
-| What did we intend?    | `team-os/product/prds/`                    | Five PRDs. Two describe things that are live; three describe things that are planned or in design                                                                                         | interpretation |
-| What shipped?          | `team-os/features/ai-features/ship-log.md` | Nothing. The log has no entries, and says engineering backfills "from this point forward"                                                                                                 | fact           |
-| Why this choice?       | `team-os/engineering/constitution.md`      | Seventeen numbered principles, versioned and ratified. Genuinely answers "why" for engineering choices, and not at all for product ones                                                   | interpretation |
-| Who is it for?         | `team-os/research/personas.md`             | Five personas by relationship to the product — Drafter, Reviewer, Newcomer, Tinkerer, Expander. Sourced from `team-os/research/interviews/`, which are labelled `provenance: constructed` | unknown        |
+| Question               | Where it is answered                       | What it says                                                                                                                                                                             | Trust          |
+| ---------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| What does it do today? | `README.md`, and the running app           | An AI-native note-taking app: documents in a hierarchy, a BlockNote editor, in-editor AI, a Coworker chat panel, publish-to-web                                                          | fact           |
+| What did we intend?    | `team-os/product/prds/`                    | Five PRDs. Two describe things that are live; three describe things that are planned or in design                                                                                        | interpretation |
+| What shipped?          | `team-os/features/ai-features/ship-log.md` | Nothing. The log has no entries, and says engineering backfills "from this point forward"                                                                                                | fact           |
+| Why this choice?       | `team-os/engineering/constitution.md`      | Seventeen numbered principles, versioned and ratified. Genuinely answers "why" for engineering choices, and not at all for product ones                                                  | interpretation |
+| Who is it for?         | `team-os/research/personas.md`             | Five personas by relationship to the product — Drafter, Reviewer, Newcomer, Tinkerer, Expander. Sourced from `team-os/research/interviews/`, which are labeled `provenance: constructed` | unknown        |
 
 The last row is the one to be careful about. There is a full research layer, it is internally
 consistent, and it describes friction I hit myself in section 1 — and every transcript in it says on
 its face that no customer said any of it. It is evidence about the workflow, not about demand. I
-have labelled it `unknown` rather than `interpretation` because "who is this for" is precisely the
+have labeled it `unknown` rather than `interpretation` because "who is this for" is precisely the
 question constructed research cannot answer.
 
 ## 3. The contradiction
@@ -51,7 +51,7 @@ shipped to users, which is nothing. The route is accurately a prototype. Neither
 What is missing is any signal _at the route itself_ that it is an instrument rather than a product.
 
 **Why it matters:** Someone who finds `/documents/start` first — a new engineer, a designer, anyone
-demoing — reads it as evidence that onboarding works. It does not. Typing "I need to summarise
+demoing — reads it as evidence that onboarding works. It does not. Typing "I need to summarize
 lecture notes" returns a Meeting Notes scaffold, because selection is five regexes over lowercased
 text and `notes` matches the meeting branch first. That string is one of the five example prompts
 the prototype itself offers. The generating screen is `setTimeout(…, 1800)`. No document is created,
@@ -83,7 +83,7 @@ exception reads exactly like a rule being broken. I nearly took it.
   and `team-os/product/prds/collaboration/team-collaboration-prd.md` describes the fix without ever
   saying why it wasn't the original design.
 - **How many people any persona covers.** Every persona is qualitative. `feature-workflow`'s Phase 0
-  says so itself, in a `[NEED: Amplitude behavioural cohort per persona]` marker. So no claim in this
+  says so itself, in a `[NEED: Amplitude behavioral cohort per persona]` marker. So no claim in this
   map about how _common_ anything is can be supported from this repo.
 - **Whether `Document Created` fires from every creation path.** The growth metrics file raises this
   as an open question and it stays open, which means the one baseline that is measurable today may
@@ -103,4 +103,4 @@ is a smaller slice that resolves the same pain. `team-os/product/prds/collaborat
 is currently sized as the former.
 
 Not: talk to more users. Every transcript in this repo is constructed, so more of them cannot raise
-my confidence about demand — only real ones or real behaviour can, and behaviour is cheaper here.
+my confidence about demand — only real ones or real behavior can, and behavior is cheaper here.

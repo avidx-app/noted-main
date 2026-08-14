@@ -44,7 +44,7 @@ function goodMap(o = {}) {
       "| Assumption | Uncertainty | Consequence | Score |",
       "| --- | --- | --- | --- |",
       "| Access is the blocker | 1 | 5 | 5 |",
-      "| The behaviour is real | 5 | 4 | 20 |",
+      "| The behavior is real | 5 | 4 | 20 |",
     ].join("\n"),
     decision: [
       "**Verb:** narrow",

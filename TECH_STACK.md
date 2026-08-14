@@ -29,6 +29,7 @@ In this project, Next.js serves as the foundation of our entire application:
   - `app/api/edgestore/[...edgestore]/route.ts` - Handles file uploads and storage
 
 **Key Files:**
+
 - `app/layout.tsx` - Root layout with all providers
 - `app/(main)/layout.tsx` - Main application layout
 - `next.config.mjs` - Next.js configuration
@@ -46,6 +47,7 @@ TypeScript is JavaScript with added type safety. It's like having a spell-checke
 TypeScript is used throughout the entire project to ensure code reliability:
 
 - **Type Safety**: All components, functions, and data structures have type definitions. For example:
+
   ```typescript
   interface EditorProps {
     onChange: (value: string) => void;
@@ -61,6 +63,7 @@ TypeScript is used throughout the entire project to ensure code reliability:
 - **API Types**: EdgeStore provides TypeScript types for file uploads, ensuring we handle file operations correctly.
 
 **Key Files:**
+
 - `tsconfig.json` - TypeScript configuration
 - All `.tsx` and `.ts` files use TypeScript
 
@@ -88,6 +91,7 @@ Tailwind CSS is our primary styling solution:
 - **Custom Configuration**: We've customized Tailwind in `tailwind.config.ts` to match our design system.
 
 **Key Files:**
+
 - `tailwind.config.ts` - Tailwind configuration
 - `app/globals.css` - Global styles and Tailwind directives
 - All component files use Tailwind classes
@@ -118,6 +122,7 @@ Shadcn UI provides our reusable UI components:
 - **Alert Dialog**: Used for confirmation dialogs when deleting documents.
 
 **Key Files:**
+
 - `components.json` - Shadcn configuration
 - `components/ui/` - All Shadcn UI components
 - Components are built on Radix UI primitives for accessibility
@@ -135,6 +140,7 @@ Clerk is an authentication and user management service. It handles all the compl
 Clerk handles all user authentication in our application:
 
 - **Authentication Provider**: We wrap our app with ClerkProvider in `components/providers/convex-provider.tsx`:
+
   ```typescript
   <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
     {/* App content */}
@@ -148,6 +154,7 @@ Clerk handles all user authentication in our application:
 - **Protected Routes**: The main layout (`app/(main)/layout.tsx`) checks authentication status and redirects unauthenticated users to the landing page.
 
 **Key Files:**
+
 - `components/providers/convex-provider.tsx` - Clerk and Convex integration
 - `convex/auth.config.js` - Clerk configuration for Convex
 - `convex/documents.ts` - Uses Clerk authentication in all queries/mutations
@@ -165,6 +172,7 @@ Convex is a backend-as-a-service platform that provides a real-time database and
 Convex is our backend and database:
 
 - **Database Schema**: We define our data structure in `convex/schema.ts`:
+
   ```typescript
   documents: defineTable({
     title: v.string(),
@@ -173,7 +181,7 @@ Convex is our backend and database:
     parentDocument: v.optional(v.id("documents")),
     content: v.optional(v.string()),
     // ... more fields
-  })
+  });
   ```
 
 - **Queries**: We use Convex queries to fetch data reactively:
@@ -194,6 +202,7 @@ Convex is our backend and database:
 - **Authentication**: Convex uses Clerk to verify user identity, ensuring users can only access their own documents.
 
 **Key Files:**
+
 - `convex/schema.ts` - Database schema definition
 - `convex/documents.ts` - All document-related queries and mutations
 - `components/providers/convex-provider.tsx` - Convex client setup
@@ -211,6 +220,7 @@ EdgeStore is a file storage service designed to work seamlessly with Next.js. It
 EdgeStore handles all file uploads in our application:
 
 - **File Upload Configuration**: We set up EdgeStore in `app/api/edgestore/[...edgestore]/route.ts`:
+
   ```typescript
   const edgeStoreRouter = es.router({
     publicFiles: es.fileBucket().beforeDelete(() => {
@@ -222,6 +232,7 @@ EdgeStore handles all file uploads in our application:
 - **Provider Setup**: EdgeStoreProvider wraps our app in `app/layout.tsx` to make file uploads available throughout the application.
 
 - **Image Uploads**: The editor component (`components/editor.tsx`) uses EdgeStore to upload images:
+
   ```typescript
   const handleUpload = async (file: File) => {
     const res = await edgestore.publicFiles.upload({
@@ -234,6 +245,7 @@ EdgeStore handles all file uploads in our application:
 - **Cover Images**: Users can upload cover images for documents, which are stored in EdgeStore and the URL is saved in the Convex database.
 
 **Key Files:**
+
 - `app/api/edgestore/[...edgestore]/route.ts` - EdgeStore API route
 - `lib/edgestore.ts` - EdgeStore provider setup
 - `components/editor.tsx` - Uses EdgeStore for image uploads
@@ -252,6 +264,7 @@ Blocknote is a block-based rich text editor (similar to Notion's editor). Instea
 Blocknote powers our document editor:
 
 - **Editor Component**: The main editor (`components/editor.tsx`) uses Blocknote:
+
   ```typescript
   const editor: BlockNoteEditor = useCreateBlockNote({
     initialContent: initialContent
@@ -270,6 +283,7 @@ Blocknote powers our document editor:
 - **Read-Only Mode**: The editor can be set to read-only mode for published documents, allowing public viewing without editing capabilities.
 
 **Key Files:**
+
 - `components/editor.tsx` - Main Blocknote editor component
 - Documents store content as JSON strings of Blocknote blocks
 - Used in `app/(main)/(routes)/documents/[documentId]/page.tsx` for editing
@@ -312,4 +326,3 @@ This tech stack provides:
 - **Rich Editing**: Blocknote provides a modern, block-based editing experience
 
 Together, these technologies create a modern, scalable, and user-friendly note-taking application.
-

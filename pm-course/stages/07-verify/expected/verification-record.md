@@ -50,8 +50,8 @@ Confirmed after the fix: Convex shows the document with `isPublished: true`, and
   what they see. Reactive query, so probably an error state, and probably is doing a lot of work there.
 - **Whether the copy is understood.** This is the whole point of the change and shipping it cannot
   verify it. It needs somebody reading the words who did not write them.
-- **That the dismissal behaviour is captured.** It is not — there is no dismissal event. So the specific
-  behaviour the bet is about is still invisible, by design, and named here so nobody reads the
+- **That the dismissal behavior is captured.** It is not — there is no dismissal event. So the specific
+  behavior the bet is about is still invisible, by design, and named here so nobody reads the
   instrumentation as complete.
 
 ## What I will watch
